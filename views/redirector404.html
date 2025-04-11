@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+    
+    </head>
+    <body>
+        <script>
+
+        const countryToLanguage = {
+            "us": "en", "gb": "en", "ca": "en", "au": "en", "nz": "en", "ie": "en", "za": "en", "ng": "en", "ph": "en", "pk": "en",
+            "tr": "tr", "cy": "tr",
+            "es": "es", "mx": "es", "ar": "es", "co": "es", "ve": "es", "cl": "es", "pe": "es", "ec": "es", "gt": "es", "cu": "es", 
+            "bo": "es", "do": "es", "hn": "es", "py": "es", "sv": "es", "ni": "es", "cr": "es", "pa": "es", "uy": "es", "gq": "es",
+            "fr": "fr", "be": "fr", "ch": "fr", "lu": "fr", "mc": "fr", "cd": "fr", "mg": "fr", "cm": "fr", "ci": "fr", 
+            "bf": "fr", "ne": "fr", "sn": "fr", "ml": "fr", "rw": "fr", "td": "fr", "gn": "fr", "bj": "fr", "bi": "fr", "tg": "fr", 
+            "cf": "fr", "cg": "fr", "ga": "fr", "dj": "fr", "km": "fr",
+            "de": "de", "at": "de", "li": "de",
+            "pt": "pt", "br": "pt", "ao": "pt", "mz": "pt", "gw": "pt", "tl": "pt", "cv": "pt", "st": "pt",
+            "sa": "ar", "ae": "ar", "eg": "ar", "iq": "ar", "jo": "ar", "lb": "ar", "sy": "ar", "ye": "ar", "om": "ar", "kw": "ar", 
+            "qa": "ar", "bh": "ar", "ps": "ar", "sd": "ar", "dz": "ar", "tn": "ar", "ma": "ar", "ly": "ar", "mr": "ar", "dj": "ar", "km": "ar",
+            "ru": "ru", "by": "ru", "kz": "ru", "kg": "ru", "uz": "ru", "tm": "ru", "tj": "ru"
+        };
+
+        function getLanguageByCountry(countryCode) {
+            return countryToLanguage[countryCode.toLowerCase()] || "en";
+        }
+
+            try{
+                fetch("https://ipinfo.io/json").then(response => response.json()).then(data => {
+                    let lang_code = getLanguageByCountry(data.country.toLowerCase());
+                    window.location.href = "/" + lang_code + "/404";
+                });
+                
+            }catch(error){
+                window.location.href = "/en/404";
+                console.log(error);
+                }
+        </script>
+    </body>
+    </html>

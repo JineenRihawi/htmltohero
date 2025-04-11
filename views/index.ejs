@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html dir="<%= t('direction') %>" lang="<%= lang %>">
+
+<head>
+    <meta charset="utf8">
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+            margin: 0%;
+        }
+
+        .CONTAINER {
+            width: 100%;
+        }
+
+        #SEARCHCONTAINER {
+            height: 550px;
+            background-color: #ef9d6e;
+            background-image: url("https://raw.githubusercontent.com/Staroandtado/html-to-hero-assets/4026803a1772f811f31df847773d184aa4d00ecf/background_pattern.svg");
+        }
+
+        .CENTER {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .DISCOVERCONTAINER {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .DISCOVERTEXT {
+            text-align: center;
+            font-size: 80px;
+            font-family: "Arial";
+            font-weight: bold;
+            user-select: none;
+            color: white;
+            text-shadow: 0px 5px #445368;
+        }
+
+        .PAGE {
+            height: calc(100% - 80px);
+            /*100% - header*/
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .SEARCH {
+            margin: 10px;
+            border-radius: 500px;
+            border: none;
+            width: 250px;
+            font-size: 20px;
+        }
+
+        .SEARCH:enabled {
+            outline: none;
+        }
+
+        .FOOTER {
+            width: calc(100% - 40px);
+            height: auto;
+            background-color: #FAD473;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: black;
+            padding: 20px;
+            font-family: 'Arial';
+            font-size: 15px;
+            gap: 20px;
+        }
+    </style>
+    <title>
+        HTMLtoHero
+    </title>
+</head>
+
+<body>
+
+    <%- include('components/header') %>
+
+    <div class="PAGE">
+        <div class="CONTAINER" id="SEARCHCONTAINER">
+            <div class="CENTER">
+                <div class="DISCOVERCONTAINER">
+                    <span class="DISCOVERTEXT"><%= t('mainpage.discovercontainer.discover') %></span>
+                    <input class="SEARCH" type="search" placeholder="<%= t('mainpage.discovercontainer.search') %>" style="width: 550px; height: 90px;">
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <footer class="FOOTER">
+                <span class="FOOTERABOUT"><%= t('footer.text') %></span>
+                <span class="FOOTERCOPYRIGHT"><%= t('footer.copyright') %></span>
+            </footer>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function getCookie(name) {
+            // Construct the cookie name as a search pattern
+            const cookiePattern = `${name}=`;
+            const cookies = document.cookie.split('; '); // Split cookies into individual parts
+
+            for (let cookie of cookies) {
+                if (cookie.startsWith(cookiePattern)) {
+                    // Extract the cookie value
+                    return decodeURIComponent(cookie.substring(cookiePattern.length));
+                }
+            }
+
+            // Return null if cookie is not found
+            return null;
+        }
+
+        function deleteCookie(cookieName) {
+            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        }
+
+        document.addEventListener("DOMContentLoaded", (event) => { // Logout if password and email dont match ( prevent hacking accounts )
+            fetch("/api/getAccount", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: getCookie("currentEmail"),
+                })
+            }).then(response => response.json())
+                .then(data => {
+                    if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
+                        deleteCookie("isLoggedIn");
+                        deleteCookie("currentEmail");
+                        deleteCookie("currentPassword");
+                        window.location.href = "/" + lang_code;
+                    }
+                })
+        });
+
+    </script>
+</body>
+
+</html>

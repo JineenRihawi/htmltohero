@@ -1,0 +1,170 @@
+{
+    "direction": "ltr",
+    "footer": {
+        "text": "HTMLtoHero ist eine Plattform, die sich dem Unterricht von Webentwicklung durch schrittweise Tutorials und interaktive Übungen widmet. Lernen Sie HTML, CSS und JavaScript auf einfache und ansprechende Weise.",
+        "copyright": "Copyright Cenin Rihavi 2025©"
+    },
+    "header": {
+        "html": "HTML",
+        "htmlTutorials": "Tutorials",
+        "htmlExercises": "Übungen",
+        "css": "CSS",
+        "cssTutorials": "Tutorials",
+        "cssExercises": "Übungen",
+        "js": "JavaScript",
+        "jsTutorials": "Tutorials",
+        "jsExercises": "Übungen",
+        "codeEditor": "Code-Editor",
+        "search": "Suchen",
+        "login": "Anmelden",
+        "profile": "Profil",
+        "logout": "Abmelden"
+    },
+    "mainpage": {
+        "discovercontainer": {
+            "discover": "Entdecken",
+            "search": "Suchen"
+        }
+    },
+    "notFoundPage": {
+        "title": "HTMLtoHero - Nicht Gefunden",
+        "errorText": "Fehler 404",
+        "smallText": "Seite Nicht Gefunden!"
+    },
+    "loginPage": {
+        "email": "E-Mail",
+        "password": "Passwort",
+        "loginButton": "Anmelden",
+        "createNewAccount": "Neues Konto Erstellen"
+    },
+    "profile": {
+        "profileContainer": {
+            "name": "Name",
+            "birthday": "Geburtstag",
+            "accountCreationDate": "Erstellungsdatum des Kontos",
+            "level": "Level"
+        },
+        "learningContainer": {
+            "continueLearning": "Weiter Lernen...",
+            "html": "HTML",
+            "css": "CSS",
+            "js": "JS"
+        },
+        "exercisingContainer": {
+            "continueExercising": "Weiter Üben...",
+            "html": "HTML",
+            "css": "CSS",
+            "js": "JS"
+        }
+    },
+    "codeeditor": {
+        "previewButton": "Vorschau"
+    },
+    "htmlTutorials": {
+        "markAsCompleted": "Als abgeschlossen markieren",
+        "chapter1": {
+            "page1": {
+                "pageTitle": "Was ist HTML?",
+                "title1": "Was ist HTML?",
+                "paragraph1": "HTML, oder HyperText Markup Language, ist der Grundstein der Webentwicklung und das Rückgrat jeder Website, die Sie besuchen. Es ist eine standardisierte Sprache, die verwendet wird, um den Inhalt von Webseiten zu erstellen und zu strukturieren, und stellt sicher, dass Browser wie Chrome, Firefox und Safari den Inhalt korrekt interpretieren und anzeigen können.",
+                "title2": "Die Bausteine des Webs",
+                "paragraph2": "HTML ist keine Programmiersprache – es ist eine Auszeichnungssprache, was bedeutet, dass sie verwendet wird, um Text zu annotieren und Browsern Anweisungen zu geben, wie Inhalte gerendert werden sollen. Diese Annotationen erfolgen in Form von HTML-Elementen, die mit Tags wie <html>, <head> und <body> geschrieben werden.",
+                "paragraph3": "HTML bietet die Struktur für alle Webinhalte. Mit Elementen für Überschriften, Absätze, Bilder, Links und mehr dient es als Ausgangspunkt für jedes Webprojekt. Durch die Kombination von HTML mit CSS und JavaScript können Entwickler visuell beeindruckende und interaktive Websites erstellen.",
+                "title3": "Was Kann HTML?",
+                "listTitle1": "HTML ermöglicht es Ihnen, die Struktur von Webseiten zu erstellen, indem Sie Folgendes hinzufügen:",
+                "list1Item1": "Überschriften und Absätze: Verwenden Sie <h2> bis <h6> für Überschriften und <p> für Absätze, um Textinhalte zu organisieren.",
+                "list1Item2": "Bilder und Multimedia: Betten Sie visuelle Elemente, Audio und Video ein, um ein ansprechendes Benutzererlebnis zu schaffen.",
+                "list1Item3": "Links: Verwenden Sie <a>-Tags, um zwischen Seiten und externen Websites zu navigieren.",
+                "list1Item4": "Listen: Organisieren Sie Inhalte mit geordneten (<ol>) oder ungeordneten (<ul>) Listen.",
+                "list1Item5": "Formulare: Erfassen Sie Benutzereingaben mit interaktiven Formularen und Eingabefeldern.",
+                "paragraph4": "HTML unterstützt auch semantische Elemente wie <header>, <footer> und <article>, um die Barrierefreiheit und SEO zu verbessern.",
+                "title4": "Warum HTML Lernen?",
+                "listTitle2": "HTML ist die Grundlage der Webentwicklung, und es zu lernen ist der erste Schritt, um Ihre eigenen Websites zu erstellen. Hier ist, warum es wichtig ist:",
+                "list2Item1": "Einfaches Lernen: HTML ist einfach und anfängerfreundlich.",
+                "list2Item2": "Vielseitigkeit: Es ist der Ausgangspunkt für alle Webprojekte.",
+                "list2Item3": "Karrierechancen: Das Verständnis von HTML öffnet Türen zu verschiedenen Rollen in der Webentwicklung und im Design.",
+                "paragraph5": "HTML zu lernen ist wie das Alphabet der Webentwicklung zu lernen. Es gibt Ihnen die Werkzeuge, um Ihre Ideen online zum Leben zu erwecken, und bietet eine solide Grundlage, um in fortgeschrittenere Technologien einzutauchen.",
+                "title5": "HTML-Struktur Visualisieren",
+                "title6": "Fazit",
+                "paragraph6": "HTML ist mehr als nur ein technisches Werkzeug; es ist die Sprache, die Ideen im Web zum Leben erweckt. Egal, ob Sie einen persönlichen Blog, ein Portfolio oder eine vollwertige Website erstellen möchten, das Beherrschen von HTML ist das Tor zu unendlichen Möglichkeiten. In Kombination mit CSS und JavaScript wird es zu einem mächtigen Trio für den Aufbau moderner, ansprechender und dynamischer Websites. Also tauchen Sie ein, experimentieren Sie und beginnen Sie Ihre Reise, ein Held der Webentwicklung zu werden!"
+            }
+        },
+        "chapter2": {
+            "page1": {
+                "pageTitle": "Das HTML-Doctype <!DOCTYPE html> Verstehen",
+                "title1": "Das HTML-Doctype <!DOCTYPE html> Verstehen",
+                "paragraph1": "Die <!DOCTYPE>-Deklaration ist ein wichtiger Bestandteil jedes HTML-Dokuments. Sie sollte als Erstes in einem HTML-Dokument erscheinen und teilt dem Webbrowser mit, welche HTML-Version zu erwarten ist. Ohne sie könnten Browser die Seite falsch rendern, insbesondere beim Wechsel zwischen verschiedenen HTML-Versionen.",
+                "title2": "Was ist <!DOCTYPE html>?",
+                "paragraph2": "Die <!DOCTYPE html>-Deklaration wird verwendet, um anzugeben, dass das Dokument ein HTML5-Dokument ist. Sie definiert den Dokumenttyp und die verwendete HTML-Version und stellt sicher, dass der Browser die Seite im Standardmodus rendert, um den Quirks-Modus zu vermeiden, in dem Browser möglicherweise veraltete Methoden zum Anzeigen von Inhalten verwenden.",
+                "title3": "Warum ist <!DOCTYPE html> Wichtig?",
+                "list1Item1": "Browser-Rendering: Es hilft dem Browser, die erwartete HTML-Version zu verstehen. Dies stellt sicher, dass moderne HTML-Elemente und -Funktionen korrekt gerendert werden.",
+                "list1Item2": "Standardmodus vs. Quirks-Modus: Ohne <!DOCTYPE html> könnten einige Browser die Seite im Quirks-Modus rendern, wo das Layout und die Stile möglicherweise nicht wie erwartet funktionieren.",
+                "list1Item3": "HTML5: Mit HTML5 ist <!DOCTYPE html> einfacher als bei früheren Versionen. Bei älteren HTML-Versionen, wie HTML 4.01, war das Doctype länger und enthielt mehr Informationen. HTML5 hat dies vereinfacht, indem es nur <!DOCTYPE html> verwendet.",
+                "title4": "Wie verwendet man <!DOCTYPE html>?",
+                "paragraph3": "Die Deklaration sollte ganz am Anfang des Dokuments erscheinen, vor dem <html>-Tag. Dies ist die erste Zeile Ihres HTML-Dokuments.",
+                "codeTitle1": "Grundstruktur:",
+                "listTitle2": "Wichtige Punkte zum Merken:",
+                "list2Item1": "Verwenden Sie immer <!DOCTYPE html> ganz oben in Ihrem HTML-Dokument.",
+                "list2Item2": "Es deklariert das Dokument als HTML5, die neueste und am weitesten verbreitete HTML-Version.",
+                "list2Item3": "<!DOCTYPE html> hilft Browsern, die Seite korrekt zu interpretieren und anzuzeigen."
+            },
+            "page2": {
+                "pageTitle": "Die Elemente <html>, <head> und <body>",
+                "title1": "Die Elemente <html>, <head> und <body>",
+                "title2": "Das <html>-Element",
+                "paragraph1": "Das <html>-Element ist das Wurzelelement eines HTML-Dokuments. Es umschließt den gesamten Inhalt der Seite, einschließlich der Head- und Body-Abschnitte. Jedes HTML-Dokument muss mit diesem Element beginnen, und alle anderen Elemente sollten darin verschachtelt sein.",
+                "codeTitle1": "Syntax:",
+                "listTitle1": "Das <html>-Element sollte zwei Hauptabschnitte enthalten:",
+                "list1Item1": "Der <head>-Abschnitt: Enthält Metainformationen über das Dokument, wie den Titel, die Zeichenkodierung und Links zu externen Ressourcen wie CSS-Dateien und Skripten.",
+                "list1Item2": "Der <body>-Abschnitt: Enthält den sichtbaren Inhalt der Seite, wie Text, Bilder, Videos und andere Elemente.",
+                "title3": "Das <head>-Element",
+                "paragraph2": "Das <head>-Element wird verwendet, um Metainformationen über das HTML-Dokument zu enthalten. Es zeigt keinen Inhalt auf der Seite selbst an, liefert aber wichtige Informationen für den Browser und Suchmaschinen.",
+                "listTitle2": "Häufig verwendete Elemente innerhalb von <head>:",
+                "list2Item1": "<meta> Gibt Metadaten wie Zeichenkodierung oder Autoreninformationen an.",
+                "list2Item2": "<title> Definiert den Titel der Seite, der in der Titelleiste des Browsers oder im Tab angezeigt wird.",
+                "list2Item3": "<link> Wird verwendet, um externe Ressourcen wie Stylesheets oder Favicons zu verknüpfen.",
+                "list2Item4": "<style> Enthält interne CSS-Styles für das Dokument.",
+                "list2Item5": "<script> Definiert externes oder inline JavaScript-Code.",
+                "codeTitle2": "Beispiel:",
+                "list3Item1": "<meta charset=\"UTF-8\"> Gibt die Zeichenkodierung für das Dokument an. UTF-8 ist die gängigste Kodierung für moderne Webseiten und unterstützt eine breite Palette von Zeichen.",
+                "list3Item2": "<meta name=\"author\" content=\"John Doe\"> Dies liefert Informationen über den Autor der Webseite, die normalerweise für Benutzer nicht sichtbar sind, aber für Suchmaschinen nützlich sein können.",
+                "list3Item3": "<title> Der Inhalt innerhalb des <title>-Tags wird im Browser-Tab angezeigt.",
+                "title4": "Das <body>-Element",
+                "paragraph3": "Das <body>-Element enthält den tatsächlichen Inhalt, der für den Benutzer sichtbar ist. Dazu gehören alle Elemente wie Text, Überschriften, Bilder, Links und andere HTML-Elemente.",
+                "codeTitle3": "Beispiel:",
+                "list4Item1": "<h1>: Das <h1>-Tag repräsentiert die Hauptüberschrift auf der Seite.",
+                "list4Item2": "<p>: Das <p>-Tag wird für einen Textabsatz verwendet.",
+                "paragraph4": "Alles innerhalb von <body> ist das, was Benutzer sehen, wenn sie die Webseite besuchen.",
+                "listTitle5": "Wichtige Punkte zum Merken:",
+                "list5Item1": "Das <html>-Element umschließt das gesamte HTML-Dokument, einschließlich der Head- und Body-Abschnitte.",
+                "list5Item2": "Das <head>-Element enthält Metadaten und Links zu externen Ressourcen wie CSS-Dateien und Skripten sowie den Titel des Dokuments.",
+                "list5Item3": "Das <body>-Element enthält den sichtbaren Inhalt, mit dem Benutzer interagieren, wie Überschriften, Absätze, Bilder und Links."
+            }
+        }
+    },
+    "cssTutorials": {
+        "markAsCompleted": "Als abgeschlossen markieren",
+        "chapter1": {
+            "page1": {
+                "title1": "Was ist CSS?",
+                "paragraph1": "CSS steht für Cascading Style Sheets. Es wird verwendet, um das Layout und die Präsentation von Webseiten zu steuern. Mit CSS können Sie die Farbe, Schriftart, Abstände, Ausrichtung und Positionierung von HTML-Elementen auf einer Webseite ändern. CSS ermöglicht es Ihnen, die Struktur des Inhalts (HTML) von seiner Präsentation (CSS) zu trennen, was die Webentwicklung effizienter und wartungsfreundlicher macht.",
+                "paragraph2": "CSS bietet eine Möglichkeit, Ihre HTML-Dokumente zu gestalten. Sie können Stile auf die gesamte Seite anwenden oder einzelne Elemente wie Absätze, Überschriften, Links und mehr gezielt anpassen.",
+                "title2": "Wie Funktioniert CSS?",
+                "paragraph3": "CSS funktioniert, indem es HTML-Elemente auswählt und ihnen Stile zuweist. Eine CSS-Regel besteht aus einem Selektor (der definiert, auf welche HTML-Elemente der Stil angewendet wird) und einer Deklaration (die definiert, welche Stile angewendet werden sollen).",
+                "codeTitle1": "Hier ist ein Beispiel für eine einfache CSS-Regel:",
+                "smallTitle1": "In diesem Beispiel:",
+                "paragraph4": "Der Selektor ist p, der alle <p>- (Absatz-) Elemente im Dokument anspricht.",
+                "paragraph5": "Die Deklarationen befinden sich innerhalb der geschweiften Klammern {} und definieren die anzuwendenden Stile. In diesem Fall wird die Farbe auf Blau gesetzt und die Schriftgröße auf 16px.",
+                "title3": "Warum CSS Verwenden?",
+                "list1Item1": "Trennung von Belangen: CSS trennt die Struktur (HTML) vom Design (CSS), was Ihre Website einfacher zu verwalten und zu aktualisieren macht.",
+                "list1Item2": "Konsistenz: Durch die Verwendung von CSS können Sie ein konsistentes Design über alle Seiten Ihrer Website hinweg sicherstellen.",
+                "list1Item3": "Effizienz: CSS ermöglicht es Ihnen, das Erscheinungsbild mehrerer Seiten von einem zentralen Ort aus zu steuern, was Änderungen schneller und einfacher macht.",
+                "codeTitle2": "Beispiel: Schauen wir uns ein Beispiel an, bei dem wir einige grundlegende CSS-Stile auf eine Webseite anwenden.",
+                "listTitle2": "In diesem Beispiel:",
+                "list2Item1": "Die Hintergrundfarbe der Seite ist auf Hellblau gesetzt.",
+                "list2Item2": "Die <h1>-Überschrift hat eine dunkelblaue Farbe und ist zentriert.",
+                "list2Item3": "Der <p>-Absatz hat dunkelgrauen Text und eine Schriftgröße von 18px."
+            }
+        }
+    }
+}

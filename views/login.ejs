@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html dir="<%= t('direction') %>" lang="<%= lang %>">
+
+<head>
+    <meta charset="utf8">
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+            margin: 0%;
+        }
+
+        .LOGINCONTAINER {
+            width: auto;
+            padding: 30px;
+            background-color: #e3a4a6;
+        }
+
+        .LOGINCONTAINERCONTENT {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .CENTER {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .PAGE {
+            width: 100%;
+            height: calc(100% - 80px);
+            /* 100% - header */
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .LOGININPUT {
+            padding: 5px;
+            border: none;
+            width: 300px;
+            height: 30px;
+        }
+
+        .LOGININPUT:enabled {
+            outline: none;
+        }
+
+        .LOGINBUTTON {
+            padding: 10px;
+            color: #445368;
+            /*background-color: #F48FB1;*/
+            background-color: #FAD473;
+            font-size: 24px;
+            font-family: "Arial";
+            font-weight: bold;
+            user-select: none;
+            height: 30px;
+            /*80 - 2*padding */
+            width: 290px;
+        }
+
+        .LOGINBUTTON:hover {
+            background-color: #ef9d6e;
+            cursor: pointer;
+        }
+
+        .CREATEACCOUNTBUTTON {
+            color: grey;
+            font-family: "Arial";
+            user-select: none;
+            font-size: 14px;
+        }
+
+        .FOOTER {
+            width: calc(100% - 40px);
+            height: auto;
+            background-color: #FAD473;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: black;
+            padding: 20px;
+            font-family: 'Arial';
+            font-size: 15px;
+            gap: 20px;
+        }
+    </style>
+    <title>
+        HTMLtoHero
+    </title>
+</head>
+
+<body>
+    
+    <%- include('components/header') %>
+
+    <div class="PAGE">
+        <div class="CENTER">
+            <div class="LOGINCONTAINER">
+                <div class="LOGINCONTAINERCONTENT">
+                    <img src="https://raw.githubusercontent.com/Staroandtado/html-to-hero-assets/ed5dd6ce839cb8033ee60ccd707d998ab282e61e/html2hero.svg"
+                        height="150px" style="margin-bottom: 35px;">
+                    <input class="LOGININPUT" id="emailInput" type="email" placeholder="<%= t('loginPage.email') %>">
+                    <input class="LOGININPUT" id="passwordInput" type="password" placeholder="<%= t('loginPage.password') %>">
+                    <div class="LOGINBUTTON"><%= t('loginPage.loginButton') %></div>
+                    <a class="CREATEACCOUNTBUTTON" href=""><%= t('loginPage.createNewAccount') %></a>
+                </div>
+            </div>
+        </div>
+
+        <footer class="FOOTER">
+            <span class="FOOTERABOUT"><%= t('footer.text') %></span>
+            <span class="FOOTERCOPYRIGHT"><%= t('footer.copyright') %></span>
+        </footer>
+
+    </div>
+
+    <script>
+
+        function getCookie(name) {
+            // Construct the cookie name as a search pattern
+            const cookiePattern = `${name}=`;
+            const cookies = document.cookie.split('; '); // Split cookies into individual parts
+
+            for (let cookie of cookies) {
+                if (cookie.startsWith(cookiePattern)) {
+                    // Extract the cookie value
+                    return decodeURIComponent(cookie.substring(cookiePattern.length));
+                }
+            }
+
+            // Return null if cookie is not found
+            return null;
+        }
+
+        function deleteCookie(cookieName) {
+            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        }
+
+        document.addEventListener("DOMContentLoaded", (event) => { // Logout if password and email dont match ( prevent hacking accounts )
+            fetch("/api/getAccount", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: getCookie("currentEmail"),
+                })
+            }).then(response => response.json())
+                .then(data => {
+                    if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
+                        deleteCookie("isLoggedIn");
+                        deleteCookie("currentEmail");
+                        deleteCookie("currentPassword");
+                        window.location.href = "/" + lang_code;
+                    }
+                })
+        });
+
+        async function logIn(email, password) {
+            const response = await fetch("/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                })
+            });
+            const data = await response.json();
+            const isLoggedIn = data.isLoggedIn;
+            if (isLoggedIn !== null && isLoggedIn !== "" && isLoggedIn !== undefined) {
+                if (isLoggedIn === true) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+
+        let LoginButton = document.querySelector(".LOGINBUTTON");
+        LoginButton.addEventListener("click", (event) => {
+
+            const email = document.querySelector("#emailInput").value;
+            const password = document.querySelector("#passwordInput").value;
+            if (email !== "" && password !== "") {
+                logIn(email, password).then(isLoggedIn => {
+                    console.log(isLoggedIn);
+                    if (isLoggedIn === true) {
+                        window.location.href = "/" + lang_code + "/profile";
+                    }
+                });
+            } else {
+                window.alert("Empty");
+            }
+
+        });
+
+    </script>
+</body>
+
+</html>

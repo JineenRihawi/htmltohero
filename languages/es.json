@@ -1,0 +1,170 @@
+{
+    "direction": "ltr",
+    "footer": {
+        "text": "HTMLtoHero es una plataforma dedicada a enseñar desarrollo web a través de tutoriales paso a paso y ejercicios interactivos. Aprende HTML, CSS y JavaScript de una manera fácil y atractiva.",
+        "copyright": "Copyright Cenin Rihavi 2025©"
+    },
+    "header": {
+        "html": "HTML",
+        "htmlTutorials": "Tutoriales",
+        "htmlExercises": "Ejercicios",
+        "css": "CSS",
+        "cssTutorials": "Tutoriales",
+        "cssExercises": "Ejercicios",
+        "js": "JavaScript",
+        "jsTutorials": "Tutoriales",
+        "jsExercises": "Ejercicios",
+        "codeEditor": "Editor de Código",
+        "search": "Buscar",
+        "login": "Iniciar Sesión",
+        "profile": "Perfil",
+        "logout": "Cerrar Sesión"
+    },
+    "mainpage": {
+        "discovercontainer": {
+            "discover": "Descubrir",
+            "search": "Buscar"
+        }
+    },
+    "notFoundPage": {
+        "title": "HTMLtoHero - No Encontrado",
+        "errorText": "Error 404",
+        "smallText": "¡Página No Encontrada!"
+    },
+    "loginPage": {
+        "email": "Correo Electrónico",
+        "password": "Contraseña",
+        "loginButton": "Iniciar Sesión",
+        "createNewAccount": "Crear Nueva Cuenta"
+    },
+    "profile": {
+        "profileContainer": {
+            "name": "Nombre",
+            "birthday": "Cumpleaños",
+            "accountCreationDate": "Fecha de Creación de la Cuenta",
+            "level": "Nivel"
+        },
+        "learningContainer": {
+            "continueLearning": "Continuar Aprendiendo...",
+            "html": "HTML",
+            "css": "CSS",
+            "js": "JS"
+        },
+        "exercisingContainer": {
+            "continueExercising": "Continuar con los Ejercicios...",
+            "html": "HTML",
+            "css": "CSS",
+            "js": "JS"
+        }
+    },
+    "codeeditor": {
+        "previewButton": "Vista Previa"
+    },
+    "htmlTutorials": {
+        "markAsCompleted": "Marcar como completado",
+        "chapter1": {
+            "page1": {
+                "pageTitle": "¿Qué es HTML?",
+                "title1": "¿Qué es HTML?",
+                "paragraph1": "HTML, o Lenguaje de Marcado de Hipertexto, es la piedra angular del desarrollo web y la columna vertebral de cada sitio web que visitas. Es un lenguaje estandarizado utilizado para crear y estructurar el contenido de las páginas web, asegurando que navegadores como Chrome, Firefox y Safari puedan interpretar y mostrar el contenido correctamente.",
+                "title2": "Los Bloques de Construcción de la Web",
+                "paragraph2": "HTML no es un lenguaje de programación, es un lenguaje de marcado, lo que significa que se usa para anotar texto y proporcionar instrucciones a los navegadores sobre cómo renderizar el contenido. Estas anotaciones vienen en forma de elementos HTML, escritos usando etiquetas como <html>, <head> y <body>.",
+                "paragraph3": "HTML proporciona la estructura para todo el contenido web. Con elementos para encabezados, párrafos, imágenes, enlaces y más, sirve como punto de partida para cada proyecto web. Al combinar HTML con CSS y JavaScript, los desarrolladores pueden crear sitios web visualmente impresionantes e interactivos.",
+                "title3": "¿Qué Puede Hacer HTML?",
+                "listTitle1": "HTML te permite construir la estructura de las páginas web al agregar:",
+                "list1Item1": "Encabezados y Párrafos: Usa <h2> a <h6> para encabezados y <p> para párrafos para organizar el contenido de texto.",
+                "list1Item2": "Imágenes y Multimedia: Inserta elementos visuales, audio y video para una experiencia de usuario atractiva.",
+                "list1Item3": "Enlaces: Usa etiquetas <a> para navegar entre páginas y sitios externos.",
+                "list1Item4": "Listas: Organiza contenido usando listas ordenadas (<ol>) o no ordenadas (<ul>).",
+                "list1Item5": "Formularios: Recoge datos de los usuarios con formularios e campos de entrada interactivos.",
+                "paragraph4": "HTML también soporta elementos semánticos como <header>, <footer> y <article> para mejorar la accesibilidad y el SEO.",
+                "title4": "¿Por Qué Aprender HTML?",
+                "listTitle2": "HTML es la base del desarrollo web, y aprenderlo es el primer paso hacia la construcción de tus propios sitios web. Aquí está por qué es esencial:",
+                "list2Item1": "Facilidad de Aprendizaje: HTML es simple y amigable para principiantes.",
+                "list2Item2": "Versatilidad: Es el punto de partida para todos los proyectos web.",
+                "list2Item3": "Oportunidades Profesionales: Entender HTML abre puertas a varios roles en desarrollo y diseño web.",
+                "paragraph5": "Aprender HTML es como aprender el alfabeto del desarrollo web. Te da las herramientas para dar vida a tus ideas en línea y proporciona una base sólida para explorar tecnologías más avanzadas.",
+                "title5": "Visualizando la Estructura de HTML",
+                "title6": "Conclusión",
+                "paragraph6": "HTML es más que una herramienta técnica; es el lenguaje que da vida a las ideas en la web. Ya sea que quieras crear un blog personal, un portafolio o un sitio web completo, dominar HTML es la puerta a infinitas posibilidades. Combinado con CSS y JavaScript, se convierte en un trío poderoso para construir sitios web modernos, atractivos y dinámicos. ¡Así que sumérgete, experimenta y comienza tu viaje para convertirte en un héroe del desarrollo web!"
+            }
+        },
+        "chapter2": {
+            "page1": {
+                "pageTitle": "Entendiendo el doctype HTML <!DOCTYPE html>",
+                "title1": "Entendiendo el doctype HTML <!DOCTYPE html>",
+                "paragraph1": "La declaración <!DOCTYPE> es una parte importante de cualquier documento HTML. Es lo primero que debe aparecer en un documento HTML, y le dice al navegador web qué versión de HTML esperar. Sin ella, los navegadores podrían renderizar la página incorrectamente, especialmente al cambiar entre diferentes versiones de HTML.",
+                "title2": "¿Qué es <!DOCTYPE html>?",
+                "paragraph2": "La declaración <!DOCTYPE html> se usa para especificar que el documento es un documento HTML5. Define el tipo de documento y la versión de HTML utilizada, y asegura que el navegador renderice la página en modo estándar, evitando el modo de compatibilidad, donde los navegadores podrían usar métodos obsoletos para mostrar el contenido.",
+                "title3": "¿Por Qué es Importante <!DOCTYPE html>?",
+                "list1Item1": "Renderización del Navegador: Ayuda al navegador a entender la versión de HTML esperada. Esto asegura que los elementos y características modernas de HTML se rendericen correctamente.",
+                "list1Item2": "Modo Estándar vs. Modo de Compatibilidad: Sin <!DOCTYPE html>, algunos navegadores pueden renderizar la página en modo de compatibilidad, donde el diseño y los estilos podrían no funcionar como se espera.",
+                "list1Item3": "HTML5: Con HTML5, <!DOCTYPE html> es más simple que en versiones anteriores. En versiones antiguas de HTML, como HTML 4.01, el doctype era más largo e incluía más información. HTML5 simplificó esto usando solo <!DOCTYPE html>.",
+                "title4": "¿Cómo Usar <!DOCTYPE html>?",
+                "paragraph3": "La declaración debe aparecer al principio del documento, antes de la etiqueta <html>. Esta es la primera línea de tu documento HTML.",
+                "codeTitle1": "Estructura Básica:",
+                "listTitle2": "Puntos Clave para Recordar:",
+                "list2Item1": "Siempre usa <!DOCTYPE html> al principio de tu documento HTML.",
+                "list2Item2": "Declara el documento como HTML5, que es la versión más reciente y ampliamente utilizada de HTML.",
+                "list2Item3": "<!DOCTYPE html> ayuda a los navegadores a interpretar y mostrar la página correctamente."
+            },
+            "page2": {
+                "pageTitle": "Los elementos <html>, <head> y <body>",
+                "title1": "Los Elementos <html>, <head> y <body>",
+                "title2": "El Elemento <html>",
+                "paragraph1": "El elemento <html> es el elemento raíz de un documento HTML. Encapsula todo el contenido de la página, incluidas las secciones de cabeza y cuerpo. Cada documento HTML debe comenzar con este elemento, y todos los demás elementos deben estar anidados dentro de él.",
+                "codeTitle1": "Sintaxis:",
+                "listTitle1": "El elemento <html> debe contener dos secciones principales:",
+                "list1Item1": "La sección <head>: Contiene meta-información sobre el documento, como el título, la codificación de caracteres y enlaces a recursos externos como archivos CSS y scripts.",
+                "list1Item2": "La sección <body>: Contiene el contenido visible de la página, como texto, imágenes, videos y otros elementos.",
+                "title3": "El Elemento <head>",
+                "paragraph2": "El elemento <head> se usa para contener meta-información sobre el documento HTML. No muestra ningún contenido en la página en sí, pero proporciona información importante para el navegador y los motores de búsqueda.",
+                "listTitle2": "Elementos Comúnmente Usados Dentro de <head>:",
+                "list2Item1": "<meta> Especifica metadatos como la codificación de caracteres o información del autor.",
+                "list2Item2": "<title> Define el título de la página, que aparece en la barra de título del navegador o en la pestaña.",
+                "list2Item3": "<link> Se usa para vincular recursos externos, como hojas de estilo o favicons.",
+                "list2Item4": "<style> Contiene estilos CSS internos para el documento.",
+                "list2Item5": "<script> Define código JavaScript externo o en línea.",
+                "codeTitle2": "Ejemplo:",
+                "list3Item1": "<meta charset=\"UTF-8\"> Especifica la codificación de caracteres para el documento. UTF-8 es la codificación más común para páginas web modernas, compatible con una amplia gama de caracteres.",
+                "list3Item2": "<meta name=\"author\" content=\"John Doe\"> Proporciona información sobre el autor de la página web, que no suele ser visible para los usuarios pero puede ser útil para los motores de búsqueda.",
+                "list3Item3": "<title> El contenido dentro de la etiqueta <title> se muestra en la pestaña del navegador.",
+                "title4": "El Elemento <body>",
+                "paragraph3": "El elemento <body> contiene el contenido real que será visible para el usuario. Esto incluye todos los elementos como texto, encabezados, imágenes, enlaces y otros elementos HTML.",
+                "codeTitle3": "Ejemplo:",
+                "list4Item1": "<h1>: La etiqueta <h1> representa el encabezado principal en la página.",
+                "list4Item2": "<p>: La etiqueta <p> se usa para un párrafo de texto.",
+                "paragraph4": "Todo lo que está dentro de <body> es lo que los usuarios ven cuando visitan la página web.",
+                "listTitle5": "Puntos Clave para Recordar:",
+                "list5Item1": "El elemento <html> envuelve todo el documento HTML, incluidas las secciones de cabeza y cuerpo.",
+                "list5Item2": "El elemento <head> contiene metadatos y enlaces a recursos externos, como archivos CSS y scripts, y el título del documento.",
+                "list5Item3": "El elemento <body> contiene el contenido visible con el que los usuarios interactúan, como encabezados, párrafos, imágenes y enlaces."
+            }
+        }
+    },
+    "cssTutorials": {
+        "markAsCompleted": "Marcar como completado",
+        "chapter1": {
+            "page1": {
+                "title1": "¿Qué es CSS?",
+                "paragraph1": "CSS significa Hojas de Estilo en Cascada. Se utiliza para controlar el diseño y la presentación de las páginas web. Con CSS, puedes cambiar el color, la fuente, el espaciado, la alineación y la posición de los elementos HTML en una página web. CSS te permite separar la estructura del contenido (HTML) de su presentación (CSS), haciendo que el desarrollo web sea más eficiente y fácil de mantener.",
+                "paragraph2": "CSS proporciona una forma de estilizar tus documentos HTML. Puedes aplicar estilos a toda la página, o puedes apuntar a elementos individuales, como párrafos, encabezados, enlaces y más.",
+                "title2": "¿Cómo Funciona CSS?",
+                "paragraph3": "CSS funciona seleccionando elementos HTML y aplicándoles estilos. Una regla CSS consta de un selector (que define a qué elementos HTML se aplicará el estilo) y una declaración (que define qué estilos se deben aplicar).",
+                "codeTitle1": "Aquí hay un ejemplo de una regla CSS simple:",
+                "smallTitle1": "En este ejemplo:",
+                "paragraph4": "El selector es p, que apunta a todos los elementos <p> (párrafo) en el documento.",
+                "paragraph5": "Las declaraciones están dentro de las llaves {} y definen los estilos a aplicar. En este caso, el color se establece en azul y el tamaño de la fuente en 16px.",
+                "title3": "¿Por Qué Usar CSS?",
+                "list1Item1": "Separación de Preocupaciones: CSS separa la estructura (HTML) del diseño (CSS), haciendo que tu sitio web sea más fácil de gestionar y actualizar.",
+                "list1Item2": "Consistencia: Al usar CSS, puedes asegurar un diseño consistente en todas las páginas de tu sitio web.",
+                "list1Item3": "Eficiencia: CSS te permite controlar la apariencia de múltiples páginas desde una ubicación central, haciendo que los cambios sean más rápidos y fáciles.",
+                "codeTitle2": "Ejemplo: Veamos un ejemplo donde aplicamos algunos estilos CSS básicos a una página web.",
+                "listTitle2": "En este ejemplo:",
+                "list2Item1": "El color de fondo de la página está establecido en azul claro.",
+                "list2Item2": "El encabezado <h1> tiene un color azul oscuro y está centrado.",
+                "list2Item3": "El párrafo <p> tiene texto gris oscuro y un tamaño de fuente de 18px."
+            }
+        }
+    }
+}

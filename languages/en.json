@@ -1,0 +1,170 @@
+{
+    "direction": "ltr",
+    "footer": {
+        "text": "HTMLtoHero is a platform dedicated to teaching web development through step-by-step tutorials and interactive exercises. Learn HTML, CSS, and JavaScript in an easy and engaging way.",
+        "copyright": "Copyright Cenin Rihavi 2025©"
+    },
+    "header": {
+        "html": "HTML",
+        "htmlTutorials": "Tutorials",
+        "htmlExercises": "Exercises",
+        "css": "CSS",
+        "cssTutorials": "Tutorials",
+        "cssExercises": "Exercises",
+        "js": "Javascript",
+        "jsTutorials": "Tutorials",
+        "jsExercises": "Exercises",
+        "codeEditor": "Code Editor",
+        "search": "Search",
+        "login": "Login",
+        "profile": "Profile",
+        "logout": "Logout"
+    },
+    "mainpage": {
+        "discovercontainer": {
+            "discover": "Discover",
+            "search": "Search"
+        }
+    },
+    "notFoundPage": {
+        "title": "HTMLtoHero - Not Found",
+        "errorText": "Error 404",
+        "smallText": "Page Not Found!"
+    },
+    "loginPage": {
+        "email": "Email",
+        "password": "Password",
+        "loginButton": "Login",
+        "createNewAccount": "Create New Account"
+    },
+    "profile": {
+        "profileContainer": {
+            "name": "Name",
+            "birthday": "Birthday",
+            "accountCreationDate": "Account Creation Date",
+            "level": "Level"
+        },
+        "learningContainer": {
+            "continueLearning": "Continue Learning...",
+            "html": "HTML",
+            "css": "CSS",
+            "js": "JS"
+        },
+        "exercisingContainer": {
+            "continueExercising": "Continue Exercising...",
+            "html": "HTML",
+            "css": "CSS",
+            "js": "JS"
+        }
+    },
+    "codeeditor": {
+        "previewButton": "Preview"
+    },
+    "htmlTutorials": {
+        "markAsCompleted": "Mark as completed",
+        "chapter1": {
+            "page1": {
+                "pageTitle": "What is HTML?",
+                "title1": "What is HTML?",
+                "paragraph1": "HTML, or HyperText Markup Language, is the cornerstone of web development and the backbone of every website you visit. It’s a standardized language used to create and structure the content of web pages, ensuring that browsers like Chrome, Firefox, and Safari can interpret and display the content properly.",
+                "title2": "The Building Blocks of the Web",
+                "paragraph2": "HTML isn’t a programming language—it’s a markup language, which means it’s used to annotate text and provide instructions to browsers on how to render content. These annotations come in the form of HTML elements, written using tags such as <html>, <head>, and <body>.",
+                "paragraph3": "HTML provides the structure for all web content. With elements for headings, paragraphs, images, links, and more, it serves as the starting point for every web project. By pairing HTML with CSS and JavaScript, developers can create visually stunning and interactive websites.",
+                "title3": "What Can HTML Do?",
+                "listTitle1": "HTML allows you to build the structure of web pages by adding:",
+                "list1Item1": "Headings and Paragraphs: Use <h2>; to <h6>; for headings and <p> for paragraphs to organize text content.",
+                "list1Item2": "Images and Multimedia: Embed visuals, audio, and video for an engaging user experience.",
+                "list1Item3": "Links: Use <a> tags to navigate between pages and external sites.",
+                "list1Item4": "Lists: Organize content using ordered (<ol>) or unordered (<ul>) lists.",
+                "list1Item5": "Forms: Collect user input with interactive forms and input fields.",
+                "paragraph4": "HTML also supports semantic elements like <header>, <footer>, and <article> to improve accessibility and SEO.",
+                "title4": "Why Learn HTML?",
+                "listTitle2": "HTML is the foundation of web development, and learning it is the first step toward building your own websites. Here’s why it’s essential:",
+                "list2Item1": "Ease of Learning: HTML is simple and beginner-friendly.",
+                "list2Item2": "Versatility: It’s the starting point for all web projects.",
+                "list2Item3": "Career Opportunities: Understanding HTML opens doors to various roles in web development and design.",
+                "paragraph5": "Learning HTML is like learning the alphabet of web development. It gives you the tools to bring your ideas to life online and provides a solid foundation for diving into more advanced technologies.",
+                "title5": "Visualizing HTML Structure",
+                "title6": "Conclusion",
+                "paragraph6": "HTML is more than just a technical tool; it’s the language that brings ideas to life on the web. Whether you want to create a personal blog, a portfolio, or a fully-fledged website, mastering HTML is the gateway to endless possibilities. Paired with CSS and JavaScript, it becomes a powerful trio for building modern, engaging, and dynamic websites. So dive in, experiment, and start your journey toward becoming a web development hero!"
+            }
+        },
+        "chapter2": {
+            "page1": {
+                "pageTitle": "Understanding the HTML doctype <!DOCTYPE html>",
+                "title1": "Understanding the HTML doctype <!DOCTYPE html>",
+                "paragraph1": "The <!DOCTYPE> declaration is an important part of any HTML document. It is the first thing that should appear in an HTML document, and it tells the web browser which version of HTML to expect. Without it, browsers might render the page incorrectly, especially when switching between different versions of HTML.",
+                "title2": "What is <!DOCTYPE html>?",
+                "paragraph2": "The <!DOCTYPE html> declaration is used to specify that the document is an HTML5 document. It defines the document type and version of HTML being used, and it ensures the browser renders the page in standards mode, avoiding quirks mode, where browsers might use outdated methods to display content.",
+                "title3": "Why is <!DOCTYPE html> Important?",
+                "list1Item1": "Browser Rendering: It helps the browser understand the version of HTML to expect. This ensures that modern HTML elements and features will be rendered correctly.",
+                "list1Item2": "Standards Mode vs. Quirks Mode: Without the <!DOCTYPE html>, some browsers may render the page in quirks mode, where the layout and styling might not work as expected.",
+                "list1Item3": "HTML5: With HTML5, <!DOCTYPE html> is simpler than previous versions. In older versions of HTML, like HTML 4.01, the doctype was longer and included more information. HTML5 simplified this by using just <!DOCTYPE html>.",
+                "title4": "How to Use <!DOCTYPE html>?",
+                "paragraph3": "The declaration should appear at the very beginning of the document, before the <html> tag. This is the first line of your HTML document.",
+                "codeTitle1": "Basic Structure:",
+                "listTitle2": "Key Points to Remember:",
+                "list2Item1": "Always use <!DOCTYPE html> at the very top of your HTML document.",
+                "list2Item2": "It declares the document as HTML5, which is the latest and most widely used version of HTML.",
+                "list2Item3": "The <!DOCTYPE html> helps browsers correctly interpret and display the page."
+            },
+            "page2": {
+                "pageTitle": "The <html>, <head>, and <body> elements",
+                "title1": "The <html>, <head>, and <body> Elements",
+                "title2": "The <html> Element",
+                "paragraph1": "The <html> element is the root element of an HTML document. It encapsulates all the content of the page, including the head and body sections. Every HTML document must start with this element, and all other elements should be nested inside it.",
+                "codeTitle1": "Syntax:",
+                "listTitle1": "The <html> element should contain two main sections:",
+                "list1Item1": "The <head> section: Contains meta-information about the document, such as the title, character encoding, and links to external resources like CSS files and scripts.",
+                "list1Item2": "The <body> section: Contains the visible content of the page, such as text, images, videos, and other elements.",
+                "title3": "The <head> Element",
+                "paragraph2": "The <head> element is used to contain meta-information about the HTML document. It does not display any content on the page itself, but it provides important information for the browser and search engines.",
+                "listTitle2": "Commonly Used Elements Inside <head>:",
+                "list2Item1": "<meta> Specifies metadata like character encoding or author information.",
+                "list2Item2": "<title> Defines the title of the page, which appears in the browser's title bar or tab.",
+                "list2Item3": "<link> Used to link external resources, such as stylesheets or favicons.",
+                "list2Item4": "<style> Contains internal CSS styles for the document.",
+                "list2Item5": "<script> Defines external or inline JavaScript code.",
+                "codeTitle2": "Example:",
+                "list3Item1": "<meta charset=\"UTF-8\"> Specifies the character encoding for the document. UTF-8 is the most common encoding for modern web pages, supporting a wide range of characters.",
+                "list3Item2": "<meta name=\"author\" content=\"John Doe\"> This provides information about the author of the webpage, which is not typically visible to users but can be useful for search engines.",
+                "list3Item3": "<title> The content inside the <title> tag is displayed in the browser tab.",
+                "title4": "The <body> Element",
+                "paragraph3": "The <body> element contains the actual content that will be visible to the user. This includes all the elements like text, headings, images, links, and other HTML elements.",
+                "codeTitle3": "Example:",
+                "list4Item1": "<h1>: The <h1. tag represents the main heading on the page.",
+                "list4Item2": "<p>: The <p> tag is used for a paragraph of text.",
+                "paragraph4": "Everything inside the <body> is what the users see when they visit the webpage.",
+                "listTitle5": "Key Points to Remember:",
+                "list5Item1": "The <html> element wraps the entire HTML document, including both the head and body sections.",
+                "list5Item2": "The <head> element contains metadata and links to external resources, such as CSS files and scripts, and the title of the document.",
+                "list5Item3": "The <body> element holds the visible content that users interact with, such as headings, paragraphs, images, and links."
+            }
+        }
+    },
+    "cssTutorials": {
+        "markAsCompleted": "Mark as completed",
+        "chapter1": {
+            "page1": {
+                "title1": "What is CSS?",
+                "paragraph1": "CSS stands for Cascading Style Sheets. It is used to control the layout and presentation of web pages. With CSS, you can change the color, font, spacing, alignment, and positioning of HTML elements on a webpage. CSS allows you to separate the structure of the content (HTML) from its presentation (CSS), making web development more efficient and easier to maintain.",
+                "paragraph2": "CSS provides a way to style your HTML documents. You can apply styles to the entire page, or you can target individual elements, such as paragraphs, headers, links, and more.",
+                "title2": "How CSS Works?",
+                "paragraph3": "CSS works by selecting HTML elements and applying styles to them. A CSS rule consists of a selector (which defines which HTML elements the style will apply to) and a declaration (which defines what styles should be applied).",
+                "codeTitle1": "Here’s an example of a simple CSS rule:",
+                "smallTitle1": "In this example:",
+                "paragraph4": "The selector is p, which targets all <p> (paragraph) elements in the document.",
+                "paragraph5": "The declarations are inside the curly braces {} and define the styles to be applied. In this case, the color is set to blue and the font size is set to 16px.",
+                "title3": "Why Use CSS?",
+                "list1Item1": "Separation of Concerns: CSS separates the structure (HTML) from the design (CSS), making your website easier to manage and update.",
+                "list1Item2": "Consistency: By using CSS, you can ensure a consistent design across all pages of your website.",
+                "list1Item3": "Efficiency: CSS allows you to control the appearance of multiple pages from one central location, making changes faster and easier.",
+                "codeTitle2": "Example: Let’s look at an example where we apply some basic CSS styles to a webpage.",
+                "listTitle2": "In this example:",
+                "list2Item1": "The background color of the page is set to lightblue.",
+                "list2Item2": "The <h1> header has a darkblue color and is centered.",
+                "list2Item3": "The <p> paragraph has darkgray text and a font size of 18px."
+            }
+        }
+    }
+}

@@ -1,0 +1,170 @@
+{
+    "direction": "ltr",
+    "footer": {
+        "text": "HTMLtoHero, adım adım eğitimler ve interaktif alıştırmalarla web geliştirme öğretmeye adanmış bir platformdur. HTML, CSS ve JavaScript'i kolay ve ilgi çekici bir şekilde öğrenin.",
+        "copyright": "Telif Hakkı Cenin Rihavi 2025©"
+    },
+    "header": {
+        "html": "HTML",
+        "htmlTutorials": "Eğitimler",
+        "htmlExercises": "Alıştırmalar",
+        "css": "CSS",
+        "cssTutorials": "Eğitimler",
+        "cssExercises": "Alıştırmalar",
+        "js": "JavaScript",
+        "jsTutorials": "Eğitimler",
+        "jsExercises": "Alıştırmalar",
+        "codeEditor": "Kod Editörü",
+        "search": "Ara",
+        "login": "Giriş Yap",
+        "profile": "Profil",
+        "logout": "Çıkış Yap"
+    },
+    "mainpage": {
+        "discovercontainer": {
+            "discover": "Keşfet",
+            "search": "Ara"
+        }
+    },
+    "notFoundPage": {
+        "title": "HTMLtoHero - Bulunamadı",
+        "errorText": "Hata 404",
+        "smallText": "Sayfa Bulunamadı!"
+    },
+    "loginPage": {
+        "email": "E-posta",
+        "password": "Şifre",
+        "loginButton": "Giriş Yap",
+        "createNewAccount": "Yeni Hesap Oluştur"
+    },
+    "profile": {
+        "profileContainer": {
+            "name": "İsim",
+            "birthday": "Doğum Günü",
+            "accountCreationDate": "Hesap Oluşturma Tarihi",
+            "level": "Seviye"
+        },
+        "learningContainer": {
+            "continueLearning": "Öğrenmeye Devam Et...",
+            "html": "HTML",
+            "css": "CSS",
+            "js": "JS"
+        },
+        "exercisingContainer": {
+            "continueExercising": "Alıştırmalara Devam Et...",
+            "html": "HTML",
+            "css": "CSS",
+            "js": "JS"
+        }
+    },
+    "codeeditor": {
+        "previewButton": "Önizleme"
+    },
+    "htmlTutorials": {
+        "markAsCompleted": "Tamamlandı olarak işaretle",
+        "chapter1": {
+            "page1": {
+                "pageTitle": "HTML Nedir?",
+                "title1": "HTML Nedir?",
+                "paragraph1": "HTML, yani Hiper Metin İşaretleme Dili, web geliştirmenin temel taşı ve ziyaret ettiğiniz her web sitesinin omurgasıdır. Web sayfalarının içeriğini oluşturmak ve yapılandırmak için kullanılan standart bir dildir, böylece Chrome, Firefox ve Safari gibi tarayıcılar içeriği doğru bir şekilde yorumlayabilir ve görüntüleyebilir.",
+                "title2": "Web'in Yapı Taşları",
+                "paragraph2": "HTML bir programlama dili değildir; bir işaretleme dilidir, yani metni açıklamak ve tarayıcılara içeriği nasıl işleyeceği konusunda talimatlar vermek için kullanılır. Bu açıklamalar, <html>, <head> ve <body> gibi etiketler kullanılarak yazılan HTML elemanları şeklinde gelir.",
+                "paragraph3": "HTML, tüm web içeriği için yapı sağlar. Başlıklar, paragraflar, resimler, bağlantılar ve daha fazlası için elemanlarla, her web projesinin başlangıç noktasıdır. HTML'i CSS ve JavaScript ile birleştirerek, geliştiriciler görsel olarak çarpıcı ve etkileşimli web siteleri oluşturabilir.",
+                "title3": "HTML Ne Yapabilir?",
+                "listTitle1": "HTML, web sayfalarının yapısını oluşturmanıza olanak tanır:",
+                "list1Item1": "Başlıklar ve Paragraflar: Metin içeriğini düzenlemek için <h2> ile <h6> arasında başlıklar ve <p> için paragraflar kullanın.",
+                "list1Item2": "Resimler ve Multimedya: Görsel, ses ve video ekleyerek ilgi çekici bir kullanıcı deneyimi oluşturun.",
+                "list1Item3": "Bağlantılar: Sayfalar arasında ve harici sitelere gezinmek için <a> etiketlerini kullanın.",
+                "list1Item4": "Listeler: Sıralı (<ol>) veya sırasız (<ul>) listelerle içeriği düzenleyin.",
+                "list1Item5": "Formlar: Etkileşimli formlar ve giriş alanlarıyla kullanıcı girişi toplayın.",
+                "paragraph4": "HTML ayrıca erişilebilirliği ve SEO'yu iyileştirmek için <header>, <footer> ve <article> gibi anlamsal elemanları destekler.",
+                "title4": "Neden HTML Öğrenmelisiniz?",
+                "listTitle2": "HTML, web geliştirmenin temelidir ve kendi web sitelerinizi oluşturmak için ilk adımdır. İşte neden önemli olduğu:",
+                "list2Item1": "Öğrenme Kolaylığı: HTML basit ve yeni başlayanlar için uygundur.",
+                "list2Item2": "Çok Yönlülük: Tüm web projeleri için başlangıç noktasıdır.",
+                "list2Item3": "Kariyer Fırsatları: HTML'i anlamak, web geliştirme ve tasarımda çeşitli roller için kapılar açar.",
+                "paragraph5": "HTML öğrenmek, web geliştirmenin alfabesini öğrenmek gibidir. Fikirlerinizi çevrimiçi olarak hayata geçirmek için araçlar sağlar ve daha gelişmiş teknolojilere dalmak için sağlam bir temel sunar.",
+                "title5": "HTML Yapısını Görselleştirme",
+                "title6": "Sonuç",
+                "paragraph6": "HTML sadece teknik bir araç değil; web'de fikirleri hayata geçiren bir dildir. Kişisel bir blog, portföy veya tam teşekküllü bir web sitesi oluşturmak istiyorsanız, HTML'i öğrenmek sonsuz olasılıklara açılan bir kapıdır. CSS ve JavaScript ile birleştirildiğinde, modern, ilgi çekici ve dinamik web siteleri inşa etmek için güçlü bir üçlü olur. Öyleyse dalın, deneyin ve bir web geliştirme kahramanı olma yolculuğunuza başlayın!"
+            }
+        },
+        "chapter2": {
+            "page1": {
+                "pageTitle": "HTML doctype <!DOCTYPE html> Anlama",
+                "title1": "HTML doctype <!DOCTYPE html> Anlama",
+                "paragraph1": "<!DOCTYPE> bildirimi, herhangi bir HTML belgesinin önemli bir parçasıdır. Bir HTML belgesinde görünmesi gereken ilk şeydir ve web tarayıcısına hangi HTML sürümünü beklemesi gerektiğini söyler. Onsuz, tarayıcılar sayfayı yanlış şekilde işleyebilir, özellikle farklı HTML sürümleri arasında geçiş yaparken.",
+                "title2": "<!DOCTYPE html> Nedir?",
+                "paragraph2": "<!DOCTYPE html> bildirimi, belgenin bir HTML5 belgesi olduğunu belirtmek için kullanılır. Kullanılan HTML türünü ve sürümünü tanımlar ve tarayıcının sayfayı standart modda işlemesini sağlar, eski yöntemleri kullanarak içeriği görüntüleyen tuhaflık modundan kaçınır.",
+                "title3": "Neden <!DOCTYPE html> Önemlidir?",
+                "list1Item1": "Tarayıcı İşleme: Tarayıcının beklenen HTML sürümünü anlamasına yardımcı olur. Bu, modern HTML elemanlarının ve özelliklerinin doğru şekilde işlenmesini sağlar.",
+                "list1Item2": "Standart Mod vs. Tuhaflık Modu: <!DOCTYPE html> olmadan, bazı tarayıcılar sayfayı tuhaflık modunda işleyebilir, bu durumda düzen ve stil beklendiği gibi çalışmayabilir.",
+                "list1Item3": "HTML5: HTML5 ile <!DOCTYPE html>, önceki sürümlere göre daha basittir. HTML 4.01 gibi eski HTML sürümlerinde doctype daha uzun ve daha fazla bilgi içeriyordu. HTML5 bunu sadece <!DOCTYPE html> kullanarak basitleştirdi.",
+                "title4": "<!DOCTYPE html> Nasıl Kullanılır?",
+                "paragraph3": "Bildirim, belgenin en başında, <html> etiketinden önce yer almalıdır. Bu, HTML belgenizin ilk satırıdır.",
+                "codeTitle1": "Temel Yapı:",
+                "listTitle2": "Hatırlanması Gereken Önemli Noktalar:",
+                "list2Item1": "HTML belgenizin en üstünde her zaman <!DOCTYPE html> kullanın.",
+                "list2Item2": "Bu, belgeyi HTML5 olarak bildirir, bu da en son ve en yaygın kullanılan HTML sürümüdür.",
+                "list2Item3": "<!DOCTYPE html>, tarayıcıların sayfayı doğru şekilde yorumlamasına ve görüntülemesine yardımcı olur."
+            },
+            "page2": {
+                "pageTitle": "<html>, <head> ve <body> elemanları",
+                "title1": "<html>, <head> ve <body> Elemanları",
+                "title2": "<html> Elemanı",
+                "paragraph1": "<html> elemanı, bir HTML belgesinin kök elemanıdır. Başlık ve gövde bölümleri de dahil olmak üzere sayfanın tüm içeriğini kapsar. Her HTML belgesi bu elemanla başlamalıdır ve diğer tüm elemanlar bunun içinde yer almalıdır.",
+                "codeTitle1": "Sözdizimi:",
+                "listTitle1": "<html> elemanı iki ana bölümü içermelidir:",
+                "list1Item1": "<head> bölümü: Belgenin başlığı, karakter kodlaması ve CSS dosyaları ve komut dosyaları gibi harici kaynaklara bağlantılar gibi meta bilgileri içerir.",
+                "list1Item2": "<body> bölümü: Metin, resimler, videolar ve diğer elemanlar gibi sayfanın görünür içeriğini içerir.",
+                "title3": "<head> Elemanı",
+                "paragraph2": "<head> elemanı, HTML belgesi hakkında meta bilgileri içermek için kullanılır. Sayfada kendisi herhangi bir içerik göstermez, ancak tarayıcı ve arama motorları için önemli bilgiler sağlar.",
+                "listTitle2": "<head> İçinde Yaygın Kullanılan Elemanlar:",
+                "list2Item1": "<meta> Karakter kodlaması veya yazar bilgisi gibi meta verileri belirtir.",
+                "list2Item2": "<title> Sayfanın başlığını tanımlar, bu başlık tarayıcının başlık çubuğunda veya sekmesinde görünür.",
+                "list2Item3": "<link> Stil sayfaları veya faviconlar gibi harici kaynakları bağlamak için kullanılır.",
+                "list2Item4": "<style> Belge için dahili CSS stillerini içerir.",
+                "list2Item5": "<script> Harici veya satır içi JavaScript kodunu tanımlar.",
+                "codeTitle2": "Örnek:",
+                "list3Item1": "<meta charset=\"UTF-8\"> Belgenin karakter kodlamasını belirtir. UTF-8, modern web sayfaları için en yaygın kodlamadır ve geniş bir karakter yelpazesini destekler.",
+                "list3Item2": "<meta name=\"author\" content=\"John Doe\"> Bu, web sayfasının yazarı hakkında bilgi sağlar, genellikle kullanıcılar tarafından görülmez ancak arama motorları için faydalı olabilir.",
+                "list3Item3": "<title> <title> etiketi içindeki içerik, tarayıcı sekmesinde görüntülenir.",
+                "title4": "<body> Elemanı",
+                "paragraph3": "<body> elemanı, kullanıcının görebileceği gerçek içeriği içerir. Bu, metin, başlıklar, resimler, bağlantılar ve diğer HTML elemanları gibi tüm elemanları kapsar.",
+                "codeTitle3": "Örnek:",
+                "list4Item1": "<h1>: <h1> etiketi, sayfadaki ana başlığı temsil eder.",
+                "list4Item2": "<p>: <p> etiketi, bir metin paragrafı için kullanılır.",
+                "paragraph4": "<body> içindeki her şey, kullanıcıların web sayfasını ziyaret ettiklerinde gördükleridir.",
+                "listTitle5": "Hatırlanması Gereken Önemli Noktalar:",
+                "list5Item1": "<html> elemanı, hem başlık hem de gövde bölümlerini içeren tüm HTML belgesini sarar.",
+                "list5Item2": "<head> elemanı, CSS dosyaları ve komut dosyaları gibi harici kaynaklara bağlantılar, belgenin başlığı gibi meta verileri içerir.",
+                "list5Item3": "<body> elemanı, başlıklar, paragraflar, resimler ve bağlantılar gibi kullanıcıların etkileşimde bulunduğu görünür içeriği tutar."
+            }
+        }
+    },
+    "cssTutorials": {
+        "markAsCompleted": "Tamamlandı olarak işaretle",
+        "chapter1": {
+            "page1": {
+                "title1": "CSS Nedir?",
+                "paragraph1": "CSS, Basamaklı Stil Sayfaları anlamına gelir. Web sayfalarının düzenini ve sunumunu kontrol etmek için kullanılır. CSS ile HTML elemanlarının rengini, yazı tipini, boşluklarını, hizasını ve konumlandırmasını değiştirebilirsiniz. CSS, içeriğin yapısını (HTML) sunumundan (CSS) ayırmanızı sağlayarak web geliştirmeyi daha verimli ve bakımı kolay hale getirir.",
+                "paragraph2": "CSS, HTML belgelerinize stil uygulamanın bir yolunu sağlar. Tüm sayfaya stiller uygulayabilir veya paragraflar, başlıklar, bağlantılar gibi tek tek elemanları hedefleyebilirsiniz.",
+                "title2": "CSS Nasıl Çalışır?",
+                "paragraph3": "CSS, HTML elemanlarını seçerek onlara stil uygular. Bir CSS kuralı, hangi HTML elemanlarına stil uygulanacağını tanımlayan bir seçici ve hangi stillerin uygulanacağını tanımlayan bir bildirimden oluşur.",
+                "codeTitle1": "İşte basit bir CSS kuralının örneği:",
+                "smallTitle1": "Bu örnekte:",
+                "paragraph4": "Seçici, belgedeki tüm <p> (paragraf) elemanlarını hedefleyen p'dir.",
+                "paragraph5": "Bildirimler, süslü parantezler {} içinde yer alır ve uygulanacak stilleri tanımlar. Bu durumda, renk mavi olarak ayarlanır ve yazı tipi boyutu 16 piksel olarak belirlenir.",
+                "title3": "Neden CSS Kullanmalısınız?",
+                "list1Item1": "Endişelerin Ayrılması: CSS, yapıyı (HTML) tasarımdan (CSS) ayırarak web sitenizi yönetmeyi ve güncellemeyi kolaylaştırır.",
+                "list1Item2": "Tutarlılık: CSS kullanarak, web sitenizin tüm sayfalarında tutarlı bir tasarım sağlayabilirsiniz.",
+                "list1Item3": "Verimlilik: CSS, birden fazla sayfanın görünümünü tek bir merkezden kontrol etmenizi sağlar, böylece değişiklikler daha hızlı ve kolay yapılır.",
+                "codeTitle2": "Örnek: Bir web sayfasına bazı temel CSS stilleri uyguladığımız bir örneğe bakalım.",
+                "listTitle2": "Bu örnekte:",
+                "list2Item1": "Sayfanın arka plan rengi açık mavi olarak ayarlanmıştır.",
+                "list2Item2": "<h1> başlığı koyu mavi renkte ve ortalanmıştır.",
+                "list2Item3": "<p> paragrafı koyu gri metne sahiptir ve yazı tipi boyutu 18 pikseldir."
+            }
+        }
+    }
+}

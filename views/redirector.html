@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <script>
+
+        const countryToLanguage = { // English (en), Turkish (tr), Spanish (es), French (fr), German (de), Portuguese (pt), Arabic (ar), Russian (ru)
+            "us": "en", "gb": "en", "ca": "en", "au": "en", "nz": "en", "ie": "en", "za": "en", "ng": "en", "ph": "en", "pk": "en",
+            "tr": "tr", "cy": "tr",
+            "es": "es", "mx": "es", "ar": "es", "co": "es", "ve": "es", "cl": "es", "pe": "es", "ec": "es", "gt": "es", "cu": "es",
+            "bo": "es", "do": "es", "hn": "es", "py": "es", "sv": "es", "ni": "es", "cr": "es", "pa": "es", "uy": "es", "gq": "es",
+            "fr": "fr", "be": "fr", "ch": "fr", "lu": "fr", "mc": "fr", "cd": "fr", "mg": "fr", "cm": "fr", "ci": "fr",
+            "bf": "fr", "ne": "fr", "sn": "fr", "ml": "fr", "rw": "fr", "td": "fr", "gn": "fr", "bj": "fr", "bi": "fr", "tg": "fr",
+            "cf": "fr", "cg": "fr", "ga": "fr", "dj": "fr", "km": "fr",
+            "de": "de", "at": "de", "li": "de",
+            "pt": "pt", "br": "pt", "ao": "pt", "mz": "pt", "gw": "pt", "tl": "pt", "cv": "pt", "st": "pt",
+            "sa": "ar", "ae": "ar", "eg": "ar", "iq": "ar", "jo": "ar", "lb": "ar", "sy": "ar", "ye": "ar", "om": "ar", "kw": "ar",
+            "qa": "ar", "bh": "ar", "ps": "ar", "sd": "ar", "dz": "ar", "tn": "ar", "ma": "ar", "ly": "ar", "mr": "ar", "dj": "ar", "km": "ar",
+            "ru": "ru", "by": "ru", "kz": "ru", "kg": "ru", "uz": "ru", "tm": "ru", "tj": "ru"
+        };
+
+        const countryToName = {
+            "us": "United States", "gb": "United Kingdom", "ca": "Canada", "au": "Australia", "nz": "New Zealand", "ie": "Ireland", "za": "South Africa", "ng": "Nigeria", "ph": "Philippines", "pk": "Pakistan",
+            "tr": "Turkey", "cy": "Cyprus",
+            "es": "Spain", "mx": "Mexico", "ar": "Argentina", "co": "Colombia", "ve": "Venezuela", "cl": "Chile", "pe": "Peru", "ec": "Ecuador", "gt": "Guatemala", "cu": "Cuba",
+            "bo": "Bolivia", "do": "Dominican Republic", "hn": "Honduras", "py": "Paraguay", "sv": "El Salvador", "ni": "Nicaragua", "cr": "Costa Rica", "pa": "Panama", "uy": "Uruguay", "gq": "Equatorial Guinea",
+            "fr": "France", "be": "Belgium", "ch": "Switzerland", "lu": "Luxembourg", "mc": "Monaco", "cd": "Democratic Republic of the Congo", "mg": "Madagascar", "cm": "Cameroon", "ci": "Ivory Coast",
+            "bf": "Burkina Faso", "ne": "Niger", "sn": "Senegal", "ml": "Mali", "rw": "Rwanda", "td": "Chad", "gn": "Guinea", "bj": "Benin", "bi": "Burundi", "tg": "Togo",
+            "cf": "Central African Republic", "cg": "Republic of the Congo", "ga": "Gabon", "dj": "Djibouti", "km": "Comoros",
+            "de": "Germany", "at": "Austria", "li": "Liechtenstein",
+            "pt": "Portugal", "br": "Brazil", "ao": "Angola", "mz": "Mozambique", "gw": "Guinea-Bissau", "tl": "Timor-Leste", "cv": "Cape Verde", "st": "São Tomé and Príncipe",
+            "sa": "Saudi Arabia", "ae": "United Arab Emirates", "eg": "Egypt", "iq": "Iraq", "jo": "Jordan", "lb": "Lebanon", "sy": "Syria", "ye": "Yemen", "om": "Oman", "kw": "Kuwait",
+            "qa": "Qatar", "bh": "Bahrain", "ps": "Palestine", "sd": "Sudan", "dz": "Algeria", "tn": "Tunisia", "ma": "Morocco", "ly": "Libya", "mr": "Mauritania",
+            "ru": "Russia", "by": "Belarus", "kz": "Kazakhstan", "kg": "Kyrgyzstan", "uz": "Uzbekistan", "tm": "Turkmenistan", "tj": "Tajikistan"
+        };
+
+
+        function getLanguageByCountry(countryCode) {
+            return countryToLanguage[countryCode.toLowerCase()] || "en";
+        }
+
+        try {
+            fetch("https://ipinfo.io/json").then(response => response.json()).then(data => {
+                let country = data.country;
+                let lang_code = getLanguageByCountry(country.toLowerCase());
+                let ip_address = data.ip;
+                window.location.href = "/" + lang_code;
+                return {
+                    COUNTRY: countryToName[country.toLowerCase()],
+                    LANGCODE: lang_code,
+                    IPADDRESS: ip_address
+                };
+            }).then(data => {
+                fetch("/api/consoleLog", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        message: `${data.IPADDRESS} connected from ${data.COUNTRY}, language = ${data.LANGCODE}`//log cikartma
+                    })
+                })
+            });
+
+        } catch (error) {
+            window.location.href = "/" + "en";
+            console.log(error);
+        }
+    </script>
+</body>
+
+</html>

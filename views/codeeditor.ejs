@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html dir="<%= t('direction') %>" lang="<%= lang %>">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css">
+
+    <!-- Include CodeMirror JavaScript library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
+
+    <!-- Include the JavaScript mode for the language you want to highlight (e.g., JavaScript, HTML, etc.) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/javascript/javascript.min.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+            margin: 0%;
+        }
+
+        .PAGE {
+            height: calc(100% - 80px);
+            /*100% - header*/
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .FOOTER {
+            width: calc(100% - 40px);
+            height: auto;
+            background-color: #FAD473;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: black;
+            padding: 20px;
+            font-family: 'Arial';
+            font-size: 15px;
+            gap: 20px;
+        }
+
+        .EDITORCONTAINERS {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 10% 25% 5% 50% 10%;
+            grid-template-rows: 10% 80% 10%;
+            grid-template-areas:
+                ". . . . ."
+                ". code . preview ."
+                ". . . . .";
+        }
+
+        .CODECONTAINER {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            grid-area: code;
+        }
+
+        .PREVIEWCONTAINER {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            grid-area: preview;
+            position: relative;
+        }
+
+        #PREVIEWFRAME {
+            border-style: dashed;
+        }
+
+        .BUTTON {
+            padding: 25px;
+            color: #445368;
+            background-color: #FAD473;
+            font-size: 24px;
+            font-family: "Arial";
+            font-weight: bold;
+            user-select: none;
+            height: 30px;
+            /*80 - 2*padding */
+        }
+
+        .BUTTON:hover {
+            background-color: #ef9d6e;
+            cursor: pointer;
+        }
+
+        #PREVIEWBUTTON {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 5px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+    <title>
+        HTMLtoHero
+    </title>
+</head>
+
+<body>
+
+    <%- include('components/header') %>
+
+    <div class="PAGE">
+
+        <div class="EDITORCONTAINERS">
+            <div class="CODECONTAINER">
+                <textarea id="CODEEDITOR"></textarea>
+            </div>
+            <div class="PREVIEWCONTAINER">
+                <div class="BUTTON" id="PREVIEWBUTTON"><%= t('codeeditor.previewButton') %></div>
+                <iframe id="PREVIEWFRAME" style="width: 100%; height: 100%;"></iframe>
+            </div>
+        </div>
+
+        <footer class="FOOTER">
+            <span class="FOOTERABOUT"><%= t('footer.text') %></span>
+            <span class="FOOTERCOPYRIGHT"><%= t('footer.copyright') %></span>
+        </footer>
+
+    </div>
+
+    <script>
+
+        function getCookie(name) {
+            // Construct the cookie name as a search pattern
+            const cookiePattern = `${name}=`;
+            const cookies = document.cookie.split('; '); // Split cookies into individual parts
+
+            for (let cookie of cookies) {
+                if (cookie.startsWith(cookiePattern)) {
+                    // Extract the cookie value
+                    return decodeURIComponent(cookie.substring(cookiePattern.length));
+                }
+            }
+
+            // Return null if cookie is not found
+            return null;
+        }
+
+        function deleteCookie(cookieName) {
+            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        }
+
+        var editor = CodeMirror.fromTextArea(document.getElementById("CODEEDITOR"), {
+            lineNumbers: true,  // Display line numbers
+            mode: "javascript", // Language mode for syntax highlighting
+            theme: "dracula",    // Theme (change to any supported theme)
+            matchBrackets: true, // Highlight matching brackets
+            autoCloseBrackets: true, // Automatically close brackets
+            lineWrapping: true, // Enable line wrapping
+        });
+        editor.setSize("100%", "100%");
+
+        let previewFrame = document.querySelector("#PREVIEWFRAME");
+        let previewButton = document.querySelector("#PREVIEWBUTTON");
+        previewButton.addEventListener("click", (event) => {
+            var doc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+            doc.open();
+            doc.write(editor.getValue());
+            doc.close();
+        })
+
+        document.addEventListener("DOMContentLoaded", (event) => { // Logout if password and email dont match ( prevent hacking accounts )
+            fetch("/api/getAccount", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: getCookie("currentEmail"),
+                })
+            }).then(response => response.json())
+                .then(data => {
+                    if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
+                        deleteCookie("isLoggedIn");
+                        deleteCookie("currentEmail");
+                        deleteCookie("currentPassword");
+                        window.location.href = "/" + lang_code;
+                    }
+                })
+        });
+
+    </script>
+</body>
+
+</html>
