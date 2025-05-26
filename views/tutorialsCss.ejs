@@ -2,7 +2,7 @@
 <html dir="<%= t('direction') %>" lang="<%= lang %>">
 
 <head>
-    <%- include('components/metadata')%>
+    <%- include('components/metadata_info')%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css">
 
@@ -77,20 +77,6 @@
             height: 100%;
             overflow-x: hidden;
             overflow-y: scroll;
-        }
-
-        .FOOTER {
-            width: calc(100% - 40px);
-            height: auto;
-            background-color: #FAD473;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            color: black;
-            padding: 20px;
-            font-family: 'Arial';
-            font-size: 15px;
-            gap: 20px;
         }
 
         .BODYCONTENT h1 {
@@ -204,10 +190,7 @@ p {
                 <%= t('cssTutorials.markAsCompleted') %>
             </div>
 
-            <footer class="FOOTER">
-                <span class="FOOTERABOUT"><%= t('footer.text') %></span>
-                <span class="FOOTERCOPYRIGHT"><%= t('footer.copyright') %></span>
-            </footer>
+            <%- include('components/footer') %>
         </div>
     </div>
 
@@ -254,27 +237,6 @@ p {
                         window.location.href = "/" + lang_code;
                     }
                 })
-        });
-
-        var HEADERHTML = document.querySelector(".HEADER")
-        var HEADERSTYLE = document.createElement("style")
-        var HEADERSCRIPT = document.createElement("script")
-
-        fetch("/api/components/loadHeader", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-            })
-        }).then(response => response.json()).then(data => {
-            if(data.HTML && data.JS && data.CSS) {
-                HEADERSCRIPT.innerHTML = data.JS;
-                HEADERSTYLE.innerHTML = data.CSS;
-                document.head.appendChild(HEADERSTYLE)
-                HEADERHTML.innerHTML = data.HTML;
-                document.body.appendChild(HEADERSCRIPT)
-            }
         });
 
         let checkpage = document.querySelector("#CHECKPAGE");

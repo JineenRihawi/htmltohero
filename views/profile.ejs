@@ -2,7 +2,7 @@
 <html dir="<%= t('direction') %>" lang="<%= lang %>">
 
 <head>
-    <%- include('components/metadata')%>
+    <%- include('components/metadata_info')%>
     <style>
         html,
         body {
@@ -69,20 +69,6 @@
             border-radius: 20px;
             padding: 20px;
             overflow-x: scroll;
-        }
-
-        .FOOTER {
-            width: calc(100% - 40px);
-            height: auto;
-            background-color: #FAD473;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            color: black;
-            padding: 20px;
-            font-family: 'Arial';
-            font-size: 15px;
-            gap: 20px;
         }
 
         .POINTSRANGE {
@@ -191,10 +177,7 @@
             </div>
         </div>
 
-        <footer class="FOOTER">
-            <span class="FOOTERABOUT"><%= t('footer.text') %></span>
-            <span class="FOOTERCOPYRIGHT"><%= t('footer.copyright') %></span>
-        </footer>
+        <%- include('components/footer') %>
     </div>
 
     <script>
@@ -287,7 +270,7 @@
                 }
             } else {
                 html.onclick = () => {
-                    window.location.href = "/" + lang_code + data.lastCheckedHtmlPageLink;
+                    window.location.href = "/" + lang_code + "/tutorials/HTML/" + data.lastCheckedHtmlPageLink;
                 }
             }
             CONTINUECONTAINERBUTTONS.appendChild(html);
@@ -301,7 +284,7 @@
                 }
             } else {
                 css.onclick = () => {
-                    window.location.href = "/" + lang_code + data.lastCheckedCssPageLink;
+                    window.location.href = "/" + lang_code + "/tutorials/CSS/" + data.lastCheckedCssPageLink;
                 }
             }
             CONTINUECONTAINERBUTTONS.appendChild(css);
@@ -315,7 +298,7 @@
                 }
             } else {
                 js.onclick = () => {
-                    window.location.href = "/" + lang_code + data.lastCheckedJsPageLink;
+                    window.location.href = "/" + lang_code + "/tutorials/JS/" + data.lastCheckedJsPageLink;
                 }
             }
             CONTINUECONTAINERBUTTONS.appendChild(js);
@@ -329,7 +312,7 @@
                 }
             } else {
                 html2.onclick = () => {
-                    window.location.href = "/" + lang_code + data.lastCheckedHtmlExerciseLink;
+                    window.location.href = "/" + lang_code + "/exercises/HTML/" + data.lastCheckedHtmlExerciseLink;
                 }
             }
             CONTINUE2CONTAINERBUTTONS.appendChild(html2);
@@ -343,7 +326,7 @@
                 }
             } else {
                 css2.onclick = () => {
-                    window.location.href = "/" + lang_code + data.lastCheckedCssExerciseLink;
+                    window.location.href = "/" + lang_code + "/exercises/CSS/" + data.lastCheckedCssExerciseLink;
                 }
             }
             CONTINUE2CONTAINERBUTTONS.appendChild(css2);
@@ -357,7 +340,7 @@
                 }
             } else {
                 js2.onclick = () => {
-                    window.location.href = "/" + lang_code + data.lastCheckedJsExerciseLink;
+                    window.location.href = "/" + lang_code + "/exercises/JS/" + data.lastCheckedJsExerciseLink;
                 }
             }
             CONTINUE2CONTAINERBUTTONS.appendChild(js2);

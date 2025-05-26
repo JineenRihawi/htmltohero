@@ -2,7 +2,7 @@
 <html dir="<%= t('direction') %>" lang="<%= lang %>">
 
 <head>
-    <%- include('components/metadata')%>
+    <%- include('components/metadata_info')%>
     <style>
         html,
         body {
@@ -47,7 +47,7 @@
         .LOGININPUT {
             padding: 5px;
             border: none;
-            width: 300px;
+            width: 100%;
             height: 30px;
         }
 
@@ -66,7 +66,7 @@
             user-select: none;
             height: 30px;
             /*80 - 2*padding */
-            width: 290px;
+            width: 100%;
         }
 
         .LOGINBUTTON:hover {
@@ -81,18 +81,10 @@
             font-size: 14px;
         }
 
-        .FOOTER {
-            width: calc(100% - 40px);
-            height: auto;
-            background-color: #FAD473;
+        .LOGININPUTDIV {
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            color: black;
-            padding: 20px;
-            font-family: 'Arial';
-            font-size: 15px;
-            gap: 20px;
+            width: 100%;
+            background-color: white;
         }
     </style>
     <title>
@@ -110,18 +102,22 @@
                 <div class="LOGINCONTAINERCONTENT">
                     <img src="https://raw.githubusercontent.com/Staroandtado/html-to-hero-assets/ed5dd6ce839cb8033ee60ccd707d998ab282e61e/html2hero.svg"
                         height="150px" style="margin-bottom: 35px;">
+                        <div class="LOGININPUTDIV">
                     <input class="LOGININPUT" id="emailInput" type="email" placeholder="<%= t('loginPage.email') %>">
-                    <input class="LOGININPUT" id="passwordInput" type="password" placeholder="<%= t('loginPage.password') %>">
+                    </div>
+                    <div class="LOGININPUTDIV">
+                        <input class="LOGININPUT" id="passwordInput" type="password" placeholder="<%= t('loginPage.password') %>">
+                        <input type="checkbox" id="SHOWPASSWORDCHECK">
+                    </div>
+                    <div class="LOGININPUTDIV" style="background-color: #FAD473;">
                     <div class="LOGINBUTTON"><%= t('loginPage.loginButton') %></div>
+                    </div>
                     <a class="CREATEACCOUNTBUTTON" href=""><%= t('loginPage.createNewAccount') %></a>
                 </div>
             </div>
         </div>
 
-        <footer class="FOOTER">
-            <span class="FOOTERABOUT"><%= t('footer.text') %></span>
-            <span class="FOOTERCOPYRIGHT"><%= t('footer.copyright') %></span>
-        </footer>
+        <%- include('components/footer') %>
 
     </div>
 
@@ -208,6 +204,16 @@
             }
 
         });
+
+        SHOWPASSWORDCHECK = document.querySelector("#SHOWPASSWORDCHECK");
+        PASSWORDINPUT = document.querySelector("#passwordInput");
+        SHOWPASSWORDCHECK.addEventListener("change", (event) => {
+            if(event.target.checked === true) {
+                PASSWORDINPUT.type = "text";
+            } else if(event.target.checked === false || event.target.checked === undefined) {
+                PASSWORDINPUT.type = "password";
+            }
+        })
 
     </script>
 </body>

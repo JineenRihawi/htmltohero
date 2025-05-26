@@ -9,7 +9,7 @@
     <!-- Include CodeMirror JavaScript library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
 
-    <!-- Include the JavaScript mode for the language you want to highlight (e.g., JavaScript, HTML, etc.) -->
+    <!-- Include the JavaScript mode for syntax highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/javascript/javascript.min.js"></script>
     <style>
         html,
@@ -30,25 +30,21 @@
         .SIDEMENUBUTTON {
             padding: 10px;
             color: #445368;
-            /*background-color: #F48FB1;*/
             background-color: #fff0cc;
             font-size: 14px;
             font-family: "Arial";
             font-weight: bold;
             user-select: none;
-            /*30 - 2*padding */
             cursor: pointer;
         }
 
         .CHAPTER {
             padding: 10px 10px 0 10px;
             color: #684444;
-            /*background-color: #F48FB1;*/
             background-color: #fff0cc;
             font-size: 14px;
             font-family: "Arial";
             font-weight: bold;
-            /*30 - 2*padding */
         }
 
         .SIDEMENUBUTTON:hover {
@@ -58,14 +54,12 @@
         .PAGE {
             width: 100%;
             height: calc(100% - 80px);
-            /* 100% - 2*padding */
             display: grid;
             grid-template-columns: 25% 75%;
         }
 
         .BODYCONTENT {
             width: calc(100% - 60px);
-            /* 100% - 2*padding */
             height: auto;
             padding: 30px;
             font-family: "Arial";
@@ -95,7 +89,7 @@
             color: white;
         }
 
-        #SIDEMENUBUTTON-3 {
+        #SIDEMENUBUTTON-5 {
             background-color: #684444;
             color: white;
         }
@@ -106,88 +100,59 @@
 </head>
 
 <body>
-
     <%- include('../components/header') %>
 
     <div class="PAGE">
         <div class="SIDEMENU">
-        <%- include('../components/htmlTutorialsSideMenu') %>
+            <%- include('../components/htmlTutorialsSideMenu') %>
         </div>
         <div class="BODY">
             <div class="BODYCONTENT">
-                <h1><%= t('htmlTutorials.chapter2.page2.title1') %></h1>
+                <h1><%= t('htmlTutorials.chapter2.page4.title1') %></h1>
+                <p><%= t('htmlTutorials.chapter2.page4.paragraph1') %></p>
+
                 <hr>
 
-                <h1><%= t('htmlTutorials.chapter2.page2.title2') %></h1>
-                <p><%= t('htmlTutorials.chapter2.page2.paragraph1') %></p>
-                <h3><%= t('htmlTutorials.chapter2.page2.codeTitle1') %></h3>
+                <h1><%= t('htmlTutorials.chapter2.page4.title2') %></h1>
+                <p><%= t('htmlTutorials.chapter2.page4.paragraph2') %></p>
+                <ul>
+                    <li><%= t('htmlTutorials.chapter2.page4.list1Item1') %></li>
+                    <li><%= t('htmlTutorials.chapter2.page4.list1Item2') %></li>
+                    <li><%= t('htmlTutorials.chapter2.page4.list1Item3') %></li>
+                </ul>
+
+                <hr>
+
+                <h1><%= t('htmlTutorials.chapter2.page4.title3') %></h1>
+                <p><%= t('htmlTutorials.chapter2.page4.paragraph3') %></p>
+
+                <h3><%= t('htmlTutorials.chapter2.page4.codeTitle1') %></h3>
                 <textarea id="CODE1">
-      &lt;html&gt;
-        &lt;!-- Content goes here --&gt;
-      &lt;/html&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My Webpage Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome to My Webpage&lt;/h1&gt;
+    &lt;p&gt;This is a simple webpage with a custom title.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
                 </textarea>
-                <p><%= t('htmlTutorials.chapter2.page2.listTitle1') %></p>
-                <ul>
-                    <li><%= t('htmlTutorials.chapter2.page2.list1Item1') %></li>
-                    <li><%= t('htmlTutorials.chapter2.page2.list1Item2') %></li>
-                </ul>
 
                 <hr>
 
-                <h1><%= t('htmlTutorials.chapter2.page2.title3') %></h1>
-                <p><%= t('htmlTutorials.chapter2.page2.paragraph2') %></p>
-                <h3><%= t('htmlTutorials.chapter2.page2.listTitle2') %></h3>
+                <h2><%= t('htmlTutorials.chapter2.page4.title4') %></h2>
+                <p><%= t('htmlTutorials.chapter2.page4.paragraph4') %></p>
                 <ul>
-                    <li><%= t('htmlTutorials.chapter2.page2.list2Item1') %></li>
-                    <li><%= t('htmlTutorials.chapter2.page2.list2Item2') %></li>
-                    <li><%= t('htmlTutorials.chapter2.page2.list21Item3') %></li>
-                    <li><%= t('htmlTutorials.chapter2.page2.list2Item4') %></li>
-                    <li><%= t('htmlTutorials.chapter2.page2.list2Item5') %></li>
-                </ul>
-                <h3><%= t('htmlTutorials.chapter2.page2.codeTitle2') %></h3>
-                <textarea id="CODE2">
-      &lt;head&gt;
-        &lt;meta charset="UTF-8"&gt; &lt;!-- Specifies character encoding --&gt;
-        &lt;meta name="author" content="John Doe"&gt; &lt;!-- Author of the page --&gt;
-        &lt;title&gt;My First HTML Page&lt;/title&gt; &lt;!-- Title of the page --&gt;
-        &lt;link rel="stylesheet" href="styles.css"&gt; &lt;!-- External stylesheet --&gt;
-      &lt;/head&gt;
-                </textarea>
-                <ul>
-                    <li><%= t('htmlTutorials.chapter2.page2.list3Item1') %></li>
-                    <li><%= t('htmlTutorials.chapter2.page2.list3Item2') %></li>
-                    <li><%= t('htmlTutorials.chapter2.page2.list31Item3') %></li>
-                </ul>
-
-                <hr>
-
-                <h1><%= t('htmlTutorials.chapter2.page2.title4') %></h1>
-                <p><%= t('htmlTutorials.chapter2.page2.paragraph3') %></p>
-                <h3><%= t('htmlTutorials.chapter2.page2.codeTitle3') %></h3>
-                <textarea id="CODE3">
-      &lt;body&gt;
-        &lt;h1&gt;Welcome to My First Webpage&lt;/h1&gt;
-        &lt;p&gt;This is a simple webpage with some basic HTML structure.&lt;/p&gt;
-      &lt;/body&gt;
-                </textarea>
-                <ul>
-                    <li><%= t('htmlTutorials.chapter2.page2.list4Item1') %></li>
-                    <li><%= t('htmlTutorials.chapter2.page2.list4Item2') %></li>
-                </ul>
-                <p><%= t('htmlTutorials.chapter2.page2.paragraph4') %></p>
-
-                <hr>
-
-                <h1><%= t('htmlTutorials.chapter2.page2.listTitle5') %></h1>
-                <ul>
-                    <li><%= t('htmlTutorials.chapter2.page2.list5Item1') %></li>
-                    <li><%= t('htmlTutorials.chapter2.page2.list5Item2') %></li>
-                    <li><%= t('htmlTutorials.chapter2.page2.list5Item3') %></li>
+                    <li><%= t('htmlTutorials.chapter2.page4.list2Item1') %></li>
+                    <li><%= t('htmlTutorials.chapter2.page4.list2Item2') %></li>
                 </ul>
             </div>
 
             <div class="CHECKBAR">
-                <input type="CHECKBOX" id="CHECKPAGE">
+                <input type="checkbox" id="CHECKPAGE">
                 Mark as completed
             </div>
 
@@ -197,20 +162,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script>
-
         function getCookie(name) {
-            // Construct the cookie name as a search pattern
             const cookiePattern = `${name}=`;
-            const cookies = document.cookie.split('; '); // Split cookies into individual parts
-
+            const cookies = document.cookie.split('; ');
             for (let cookie of cookies) {
                 if (cookie.startsWith(cookiePattern)) {
-                    // Extract the cookie value
                     return decodeURIComponent(cookie.substring(cookiePattern.length));
                 }
             }
-
-            // Return null if cookie is not found
             return null;
         }
 
@@ -218,9 +177,9 @@
             document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
         }
 
-        let page_link = 'html_elements';
+        let page_link = 'title';
 
-        document.addEventListener("DOMContentLoaded", (event) => { // Logout if password and email dont match ( prevent hacking accounts )
+        document.addEventListener("DOMContentLoaded", (event) => {
             fetch("/api/getAccount", {
                 method: "POST",
                 headers: {
@@ -255,40 +214,18 @@
                 checkpage.checked = true;
                 checkpage.disabled = true;
             }
-        })
+        });
 
         var editor = CodeMirror.fromTextArea(document.getElementById("CODE1"), {
-            lineNumbers: true,  // Display line numbers
-            mode: "javascript", // Language mode for syntax highlighting
-            theme: "dracula",    // Theme (change to any supported theme)
-            matchBrackets: true, // Highlight matching brackets
-            autoCloseBrackets: true, // Automatically close brackets
-            lineWrapping: true, // Enable line wrapping
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
             readOnly: true,
         });
-        editor.setSize(null, 70);
-
-        var editor2 = CodeMirror.fromTextArea(document.getElementById("CODE2"), {
-            lineNumbers: true,  // Display line numbers
-            mode: "javascript", // Language mode for syntax highlighting
-            theme: "dracula",    // Theme (change to any supported theme)
-            matchBrackets: true, // Highlight matching brackets
-            autoCloseBrackets: true, // Automatically close brackets
-            lineWrapping: true, // Enable line wrapping
-            readOnly: true,
-        });
-        editor2.setSize(null, 120);
-
-        var editor3 = CodeMirror.fromTextArea(document.getElementById("CODE3"), {
-            lineNumbers: true,  // Display line numbers
-            mode: "javascript", // Language mode for syntax highlighting
-            theme: "dracula",    // Theme (change to any supported theme)
-            matchBrackets: true, // Highlight matching brackets
-            autoCloseBrackets: true, // Automatically close brackets
-            lineWrapping: true, // Enable line wrapping
-            readOnly: true,
-        });
-        editor3.setSize(null, 90);
+        editor.setSize(null, 200);
 
         checkpage.addEventListener("change", (event) => {
             if (checkpage.checked) {

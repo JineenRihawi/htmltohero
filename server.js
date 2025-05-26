@@ -54,7 +54,7 @@ app.use(cookieParser());
 app.set('trust proxy', true);
 app.set('view engine', 'ejs')
 
-app.post("/api/consoleLog", (req, res) => {
+app.post("/api/consoleLog", (req, res) => { // Server tarafinda log cikartma
     try {
         console.log(req.body.message);
     } catch (error) {

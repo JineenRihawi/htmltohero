@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html dir="<%= t('direction') %>" lang="<%= lang %>">
-
 <head>
-    <%- include('components/metadata_info')%>
+    <%- include('../components/metadata_info')%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css">
-
-    <!-- Include CodeMirror JavaScript library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
-
-    <!-- Include the JavaScript mode for the language you want to highlight (e.g., JavaScript, HTML, etc.) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/xml/xml.min.js"></script>
     <style>
         html,
         body {
@@ -30,25 +25,21 @@
         .SIDEMENUBUTTON {
             padding: 10px;
             color: #445368;
-            /*background-color: #F48FB1;*/
             background-color: #fff0cc;
             font-size: 14px;
             font-family: "Arial";
             font-weight: bold;
             user-select: none;
-            /*30 - 2*padding */
             cursor: pointer;
         }
 
         .CHAPTER {
             padding: 10px 10px 0 10px;
             color: #684444;
-            /*background-color: #F48FB1;*/
             background-color: #fff0cc;
             font-size: 14px;
             font-family: "Arial";
             font-weight: bold;
-            /*30 - 2*padding */
         }
 
         .SIDEMENUBUTTON:hover {
@@ -58,14 +49,12 @@
         .PAGE {
             width: 100%;
             height: calc(100% - 80px);
-            /* 100% - 2*padding */
             display: grid;
             grid-template-columns: 25% 75%;
         }
 
         .BODYCONTENT {
             width: calc(100% - 60px);
-            /* 100% - 2*padding */
             height: auto;
             padding: 30px;
             font-family: "Arial";
@@ -83,10 +72,14 @@
             color: #fdc535;
         }
 
+        .BODYCONTENT h3 {
+            color: #445368;
+        }
+
         .CHECKBAR {
             background-color: #445368;
             margin-bottom: 10px;
-            width: calc(100%-6px);
+            width: calc(100% - 6px);
             padding: 3px;
             display: flex;
             flex-direction: row-reverse;
@@ -95,95 +88,112 @@
             color: white;
         }
 
-        #SIDEMENUBUTTON-1 {
+        #SIDEMENUBUTTON-18 {
             background-color: #684444;
             color: white;
         }
+
+        .NOTE {
+            background-color: #f0f4f8;
+            padding: 15px;
+            border-left: 4px solid #fdc535;
+            margin: 20px 0;
+            font-style: italic;
+        }
     </style>
-    <title>
-        HTMLtoHero
-    </title>
+    <title>HTMLtoHero</title>
 </head>
-
 <body>
-
-    <%- include('components/header') %>
-
+    <%- include('../components/header') %>
     <div class="PAGE">
         <div class="SIDEMENU">
-            <%- include('components/htmlTutorialsSideMenu') %>
+            <%- include('../components/htmlTutorialsSideMenu') %>
         </div>
         <div class="BODY">
             <div class="BODYCONTENT">
-                <h1> <%= t('htmlTutorials.chapter1.page1.title1') %> </h1>
-                <%= t('htmlTutorials.chapter1.page1.paragraph1') %>
+                <h1><%= t('htmlTutorials.chapter4.page5.title1') %></h1>
+                <p><%= t('htmlTutorials.chapter4.page5.paragraph1') %></p>
+
                 <hr>
-                <h1><%= t('htmlTutorials.chapter1.page1.title2') %></h1>
-                <%= t('htmlTutorials.chapter1.page1.paragraph2') %>
-                <br>
-                <%= t('htmlTutorials.chapter1.page1.paragraph3') %>
-                <br>
-                <hr>
-                <h1><%= t('htmlTutorials.chapter1.page1.title3') %></h1>
-                <%= t('htmlTutorials.chapter1.page1.listTitle1') %>
+
+                <h1><%= t('htmlTutorials.chapter4.page5.title2') %></h1>
+                <p><%= t('htmlTutorials.chapter4.page5.paragraph2') %></p>
                 <ul>
-                    <li><%= t('htmlTutorials.chapter1.page1.list1Item1') %></li>
-                    <li><%= t('htmlTutorials.chapter1.page1.list1Item2') %></li>
-                    <li><%= t('htmlTutorials.chapter1.page1.list1Item3') %></li>
-                    <li><%= t('htmlTutorials.chapter1.page1.list1Item4') %></li>
-                    <li><%= t('htmlTutorials.chapter1.page1.list1Item5') %></li>
+                    <li><%= t('htmlTutorials.chapter4.page5.list1Item1') %></li>
+                    <li><%= t('htmlTutorials.chapter4.page5.list1Item2') %></li>
                 </ul>
-                <%= t('htmlTutorials.chapter1.page1.paragraph4') %>
-                <hr>
-                <h1><%= t('htmlTutorials.chapter1.page1.title4') %></h1>
-                <%= t('htmlTutorials.chapter1.page1.listTitle2') %>
-                <ol>
-                    <li><%= t('htmlTutorials.chapter1.page1.list2Item1') %></li>
-                    <li><%= t('htmlTutorials.chapter1.page1.list2Item2') %></li>
-                    <li><%= t('htmlTutorials.chapter1.page1.list2Item3') %></li>
-                </ol>
-                <%= t('htmlTutorials.chapter1.page1.paragraph5') %>
-                <hr>
-                <h1><%= t('htmlTutorials.chapter1.page1.title5') %></h1>
+                <h3><%= t('htmlTutorials.chapter4.page5.codeTitle1') %></h3>
                 <textarea id="CODE1">
-|-- &lt;head&gt;<br>
-|     &nbsp;&nbsp;&nbsp;|-- &lt;title&gt;<br>
-|<br>
-|-- &lt;body&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- &lt;h1&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- &lt;p&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- &lt;img&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- &lt;a&gt;<br></textarea>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Target Blank</title>
+</head>
+<body>
+    <h1>External Resources</h1>
+    <p>Visit <a href="https://www.example.com" target="_blank">Example.com</a> for more information.</p>
+    <p>Check out <a href="https://www.learning.com" target="_blank">Learning.com</a>.</p>
+</body>
+</html>
+                </textarea>
+
                 <hr>
-                <h1><%= t('htmlTutorials.chapter1.page1.title6') %></h1>
-                <%= t('htmlTutorials.chapter1.page1.paragraph6') %>
-            </div>
 
+                <h1><%= t('htmlTutorials.chapter4.page5.title3') %></h1>
+                <p><%= t('htmlTutorials.chapter4.page5.paragraph3') %></p>
+                <h3><%= t('htmlTutorials.chapter4.page5.codeTitle2') %></h3>
+                <textarea id="CODE2">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation with Target Blank</title>
+</head>
+<body>
+    <nav>
+        <a href="/home">Home</a>
+        <a href="https://www.resources.com" target="_blank">Resources</a>
+        <a href="https://www.support.com" target="_blank">Support</a>
+    </nav>
+    <h1>Our Website</h1>
+    <p>Explore external resources and support links in the navigation above.</p>
+</body>
+</html>
+                </textarea>
+
+                <div class="NOTE">
+                    <p><%= t('htmlTutorials.chapter4.page5.note1') %></p>
+                </div>
+
+                <hr>
+
+                <h1><%= t('htmlTutorials.chapter4.page5.title4') %></h1>
+                <p><%= t('htmlTutorials.chapter4.page5.paragraph4') %></p>
+                <ul>
+                    <li><%= t('htmlTutorials.chapter4.page5.list2Item1') %></li>
+                    <li><%= t('htmlTutorials.chapter4.page5.list2Item2') %></li>
+                </ul>
+            </div>
             <div class="CHECKBAR">
-                <input type="CHECKBOX" id="CHECKPAGE">
-                <%= t('htmlTutorials.markAsCompleted') %>
+                <input type="checkbox" id="CHECKPAGE">
+                Mark as completed
             </div>
-
-            <%- include('components/footer') %>
+            <%- include('../components/footer') %>
         </div>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script>
-
         function getCookie(name) {
-            // Construct the cookie name as a search pattern
             const cookiePattern = `${name}=`;
-            const cookies = document.cookie.split('; '); // Split cookies into individual parts
-
+            const cookies = document.cookie.split('; ');
             for (let cookie of cookies) {
                 if (cookie.startsWith(cookiePattern)) {
-                    // Extract the cookie value
                     return decodeURIComponent(cookie.substring(cookiePattern.length));
                 }
             }
-
-            // Return null if cookie is not found
             return null;
         }
 
@@ -191,9 +201,9 @@
             document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
         }
 
-        let page_link = 'null';
+        let page_link = 'blank_target';
 
-        document.addEventListener("DOMContentLoaded", (event) => { // Logout if password and email dont match ( prevent hacking accounts )
+        document.addEventListener("DOMContentLoaded", (event) => {
             fetch("/api/getAccount", {
                 method: "POST",
                 headers: {
@@ -224,22 +234,33 @@
                 PAGELINK: page_link,
             })
         }).then(response => response.json()).then(data => {
-            if(data.PAGECHECKED === true) {
+            if (data.PAGECHECKED === true) {
                 checkpage.checked = true;
                 checkpage.disabled = true;
             }
-        })
+        });
 
-        var editor = CodeMirror.fromTextArea(document.getElementById("CODE1"), {
-            lineNumbers: true,  // Display line numbers
-            mode: "javascript", // Language mode for syntax highlighting
-            theme: "dracula",    // Theme (change to any supported theme)
-            matchBrackets: true, // Highlight matching brackets
-            autoCloseBrackets: true, // Automatically close brackets
-            lineWrapping: true, // Enable line wrapping
+        var editor1 = CodeMirror.fromTextArea(document.getElementById("CODE1"), {
+            lineNumbers: true,
+            mode: "xml",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
             readOnly: true,
         });
-        editor.setSize(null, 150);
+        editor1.setSize(null, 230);
+
+        var editor2 = CodeMirror.fromTextArea(document.getElementById("CODE2"), {
+            lineNumbers: true,
+            mode: "xml",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
+            readOnly: true,
+        });
+        editor2.setSize(null, 285);
 
         checkpage.addEventListener("change", (event) => {
             if (checkpage.checked) {
@@ -264,5 +285,4 @@
         });
     </script>
 </body>
-
 </html>
