@@ -79,6 +79,11 @@
             font-family: "Arial";
             user-select: none;
             font-size: 14px;
+            cursor: pointer;
+        }
+
+        .CREATEACCOUNTBUTTON:hover {
+            color: white;
         }
 
         .LOGININPUTDIV {
@@ -100,7 +105,7 @@
         <div class="CENTER">
             <div class="LOGINCONTAINER">
                 <div class="LOGINCONTAINERCONTENT">
-                    <img src="https://raw.githubusercontent.com/Staroandtado/html-to-hero-assets/ed5dd6ce839cb8033ee60ccd707d998ab282e61e/html2hero.svg"
+                    <img src="https://raw.githubusercontent.com/JineenRihawi/htmltoheroassets/1e4e4bd65bfed1479c5e272f2a43b8da9f849aa7/html2hero.svg"
                         height="150px" style="margin-bottom: 35px;">
                         <div class="LOGININPUTDIV">
                     <input class="LOGININPUT" id="emailInput" type="email" placeholder="<%= t('loginPage.email') %>">
@@ -112,7 +117,7 @@
                     <div class="LOGININPUTDIV" style="background-color: #FAD473;">
                     <div class="LOGINBUTTON"><%= t('loginPage.loginButton') %></div>
                     </div>
-                    <a class="CREATEACCOUNTBUTTON" href=""><%= t('loginPage.createNewAccount') %></a>
+                    <a class="CREATEACCOUNTBUTTON"><%= t('loginPage.createNewAccount') %></a>
                 </div>
             </div>
         </div>
@@ -203,6 +208,11 @@
                 window.alert("Empty");
             }
 
+        });
+
+        CREATEACCOUNTBUTTON = document.querySelector(".CREATEACCOUNTBUTTON")
+        CREATEACCOUNTBUTTON.addEventListener("click", function(event) {
+            window.location.href = "/" + lang_code + "/register";
         });
 
         SHOWPASSWORDCHECK = document.querySelector("#SHOWPASSWORDCHECK");

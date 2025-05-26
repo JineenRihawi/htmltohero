@@ -346,6 +346,73 @@ app.get("/:lang/profile", (req, res) => {
     }
 });
 
+app.get("/:lang/search", (req, res) => {
+
+    try {
+        const lang = req.params.lang;
+        const content = "";
+
+        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+            return res.redirect("/404")
+        }
+
+        t = i18n.getFixedT(lang);
+
+        res.render('search', {
+            t,
+            lang,
+            content
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get("/:lang/register", (req, res) => {
+
+    try {
+        const lang = req.params.lang;
+
+        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+            return res.redirect("/404")
+        }
+
+        t = i18n.getFixedT(lang);
+
+        res.render('register', {
+            t,
+            lang
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get("/:lang/search/:content", (req, res) => {
+
+    try {
+        const lang = req.params.lang;
+        const content = req.params.content;
+
+        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+            return res.redirect("/404")
+        }
+
+        t = i18n.getFixedT(lang);
+
+        res.render('search', {
+            t,
+            lang,
+            content
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 app.get("/:lang/tutorials/html", (req, res) => {
 
     try {

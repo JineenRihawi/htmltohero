@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html dir="<%= t('direction') %>" lang="<%= lang %>">
+<head>
+    <%- include('../components/metadata_info') %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/javascript/javascript.min.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0%;
+        }
+
+        .SIDEMENU {
+            height: 100%;
+            width: 100%;
+            overflow-y: scroll;
+            background-color: #fff0cc;
+        }
+
+        .SIDEMENUBUTTON {
+            padding: 10px;
+            color: #445368;
+            background-color: #fff0cc;
+            font-size: 14px;
+            font-family: "Arial";
+            font-weight: bold;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .CHAPTER {
+            padding: 10px 10px 0 10px;
+            color: #684444;
+            background-color: #fff0cc;
+            font-size: 14px;
+            font-family: "Arial";
+            font-weight: bold;
+        }
+
+        .SIDEMENUBUTTON:hover {
+            background-color: #fee9b6;
+        }
+
+        .PAGE {
+            width: 100%;
+            height: calc(100% - 80px);
+            display: grid;
+            grid-template-columns: 25% 75%;
+        }
+
+        .BODYCONTENT {
+            width: calc(100% - 60px);
+            height: auto;
+            padding: 30px;
+            font-family: "Arial";
+            color: #1a2028;
+        }
+
+        .BODY {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .BODYCONTENT h1 {
+            color: #fdc535;
+        }
+
+        .BODYCONTENT h3 {
+            color: #445368;
+        }
+
+        .CHECKBAR {
+            background-color: #445368;
+            margin-bottom: 10px;
+            width: calc(100% - 6px);
+            padding: 3px;
+            display: flex;
+            flex-direction: row-reverse;
+            user-select: none;
+            font-family: "Arial";
+            color: white;
+        }
+
+        #SIDEMENUBUTTON-34 {
+            background-color: #684444;
+            color: white;
+        }
+
+        .NOTE {
+            background-color: #f0f4f8;
+            padding: 15px;
+            border-left: 4px solid #fdc535;
+            margin: 20px 0;
+            font-style: italic;
+        }
+    </style>
+    <title>HTMLtoHero</title>
+</head>
+<body>
+    <%- include('../components/header') %>
+    <div class="PAGE">
+        <div class="SIDEMENU">
+            <%- include('../components/htmlTutorialsSideMenu') %>
+        </div>
+        <div class="BODY">
+            <div class="BODYCONTENT">
+                <h1><%= t('htmlTutorials.chapter8.page1.title1') %></h1>
+                <p><%= t('htmlTutorials.chapter8.page1.paragraph1') %></p>
+                <p><%= t('htmlTutorials.chapter8.page1.paragraph1a') %></p>
+                <p><%= t('htmlTutorials.chapter8.page1.paragraph1b') %></p>
+
+                <hr>
+
+                <h1><%= t('htmlTutorials.chapter8.page1.title2') %></h1>
+                <p><%= t('htmlTutorials.chapter8.page1.paragraph2') %></p>
+                <p><%= t('htmlTutorials.chapter8.page1.paragraph2a') %></p>
+                <p><%= t('htmlTutorials.chapter8.page1.paragraph2b') %></p>
+                <ul>
+                    <li><%= t('htmlTutorials.chapter8.page1.list1Item1') %></li>
+                    <li><%= t('htmlTutorials.chapter8.page1.list1Item2') %></li>
+                </ul>
+                <h3><%= t('htmlTutorials.chapter8.page1.codeTitle1') %></h3>
+                <textarea id="CODE1">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Form</title>
+</head>
+<body>
+    <h1>Contact Us</h1>
+    <form action="/submit" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <input type="submit" value="Send">
+    </form>
+</body>
+</html>
+                </textarea>
+
+                <hr>
+
+                <h1><%= t('htmlTutorials.chapter8.page1.title3') %></h1>
+                <p><%= t('htmlTutorials.chapter8.page1.paragraph3') %></p>
+                <p><%= t('htmlTutorials.chapter8.page1.paragraph3a') %></p>
+                <p><%= t('htmlTutorials.chapter8.page1.paragraph3b') %></p>
+                <h3><%= t('htmlTutorials.chapter8.page1.codeTitle2') %></h3>
+                <textarea id="CODE2">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+</head>
+<body>
+    <h1>Sign In</h1>
+    <form action="/login" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>
+                </textarea>
+
+                <hr>
+
+                <h1><%= t('htmlTutorials.chapter8.page1.title4') %></h1>
+                <p><%= t('htmlTutorials.chapter8.page1.paragraph4') %></p>
+                <p><%= t('htmlTutorials.chapter8.page1.paragraph4a') %></p>
+                <p><%= t('htmlTutorials.chapter8.page1.paragraph4b') %></p>
+                <h3><%= t('htmlTutorials.chapter8.page1.codeTitle3') %></h3>
+                <textarea id="CODE3">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+</head>
+<body>
+    &lt;h1&gt;Provide Feedback&lt;h1&gt;
+    &lt;form action="/feedback" method="POST"&gt;
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <label for="message">Message:</label>
+        &lt;textarea id="message" name="message"&gt;&lt;/textarea&gt;
+        &lt;input type="submit" value="Submit"&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </textarea>
+
+                <div class="NOTE">
+                    <p><%= t('htmlTutorials.chapter8.page1.note1') %></p>
+                </div>
+
+                <hr>
+
+                <h1><%= t('htmlTutorials.chapter8.page1.title5') %></h1>
+                <p><%= t('htmlTutorials.chapter8.page1.paragraph5') %></p>
+                <p><%= t('htmlTutorials.chapter8.page1.paragraph5a') %></p>
+                <ul>
+                    <li><%= t('htmlTutorials.chapter8.page1.list2Item1') %></li>
+                    <li><%= t('htmlTutorials.chapter8.page1.list2Item2') %></li>
+                </ul>
+            </div>
+            <div class="CHECKBAR">
+                <input type="checkbox" id="CHECKPAGE">
+                Mark as completed
+            </div>
+            <%- include('../components/footer') %>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        function getCookie(name) {
+            const cookiePattern = `${name}=`;
+            const cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                if (cookie.startsWith(cookiePattern)) {
+                    return decodeURIComponent(cookie.substring(cookiePattern.length));
+                }
+            }
+            return null;
+        }
+
+        function deleteCookie(cookieName) {
+            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        }
+
+        let page_link = 'form';
+
+        document.addEventListener("DOMContentLoaded", (event) => {
+            fetch("/api/getAccount", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: getCookie("currentEmail"),
+                })
+            }).then(response => response.json())
+                .then(data => {
+                    if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
+                        deleteCookie("isLoggedIn");
+                        deleteCookie("currentEmail");
+                        deleteCookie("currentPassword");
+                        window.location.href = "/" + lang_code;
+                    }
+                })
+        });
+
+        let checkpage = document.querySelector("#CHECKPAGE");
+
+        fetch("/api/checkCheckedHtmlPage", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                PAGELINK: page_link,
+            })
+        }).then(response => response.json()).then(data => {
+            if (data.PAGECHECKED === true) {
+                checkpage.checked = true;
+                checkpage.disabled = true;
+            }
+        });
+
+        var editor1 = CodeMirror.fromTextArea(document.getElementById("CODE1"), {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
+            readOnly: true,
+        });
+        editor1.setSize(null, 270);
+
+        var editor2 = CodeMirror.fromTextArea(document.getElementById("CODE2"), {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
+            readOnly: true,
+        });
+        editor2.setSize(null, 300);
+
+        var editor3 = CodeMirror.fromTextArea(document.getElementById("CODE3"), {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
+            readOnly: true,
+        });
+        editor3.setSize(null, 300);
+
+        checkpage.addEventListener("change", (event) => {
+            if (checkpage.checked) {
+                checkpage.disabled = true;
+                const isLoggedIn = getCookie("isLoggedIn");
+                if (isLoggedIn === null || isLoggedIn == "false") {
+                    event.target.checked = false;
+                    window.location.href = "/" + lang_code + "/" + "login";
+                }
+                if (isLoggedIn == "true") {
+                    fetch("/api/checkHtmlPage", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            link: page_link,
+                        })
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

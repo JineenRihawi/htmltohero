@@ -3,152 +3,225 @@
 
 <head>
     <%- include('components/metadata_info')%>
-    <style>
-        html,
-        body {
-            height: 100%;
-            width: 100%;
-            overflow-x: hidden;
-            margin: 0%;
-        }
+        <style>
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                overflow-x: hidden;
+                margin: 0%;
+            }
 
-        .CONTAINER {
-            width: 100%;
-        }
+            .CONTAINER {
+                width: 100%;
+            }
 
-        #SEARCHCONTAINER {
-            height: 550px;
-            background-color: #ef9d6e;
-            background-image: url("https://raw.githubusercontent.com/Staroandtado/html-to-hero-assets/4026803a1772f811f31df847773d184aa4d00ecf/background_pattern.svg");
-        }
+            #SEARCHCONTAINER {
+                height: 550px;
+                background-color: #ef9d6e;
+                background-image: url("https://raw.githubusercontent.com/JineenRihawi/htmltoheroassets/1e4e4bd65bfed1479c5e272f2a43b8da9f849aa7/background_pattern.svg");
+            }
 
-        .CENTER {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+            #HTMLCONTAINER {
+                height: 550px;
+                background-color: #9c4646;
+                background-image: url("https://raw.githubusercontent.com/JineenRihawi/htmltoheroassets/1e4e4bd65bfed1479c5e272f2a43b8da9f849aa7/background_pattern2.svg");
+            }
 
-        .DISCOVERCONTAINER {
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-            gap: 10px;
-        }
+            #CSSCONTAINER {
+                height: 550px;
+                background-color: #68893f;
+                background-image: url("https://raw.githubusercontent.com/JineenRihawi/htmltoheroassets/8d589ea4970b81e7236edf9053027f49875c0507/background_pattern3.svg");
+            }
 
-        .DISCOVERTEXT {
-            text-align: center;
-            font-size: 80px;
-            font-family: "Arial";
-            font-weight: bold;
-            user-select: none;
-            color: white;
-            text-shadow: 0px 5px #445368;
-        }
+            #JSCONTAINER {
+                height: 550px;
+                background-color: #347575;
+                background-image: url("https://raw.githubusercontent.com/JineenRihawi/htmltoheroassets/db559ec255583d14d4ec9a309c08d5f489351a83/background_pattern4.svg");
+            }
 
-        .PAGE {
-            height: calc(100% - 80px);
-            /*100% - header*/
-            width: 100%;
-            overflow-x: hidden;
-            overflow-y: scroll;
-        }
+            .CENTER {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
-        .SEARCH {
-            margin: 10px;
-            border-radius: 500px;
-            border: none;
-            width: 250px;
-            font-size: 20px;
-        }
+            .DISCOVERCONTAINER {
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+                gap: 10px;
+            }
 
-        .SEARCH:enabled {
-            outline: none;
-        }
-    </style>
-    <title>
-        HTMLtoHero
-    </title>
+            .SPLITCONTAINER {
+                display: grid;
+                grid-template-columns: 50% 50%;
+                height: 100%;
+            }
+
+            .CONTAINERSMALLTEXT {
+                color: white;
+                font-size: 25px;
+                user-select: none;
+                font-family: "Arial";
+                padding: 30px;
+            }
+
+            .CONTAINERTEXT {
+                text-align: center;
+                font-size: 80px;
+                font-family: "Arial";
+                font-weight: bold;
+                user-select: none;
+                color: white;
+                text-shadow: 0px 5px #445368;
+            }
+
+            .PAGE {
+                height: calc(100% - 80px);
+                /*100% - header*/
+                width: 100%;
+                overflow-x: hidden;
+                overflow-y: scroll;
+            }
+
+            .SEARCH {
+                margin: 10px;
+                border-radius: 500px;
+                border: none;
+                width: 250px;
+                font-size: 20px;
+            }
+
+            .SEARCH:enabled {
+                outline: none;
+            }
+        </style>
+        <title>
+            HTMLtoHero
+        </title>
 </head>
 
 <body>
 
     <%- include('components/header') %>
 
-    <div class="PAGE">
-        <div class="CONTAINER" id="SEARCHCONTAINER">
-            <div class="CENTER">
-                <div class="DISCOVERCONTAINER">
-                    <span class="DISCOVERTEXT"><%= t('mainpage.discovercontainer.discover') %></span>
-                    <input class="SEARCH" type="search" placeholder="<%= t('mainpage.discovercontainer.search') %>" style="width: 550px; height: 90px;">
+        <div class="PAGE">
+            <div class="CONTAINER" id="SEARCHCONTAINER">
+                <div class="CENTER">
+                    <div class="DISCOVERCONTAINER">
+                        <span class="CONTAINERTEXT">
+                            <%= t('mainpage.discovercontainer.discover') %>
+                        </span>
+                        <input class="SEARCH" type="search" placeholder="<%= t('mainpage.discovercontainer.search') %>"
+                            style="width: 550px; height: 90px;">
+                    </div>
                 </div>
             </div>
 
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+            <div class="CONTAINER" id="HTMLCONTAINER">
+                <div class="SPLITCONTAINER">
+                    <div class="CENTER">
+                        <span class="CONTAINERTEXT">
+                            <%= t('mainpage.htmlcontainer.html') %>
+                        </span>
+                    </div>
+                    <div class="CENTER">
+                        <div class="CONTAINERSMALLTEXT">
+                            <%= t('mainpage.htmlcontainer.description') %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="CONTAINER" id="CSSCONTAINER">
+                <div class="SPLITCONTAINER">
+                    <div class="CENTER">
+                        <div class="CONTAINERSMALLTEXT">
+                            <%= t('mainpage.csscontainer.description') %>
+                        </div>
+                    </div>
+                    <div class="CENTER">
+                        <span class="CONTAINERTEXT">
+                            <%= t('mainpage.csscontainer.css') %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="CONTAINER" id="JSCONTAINER">
+                <div class="SPLITCONTAINER">
+                    <div class="CENTER">
+                        <span class="CONTAINERTEXT">
+                            <%= t('mainpage.jscontainer.js') %>
+                        </span>
+                    </div>
+                    <div class="CENTER">
+                        <div class="CONTAINERSMALLTEXT">
+                            <%= t('mainpage.jscontainer.description') %>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <%- include('components/footer') %>
 
         </div>
 
-    </div>
+        <script>
 
-    <script>
+            function getCookie(name) {
+                // Construct the cookie name as a search pattern
+                const cookiePattern = `${name}=`;
+                const cookies = document.cookie.split('; '); // Split cookies into individual parts
 
-        function getCookie(name) {
-            // Construct the cookie name as a search pattern
-            const cookiePattern = `${name}=`;
-            const cookies = document.cookie.split('; '); // Split cookies into individual parts
-
-            for (let cookie of cookies) {
-                if (cookie.startsWith(cookiePattern)) {
-                    // Extract the cookie value
-                    return decodeURIComponent(cookie.substring(cookiePattern.length));
+                for (let cookie of cookies) {
+                    if (cookie.startsWith(cookiePattern)) {
+                        // Extract the cookie value
+                        return decodeURIComponent(cookie.substring(cookiePattern.length));
+                    }
                 }
+
+                // Return null if cookie is not found
+                return null;
             }
 
-            // Return null if cookie is not found
-            return null;
-        }
+            function deleteCookie(cookieName) {
+                document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            }
 
-        function deleteCookie(cookieName) {
-            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-        }
+            document.addEventListener("DOMContentLoaded", (event) => { // Logout if password and email dont match ( prevent hacking accounts )
+                fetch("/api/getAccount", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email: getCookie("currentEmail"),
+                    })
+                }).then(response => response.json())
+                    .then(data => {
+                        if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
+                            deleteCookie("isLoggedIn");
+                            deleteCookie("currentEmail");
+                            deleteCookie("currentPassword");
+                            window.location.href = "/" + lang_code;
+                        }
+                    })
+            });
 
-        document.addEventListener("DOMContentLoaded", (event) => { // Logout if password and email dont match ( prevent hacking accounts )
-            fetch("/api/getAccount", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: getCookie("currentEmail"),
-                })
-            }).then(response => response.json())
-                .then(data => {
-                    if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
-                        deleteCookie("isLoggedIn");
-                        deleteCookie("currentEmail");
-                        deleteCookie("currentPassword");
-                        window.location.href = "/" + lang_code;
+            let SEARCH = document.querySelector(".SEARCH")
+            SEARCH.addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                    if (event.target.value.length > 0) {
+                        window.location.href = "/" + lang_code + "/" + "search/" + event.target.value;
                     }
-                })
-        });
+                }
+            })
 
-    </script>
+        </script>
 </body>
 
 </html>
