@@ -38,9 +38,40 @@
         display: none;
     }
 
+    .SIDEMENUCLOSE {
+        display: none;
+        position: relative;
+        top: 0;
+        right: 0;
+        font-size: 100%;
+        user-select: none;
+        padding: 5%;
+        font-family: "Arial";
+        font-weight: bold;
+        color: #445368;
+        cursor: pointer;
+        width: fit-content;
+    }
+
     @media (max-width: 1100px) {
+        .SIDEMENUCLOSE {
+            display: block;
+        }
         .SIDEMENU {
+            width: fit-content;
             display: none;
+            position: absolute;
+            right: 100%;
+            bottom: 0;
+            top: 0;
+            left: 0;
+            background-color: #fff0cc;
+            z-index: 2;
+        }
+
+        .SIDEMENUOPENED {
+            display: block;
+            right: 50%;
         }
 
         .PAGE {
@@ -48,221 +79,245 @@
         }
 
         .SIDEMENUOPENBUTTON {
-            position: absolute;
+            position: relative;
             top: 5px;
             left: 5px;
             display: block;
+            cursor: pointer;
+            width: fit-content;
         }
     }
 </style>
 
-<div class="SIDEMENUOPENBUTTON"><svg width="60px" height="60px" viewBox="0 0 24 24" fill="none"
+<div class="SIDEMENUOPENBUTTON"><svg width="30px" height="30px" viewBox="0 0 16 16" fill="none"
         xmlns="http://www.w3.org/2000/svg">
-        <path d="M4 6H20M4 12H20M4 18H20" stroke="#445368" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" />
+        <path d="M8 6L8 2L10 2L16 8L10 14L8 14L8 10L-1.74845e-07 10L-3.01991e-07 6L8 6Z" fill="#684444" />
     </svg></div>
 
-<div class="CHAPTER">
-    <%= t('htmlTutorials.chapter1.title') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-1"> <%=
-        t('htmlTutorials.chapter1.page1.pageTitle') %>
+
+<div class="SIDEMENU">
+    <div class="SIDEMENUCLOSE">
+        <svg width="30px" height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 10L8 14L6 14L-2.62268e-07 8L6 2L8 2L8 6L16 6L16 10L8 10Z" fill="#684444"/>
+</svg>
+    </div>
+    <div class="CHAPTER">
+        <%= t('htmlTutorials.chapter1.title') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-1"> 
+        <%= t('htmlTutorials.chapter1.page1.pageTitle') %>
+    </div>
+
+    <div class="CHAPTER">
+        <%= t('htmlTutorials.chapter2.title') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/html_doctype';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-2"> <%= t('htmlTutorials.chapter2.page1.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/html_elements';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-3"> <%= t('htmlTutorials.chapter2.page2.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/metadata';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-4"> <%= t('htmlTutorials.chapter2.page3.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/title';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-5">
+         <%= t('htmlTutorials.chapter2.page4.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/charmeta';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-6"> <%= t('htmlTutorials.chapter2.page5.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/html_structure';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-7"> <%= t('htmlTutorials.chapter2.page6.pageTitle') %>
+    </div>
+
+    <div class="CHAPTER">
+        <%= t('htmlTutorials.chapter3.title') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/headings';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-8"> <%= t('htmlTutorials.chapter3.page1.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/paragraphs';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-9"> <%= t('htmlTutorials.chapter3.page2.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/formating_text';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-10"> <%= t('htmlTutorials.chapter3.page3.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/line_break';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-11"> <%= t('htmlTutorials.chapter3.page4.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/horizontal_line';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-12"> <%= t('htmlTutorials.chapter3.page5.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/comments';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-13"> <%= t('htmlTutorials.chapter3.page6.pageTitle') %>
+    </div>
+
+    <div class="CHAPTER">
+        <%= t('htmlTutorials.chapter4.title') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/links';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-14"> <%= t('htmlTutorials.chapter4.page1.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/int_ext_links';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-15"> <%= t('htmlTutorials.chapter4.page2.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/nav_bar';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-16"> <%= t('htmlTutorials.chapter4.page3.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/anchor_links';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-17"> <%= t('htmlTutorials.chapter4.page4.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/blank_target';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-18"> <%= t('htmlTutorials.chapter4.page5.pageTitle') %>
+    </div>
+
+    <div class="CHAPTER">
+        <%= t('htmlTutorials.chapter5.title') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/ul_li';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-19"> <%= t('htmlTutorials.chapter5.page1.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/ol_li';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-20"> <%= t('htmlTutorials.chapter5.page2.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/dl_dt_dd';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-21"> <%= t('htmlTutorials.chapter5.page3.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/nesting_lists';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-22"> <%= t('htmlTutorials.chapter5.page4.pageTitle') %>
+    </div>
+
+    <div class="CHAPTER">
+        <%= t('htmlTutorials.chapter6.title') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/images';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-23"> <%= t('htmlTutorials.chapter6.page1.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/images_attr';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-24"> <%= t('htmlTutorials.chapter6.page2.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/video';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-25"> <%= t('htmlTutorials.chapter6.page3.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/audio';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-26"> <%= t('htmlTutorials.chapter6.page4.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/iframe';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-27"> <%= t('htmlTutorials.chapter6.page5.pageTitle') %>
+    </div>
+
+    <div class="CHAPTER">
+        <%= t('htmlTutorials.chapter7.title') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/tables';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-28"> <%= t('htmlTutorials.chapter7.page1.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/table_rows';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-29"> <%= t('htmlTutorials.chapter7.page2.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/table_heading';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-30"> <%= t('htmlTutorials.chapter7.page3.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/table_data';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-31"> <%= t('htmlTutorials.chapter7.page4.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/table_attr';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-32"> <%= t('htmlTutorials.chapter7.page5.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/table_caption';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-33"> <%= t('htmlTutorials.chapter7.page6.pageTitle') %>
+    </div>
+
+    <div class="CHAPTER">
+        <%= t('htmlTutorials.chapter8.title') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/form';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-34">
+         <%= t('htmlTutorials.chapter8.page1.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/form_input_types';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-35"> <%= t('htmlTutorials.chapter8.page2.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/form_elements';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-36"> <%= t('htmlTutorials.chapter8.page3.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/form_submission';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-37"> <%= t('htmlTutorials.chapter8.page4.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/form_placeholder';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-38"> <%= t('htmlTutorials.chapter8.page5.pageTitle') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/form_validation';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-39"> <%= t('htmlTutorials.chapter8.page6.pageTitle') %>
+    </div>
+
+    <div class="CHAPTER">
+        <%= t('htmlTutorials.chapter9.title') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/semantic_html';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-40"> Importance of semantic HTML</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/semantic_elements';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-41"> Semantic elements</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/non_semantic_html';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-42"> The &lt;div&gt; and &lt;span&gt; elements for non-semantic containers</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/quoting';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-43"> The &lt;blockquote&gt; and &lt;cite&gt; elements for quoting text</div>
+
+    <div class="CHAPTER">
+        <%= t('htmlTutorials.chapter10.title') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/semantic_html5';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-44"> New semantic elements introduced in HTML5</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/canvas';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-45"> The &lt;canvas&gt; tag for drawing graphics</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/inputs';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-46"> HTML5 form input types: date, time, number, range, etc.</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/storage';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-47"> HTML5 local storage (using localStorage and sessionStorage)</div>
+
+    <div class="CHAPTER">
+        <%= t('htmlTutorials.chapter11.title') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/entities';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-48"> What are HTML entities?</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/common_entities';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-49"> Common HTML entities</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/special_entities';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-50"> Displaying special characters in HTML using entities</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/utf8';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-51">
+         Character encoding and its importance (UTF-8)</div>
+
+    <div class="CHAPTER">
+        <%= t('htmlTutorials.chapter12.title') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/seo_heading';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-52"> Importance of heading tags for SEO</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/linking';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-53"> Using &lt;link&gt; for linking external resources like favicons</div>
+
+    <div class="CHAPTER">
+        <%= t('htmlTutorials.chapter13.title') %>
+    </div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/html_validator';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-54"> Introduction to HTML validators (e.g., W3C Validator)</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/html_errors';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-55"> Common HTML errors and how to fix them</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/inspect';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-56"> Using browser developer tools to inspect and debug HTML</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/browser_compatibility';" class="SIDEMENUBUTTON"
+        id="SIDEMENUBUTTON-57"> Ensuring cross-browser compatibility</div>
 </div>
 
-<div class="CHAPTER">
-    <%= t('htmlTutorials.chapter2.title') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/html_doctype';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-2"> <%= t('htmlTutorials.chapter2.page1.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/html_elements';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-3"> <%= t('htmlTutorials.chapter2.page2.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/metadata';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-4"> <%= t('htmlTutorials.chapter2.page3.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/title';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-5">
-     <%= t('htmlTutorials.chapter2.page4.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/charmeta';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-6"> <%= t('htmlTutorials.chapter2.page5.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/html_structure';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-7"> <%= t('htmlTutorials.chapter2.page6.pageTitle') %>
-</div>
-
-<div class="CHAPTER">
-    <%= t('htmlTutorials.chapter3.title') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/headings';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-8"> <%= t('htmlTutorials.chapter3.page1.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/paragraphs';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-9"> <%= t('htmlTutorials.chapter3.page2.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/formating_text';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-10"> <%= t('htmlTutorials.chapter3.page3.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/line_break';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-11"> <%= t('htmlTutorials.chapter3.page4.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/horizontal_line';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-12"> <%= t('htmlTutorials.chapter3.page5.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/comments';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-13"> <%= t('htmlTutorials.chapter3.page6.pageTitle') %>
-</div>
-
-<div class="CHAPTER">
-    <%= t('htmlTutorials.chapter4.title') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/links';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-14"> <%= t('htmlTutorials.chapter4.page1.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/int_ext_links';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-15"> <%= t('htmlTutorials.chapter4.page2.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/nav_bar';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-16"> <%= t('htmlTutorials.chapter4.page3.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/anchor_links';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-17"> <%= t('htmlTutorials.chapter4.page4.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/blank_target';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-18"> <%= t('htmlTutorials.chapter4.page5.pageTitle') %>
-</div>
-
-<div class="CHAPTER">
-    <%= t('htmlTutorials.chapter5.title') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/ul_li';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-19"> <%= t('htmlTutorials.chapter5.page1.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/ol_li';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-20"> <%= t('htmlTutorials.chapter5.page2.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/dl_dt_dd';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-21"> <%= t('htmlTutorials.chapter5.page3.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/nesting_lists';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-22"> <%= t('htmlTutorials.chapter5.page4.pageTitle') %>
-</div>
-
-<div class="CHAPTER">
-    <%= t('htmlTutorials.chapter6.title') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/images';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-23"> <%= t('htmlTutorials.chapter6.page1.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/images_attr';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-24"> <%= t('htmlTutorials.chapter6.page2.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/video';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-25"> <%= t('htmlTutorials.chapter6.page3.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/audio';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-26"> <%= t('htmlTutorials.chapter6.page4.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/iframe';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-27"> <%= t('htmlTutorials.chapter6.page5.pageTitle') %>
-</div>
-
-<div class="CHAPTER">
-    <%= t('htmlTutorials.chapter7.title') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/tables';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-28"> <%= t('htmlTutorials.chapter7.page1.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/table_rows';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-29"> <%= t('htmlTutorials.chapter7.page2.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/table_heading';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-30"> <%= t('htmlTutorials.chapter7.page3.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/table_data';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-31"> <%= t('htmlTutorials.chapter7.page4.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/table_attr';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-32"> <%= t('htmlTutorials.chapter7.page5.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/table_caption';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-33"> <%= t('htmlTutorials.chapter7.page6.pageTitle') %>
-</div>
-
-<div class="CHAPTER">
-    <%= t('htmlTutorials.chapter8.title') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/form';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-34">
-     <%= t('htmlTutorials.chapter8.page1.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/form_input_types';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-35"> <%= t('htmlTutorials.chapter8.page2.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/form_elements';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-36"> <%= t('htmlTutorials.chapter8.page3.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/form_submission';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-37"> <%= t('htmlTutorials.chapter8.page4.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/form_placeholder';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-38"> <%= t('htmlTutorials.chapter8.page5.pageTitle') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/form_validation';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-39"> <%= t('htmlTutorials.chapter8.page6.pageTitle') %>
-</div>
-
-<div class="CHAPTER">
-    <%= t('htmlTutorials.chapter9.title') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/semantic_html';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-40"> Importance of semantic HTML</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/semantic_elements';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-41"> Semantic elements</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/non_semantic_html';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-42"> The &lt;div&gt; and &lt;span&gt; elements for non-semantic containers</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/quoting';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-43"> The &lt;blockquote&gt; and &lt;cite&gt; elements for quoting text</div>
-
-<div class="CHAPTER">
-    <%= t('htmlTutorials.chapter10.title') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/semantic_html5';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-44"> New semantic elements introduced in HTML5</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/canvas';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-45"> The &lt;canvas&gt; tag for drawing graphics</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/inputs';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-46"> HTML5 form input types: date, time, number, range, etc.</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/storage';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-47"> HTML5 local storage (using localStorage and sessionStorage)</div>
-
-<div class="CHAPTER">
-    <%= t('htmlTutorials.chapter11.title') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/entities';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-48"> What are HTML entities?</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/common_entities';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-49"> Common HTML entities</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/special_entities';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-50"> Displaying special characters in HTML using entities</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/utf8';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-51">
-     Character encoding and its importance (UTF-8)</div>
-
-<div class="CHAPTER">
-    <%= t('htmlTutorials.chapter12.title') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/seo_heading';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-52"> Importance of heading tags for SEO</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/linking';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-53"> Using &lt;link&gt; for linking external resources like favicons</div>
-
-<div class="CHAPTER">
-    <%= t('htmlTutorials.chapter13.title') %>
-</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/html_validator';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-54"> Introduction to HTML validators (e.g., W3C Validator)</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/html_errors';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-55"> Common HTML errors and how to fix them</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/inspect';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-56"> Using browser developer tools to inspect and debug HTML</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/browser_compatibility';" class="SIDEMENUBUTTON"
-    id="SIDEMENUBUTTON-57"> Ensuring cross-browser compatibility</div>
+<script>
+    let SIDEMENUOPENBUTTON = document.querySelector(".SIDEMENUOPENBUTTON");
+    let SIDEMENU = document.querySelector(".SIDEMENU");
+    SIDEMENUOPENBUTTON.addEventListener("click", (event) => {
+        SIDEMENU.classList.add("SIDEMENUOPENED");
+    })
+    let SIDEMENUCLOSE = document.querySelector(".SIDEMENUCLOSE");
+    SIDEMENUCLOSE.addEventListener("click", (event) => {
+        SIDEMENU.classList.remove("SIDEMENUOPENED");
+    })
+</script>
