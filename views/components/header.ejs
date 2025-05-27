@@ -13,9 +13,21 @@
         width: 60px;
     }
 
-    .DROPDOWNMENU {
+    .MENUBUTTONSMALLSCREEN {
+        padding: 10px;
+        height: 60px;
+        width: 60px;
+    }
+
+    .DROPDOWNMENU,
+    .DROPDOWNMENUSMALLSCREEN {
         z-index: 1;
         position: relative;
+    }
+
+    .DROPDOWNMENUSMALLSCREEN {
+        display: none;
+        cursor: pointer;
     }
 
     .DROPDOWNMENU:hover .DROPDOWNMENUCONTENT {
@@ -23,10 +35,13 @@
     }
 
     .MENUBUTTON {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         padding: 25px;
         color: #445368;
         background-color: #FAD473;
-        font-size: 24px;
+        font-size: 1.5rem;
         font-family: "Arial";
         font-weight: bold;
         user-select: none;
@@ -90,11 +105,6 @@
         height: 55px;
     }
 
-    #HOMEBUTTON {
-        padding: 10px;
-        height: 60px;
-    }
-
     #PROFILEIMAGE:hover {
         background-color: #FAD473;
     }
@@ -111,7 +121,132 @@
     #PROFILEIMAGE:hover #PROFILEIMAGESVG {
         fill: #ef9d6e;
     }
+
+    .HEADERSIDEMENU {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        left: 100%;
+        background-color: #fff0cc;
+        z-index: 2;
+        transition: left 0.5s;
+    }
+
+    .HEADERSIDEMENUCONTENT {
+        display: none;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .HEADERSIDEMENUOPENED {
+        left: 50%;
+    }
+
+    .HEADERSIDEMENUCLOSE {
+        font-size: 100%;
+        user-select: none;
+        padding: 5%;
+        font-family: "Arial";
+        font-weight: bold;
+        color: #445368;
+        cursor: pointer;
+        width: fit-content;
+    }
+
+    .HEADERSIDEMENUCLOSE:hover {
+        color: white;
+    }
+
+    .HEADERSIDEMENUBUTTON {
+        padding: 10px;
+        color: #445368;
+        background-color: #fff0cc;
+        font-size: 14px;
+        font-family: "Arial";
+        font-weight: bold;
+        user-select: none;
+        cursor: pointer;
+    }
+
+    .HEADERSIDEMENUBUTTON:hover {
+        background-color: #fee9b6;
+    }
+
+    #HEADERSIDEMENULOGIN,
+    #HEADERSIDEMENUPROFILE,
+    #HEADERSIDEMENULOGOUT {
+        display: none;
+    }
+
+    @media (min-width: 1100px) {
+        .HEADERSIDEMENUOPENED {
+            left: 100%;
+        }
+    }
+
+    @media (max-width: 1100px) {
+
+        .MENUBUTTON,
+        .HEADERSEARCH,
+        .DROPDOWNMENU,
+        #LOGINBUTTONDIV {
+            display: none;
+        }
+
+        .DROPDOWNMENUSMALLSCREEN {
+            display: block;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .HEADERSIDEMENUOPENED {
+            left: 0;
+        }
+    }
 </style>
+
+<div class="HEADERSIDEMENU">
+    <div class="HEADERSIDEMENUCONTENT">
+        <div class="HEADERSIDEMENUCLOSE">X</div>
+        <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENUTUTORIALSHTML">
+            <%= t('header.html') %>
+                <%= t('header.htmlTutorials') %>
+        </div>
+        <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENUEXERCISESHTML">
+            <%= t('header.html') %>
+                <%= t('header.htmlExercises') %>
+        </div>
+        <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENUTUTORIALSCSS">
+            <%= t('header.css') %>
+                <%= t('header.cssTutorials') %>
+        </div>
+        <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENUEXERCISESCSS">
+            <%= t('header.css') %>
+                <%= t('header.cssExercises') %>
+        </div>
+        <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENUTUTORIALSJS">
+            <%= t('header.js') %>
+                <%= t('header.jsTutorials') %>
+        </div>
+        <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENUEXERCISESJS">
+            <%= t('header.js') %>
+                <%= t('header.jsExercises') %>
+        </div>
+        <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENUCODEEDITOR">
+            <%= t('header.codeEditor') %>
+        </div>
+        <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENULOGIN">
+            <%= t('header.login') %>
+        </div>
+        <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENUPROFILE">
+            <%= t('header.profile') %>
+        </div>
+        <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENULOGOUT">
+            <%= t('header.logout') %>
+        </div>
+    </div>
+</div>
 
 <header class="HEADER">
     <div class="HEADERHALF">
@@ -121,33 +256,59 @@
         </div>
         <div style="display: flex;">
             <div class="DROPDOWNMENU">
-                <div class="MENUBUTTON"> <%= t('header.html') %> </div>
+                <div class="MENUBUTTON">
+                    <%= t('header.html') %>
+                </div>
                 <div class="DROPDOWNMENUCONTENT">
-                    <div class="MENUBUTTON HEADERTUTORIALSHTMLBUTTON"> <%= t('header.htmlTutorials') %> </div>
-                    <div class="MENUBUTTON HEADEREXERCISESHTMLBUTTON"> <%= t('header.htmlExercises') %> </div>
+                    <div class="MENUBUTTON HEADERTUTORIALSHTMLBUTTON">
+                        <%= t('header.htmlTutorials') %>
+                    </div>
+                    <div class="MENUBUTTON HEADEREXERCISESHTMLBUTTON">
+                        <%= t('header.htmlExercises') %>
+                    </div>
                 </div>
             </div>
 
             <div class="DROPDOWNMENU">
-                <div class="MENUBUTTON"> <%= t('header.css') %> </div>
+                <div class="MENUBUTTON">
+                    <%= t('header.css') %>
+                </div>
                 <div class="DROPDOWNMENUCONTENT">
-                    <div class="MENUBUTTON HEADERTUTORIALSCSSBUTTON"> <%= t('header.cssTutorials') %> </div>
-                    <div class="MENUBUTTON HEADEREXERCISESCSSBUTTON"> <%= t('header.cssExercises') %> </div>
+                    <div class="MENUBUTTON HEADERTUTORIALSCSSBUTTON">
+                        <%= t('header.cssTutorials') %>
+                    </div>
+                    <div class="MENUBUTTON HEADEREXERCISESCSSBUTTON">
+                        <%= t('header.cssExercises') %>
+                    </div>
                 </div>
             </div>
 
             <div class="DROPDOWNMENU">
-                <div class="MENUBUTTON"> <%= t('header.js') %> </div>
+                <div class="MENUBUTTON">
+                    <%= t('header.js') %>
+                </div>
                 <div class="DROPDOWNMENUCONTENT">
-                    <div class="MENUBUTTON HEADERTUTORIALSJSBUTTON"> <%= t('header.jsTutorials') %> </div>
-                    <div class="MENUBUTTON HEADEREXERCISESJSBUTTON"> <%= t('header.jsExercises') %> </div>
+                    <div class="MENUBUTTON HEADERTUTORIALSJSBUTTON">
+                        <%= t('header.jsTutorials') %>
+                    </div>
+                    <div class="MENUBUTTON HEADEREXERCISESJSBUTTON">
+                        <%= t('header.jsExercises') %>
+                    </div>
                 </div>
             </div>
-            <div class="MENUBUTTON HEADERCODEEDITORBUTTON"> <%= t('header.codeEditor') %> </div>
+            <div class="MENUBUTTON HEADERCODEEDITORBUTTON">
+                <%= t('header.codeEditor') %>
+            </div>
         </div>
         <input class="HEADERSEARCH" type="search" placeholder=" <%= t('header.search') %> ">
     </div>
     <div class="HEADERSECONDHALF">
+        <div class="DROPDOWNMENUSMALLSCREEN">
+            <svg width="60px" height="60px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6H20M4 12H20M4 18H20" stroke="#445368" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </div>
         <div class="DROPDOWNMENU">
             <div class="MENUBUTTON" id="PROFILEIMAGE">
                 <svg id="PROFILEIMAGESVG" fill="#EF6E72" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -164,12 +325,18 @@
                 </svg>
             </div>
             <div class="DROPDOWNMENUCONTENT">
-                <div class="MENUBUTTON" id="PROFILEBUTTON"> <%= t('header.profile') %> </div>
-                <div class="MENUBUTTON" id="LOGOUTBUTTON"> <%= t('header.logout') %> </div>
+                <div class="MENUBUTTON" id="PROFILEBUTTON">
+                    <%= t('header.profile') %>
+                </div>
+                <div class="MENUBUTTON" id="LOGOUTBUTTON">
+                    <%= t('header.logout') %>
+                </div>
             </div>
         </div>
-        <div class="MENUBUTTON" id="LOGINBUTTON">
-            <%= t('header.login') %> 
+        <div id="LOGINBUTTONDIV">
+            <div class="MENUBUTTON" id="LOGINBUTTON">
+                <%= t('header.login') %>
+            </div>
         </div>
         <select class="LANGSELECT" name="language" id="LANGSELECT">
             <option value="en">EN</option>
@@ -211,7 +378,7 @@
     langSelect.value = lang_code;
     langSelect.addEventListener("change", (e) => {
         var currentPathArray = window.location.pathname.split('/');
-        if(currentPathArray[0].length !== 0) {
+        if (currentPathArray[0].length !== 0) {
             currentPathArray[0] = e.target.value;
         } else {
             currentPathArray[1] = e.target.value;
@@ -220,65 +387,113 @@
     })
 
     let SEARCHBAR = document.querySelector(".HEADERSEARCH")
-    SEARCHBAR.addEventListener("keydown", function(event) {
-        if(event.key === "Enter") {
-            if(event.target.value.length > 0) {
+    SEARCHBAR.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            if (event.target.value.length > 0) {
                 window.location.href = "/" + lang_code + "/" + "search/" + event.target.value;
             }
         }
     })
 
     let loginButton = document.querySelector("#LOGINBUTTON");
+    let HEADERSIDEMENULOGIN = document.querySelector("#HEADERSIDEMENULOGIN")
     loginButton.addEventListener("click", (event) => {
+        window.location.href = "/" + lang_code + "/" + "login";
+    });
+    HEADERSIDEMENULOGIN.addEventListener("click", (event) => {
         window.location.href = "/" + lang_code + "/" + "login";
     });
 
     let profilePicture = document.querySelector("#PROFILEIMAGE");
+    let HEADERSIDEMENUPROFILE = document.querySelector("#HEADERSIDEMENUPROFILE")
+    let HEADERSIDEMENULOGOUT = document.querySelector("#HEADERSIDEMENULOGOUT")
     const isLoggedIn = getCookie("isLoggedIn");
     if (isLoggedIn === null || isLoggedIn == "false") {
-        loginButton.style.display = "block";
+        loginButton.style.display = "flex";
+        HEADERSIDEMENULOGIN.style.display = "flex";
     }
     if (isLoggedIn == "true") {
         profilePicture.style.display = "inline";
+        HEADERSIDEMENUPROFILE.style.display = "flex";
+        HEADERSIDEMENULOGOUT.style.display = "flex";
     }
 
+    let HEADERLOGO = document.querySelector(".HEADERLOGO");
+    HEADERLOGO.addEventListener("click", (event) => {
+        window.location.href = "/" + lang_code;
+    });
+
+    let DROPDOWNMENUSMALLSCREEN = document.querySelector(".DROPDOWNMENUSMALLSCREEN")
+    let HEADERSIDEMENU = document.querySelector(".HEADERSIDEMENU");
+    DROPDOWNMENUSMALLSCREEN.addEventListener("click", (event) => {
+        HEADERSIDEMENU.classList.add("HEADERSIDEMENUOPENED");
+        document.querySelector(".HEADERSIDEMENUCONTENT").style.display = "block";
+    })
+    let HEADERSIDEMENUCLOSE = document.querySelector(".HEADERSIDEMENUCLOSE")
+    HEADERSIDEMENUCLOSE.addEventListener("click", (event) => {
+        HEADERSIDEMENU.classList.remove("HEADERSIDEMENUOPENED");
+        document.querySelector(".HEADERSIDEMENUCONTENT").style.display = "none";
+    })
+
     let exercisesHtml = document.querySelector(".HEADEREXERCISESHTMLBUTTON");
+    let HEADERSIDEMENUEXERCISESHTML = document.querySelector("#HEADERSIDEMENUEXERCISESCSS");
+    HEADERSIDEMENUEXERCISESHTML.addEventListener("click", (event) => {
+        window.location.href = "/" + lang_code + "/exercises/HTML";
+    });
     exercisesHtml.addEventListener("click", (event) => {
         window.location.href = "/" + lang_code + "/exercises/HTML";
     });
 
     let exercisesCss = document.querySelector(".HEADEREXERCISESCSSBUTTON");
+    let HEADERSIDEMENUEXERCISESCSS = document.querySelector("#HEADERSIDEMENUEXERCISESCSS");
+    HEADERSIDEMENUEXERCISESCSS.addEventListener("click", (event) => {
+        window.location.href = "/" + lang_code + "/exercises/CSS";
+    });
     exercisesCss.addEventListener("click", (event) => {
         window.location.href = "/" + lang_code + "/exercises/CSS";
     });
 
     let exercisesJs = document.querySelector(".HEADEREXERCISESJSBUTTON");
+    let HEADERSIDEMENUEXERCISESJS = document.querySelector("#HEADERSIDEMENUEXERCISESJS");
+    HEADERSIDEMENUEXERCISESJS.addEventListener("click", (event) => {
+        window.location.href = "/" + lang_code + "/exercises/JS";
+    });
     exercisesJs.addEventListener("click", (event) => {
         window.location.href = "/" + lang_code + "/exercises/JS";
     });
 
     let tutorialsHtml = document.querySelector(".HEADERTUTORIALSHTMLBUTTON");
+    let HEADERSIDEMENUTUTORIALSHTML = document.querySelector("#HEADERSIDEMENUTUTORIALSHTML");
+    HEADERSIDEMENUTUTORIALSHTML.addEventListener("click", (event) => {
+        window.location.href = "/" + lang_code + "/tutorials/HTML";
+    });
     tutorialsHtml.addEventListener("click", (event) => {
         window.location.href = "/" + lang_code + "/tutorials/HTML";
     });
 
     let tutorialsCss = document.querySelector(".HEADERTUTORIALSCSSBUTTON");
+    let HEADERSIDEMENUTUTORIALSCSS = document.querySelector("#HEADERSIDEMENUTUTORIALSCSS");
+    HEADERSIDEMENUTUTORIALSCSS.addEventListener("click", (event) => {
+        window.location.href = "/" + lang_code + "/tutorials/CSS";
+    });
     tutorialsCss.addEventListener("click", (event) => {
         window.location.href = "/" + lang_code + "/tutorials/CSS";
     });
 
     let tutorialsJs = document.querySelector(".HEADERTUTORIALSJSBUTTON");
+    let HEADERSIDEMENUTUTORIALSJS = document.querySelector("#HEADERSIDEMENUTUTORIALSJS");
+    HEADERSIDEMENUTUTORIALSJS.addEventListener("click", (event) => {
+        window.location.href = "/" + lang_code + "/tutorials/JS";
+    });
     tutorialsJs.addEventListener("click", (event) => {
         window.location.href = "/" + lang_code + "/tutorials/JS";
     });
 
-    let homeButton = document.querySelector(".HEADERLOGO");
-    homeButton.addEventListener("click", (event) => {
-        window.location.href = "/" + lang_code;
-    });
-
     let profileImage = document.querySelector("#PROFILEIMAGE");
     profileImage.addEventListener("click", (event) => {
+        window.location.href = "/" + lang_code + "/profile";
+    });
+    HEADERSIDEMENUPROFILE.addEventListener("click", (event) => {
         window.location.href = "/" + lang_code + "/profile";
     });
 
@@ -294,8 +509,18 @@
         deleteCookie("currentPassword")
         window.location.href = "/" + lang_code;
     });
+    HEADERSIDEMENULOGOUT.addEventListener("click", (event) => {
+        deleteCookie("isLoggedIn");
+        deleteCookie("currentEmail");
+        deleteCookie("currentPassword")
+        window.location.href = "/" + lang_code;
+    });
 
     let codeEditorButton = document.querySelector(".HEADERCODEEDITORBUTTON");
+    let HEADERSIDEMENUCODEEDITOR = document.querySelector("#HEADERSIDEMENUCODEEDITOR")
+    HEADERSIDEMENUCODEEDITOR.addEventListener("click", (event) => {
+        window.location.href = "/" + lang_code + "/codeeditor";
+    });
     codeEditorButton.addEventListener("click", (event) => {
         window.location.href = "/" + lang_code + "/codeeditor";
     });

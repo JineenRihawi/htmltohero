@@ -56,22 +56,35 @@
             }
 
             .REGISTERBUTTON {
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 padding: 10px;
                 color: #445368;
-                /*background-color: #F48FB1;*/
                 background-color: #FAD473;
                 font-size: 24px;
                 font-family: "Arial";
                 font-weight: bold;
                 user-select: none;
                 height: 30px;
-                /*80 - 2*padding */
                 width: 100%;
             }
 
             .REGISTERBUTTON:hover {
                 background-color: #ef9d6e;
                 cursor: pointer;
+            }
+
+            .CREATEACCOUNTBUTTON {
+                color: grey;
+                font-family: "Arial";
+                user-select: none;
+                font-size: 14px;
+                cursor: pointer;
+            }
+
+            .CREATEACCOUNTBUTTON:hover {
+                color: white;
             }
 
             .REGISTERINPUTDIV {
@@ -86,8 +99,182 @@
                 align-items: center;
                 color: #757575;
                 padding: 5px;
-                content: none;
                 user-select: none;
+            }
+
+            @media (max-width: 500px) {
+                .REGISTERCONTAINER {
+                    width: 100%;
+                    height: 100%;
+                    background-color: #e3a4a6;
+                    margin: 0;
+                }
+                .REGISTERBUTTON {
+                    font-size: 100%;
+                }
+            }
+
+            /* Header styles copied from login page to fix .HEADERSIDEMENUCLOSE */
+            .HEADER {
+                width: 100%;
+                height: 80px;
+                background-color: #FAD473;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .HEADERLOGO {
+                padding: 10px;
+                height: 60px;
+                width: 60px;
+            }
+
+            .MENUBUTTONSMALLSCREEN {
+                padding: 10px;
+                height: 60px;
+                width: 60px;
+            }
+
+            .DROPDOWNMENU,
+            .DROPDOWNMENUSMALLSCREEN {
+                z-index: 1;
+                position: relative;
+            }
+
+            .DROPDOWNMENUSMALLSCREEN {
+                display: none;
+                cursor: pointer;
+            }
+
+            .DROPDOWNMENU:hover .DROPDOWNMENUCONTENT {
+                display: block;
+            }
+
+            .MENUBUTTON {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 25px;
+                color: #445368;
+                background-color: #FAD473;
+                font-size: 1.5rem;
+                font-family: "Arial";
+                font-weight: bold;
+                user-select: none;
+                height: 30px;
+            }
+
+            .MENUBUTTON:hover {
+                background-color: #ef9d6e;
+                cursor: pointer;
+            }
+
+            .DROPDOWNMENUCONTENT {
+                display: none;
+                position: absolute;
+                right: 0;
+                background-color: #FAD473;
+            }
+
+            .HEADERHALF,
+            .HEADERSECONDHALF {
+                width: auto;
+                height: 100%;
+                display: flex;
+                gap: 10px;
+            }
+
+            .HEADERSECONDHALF {
+                display: flex;
+                flex-direction: row-reverse;
+                align-items: center;
+            }
+
+            .HEADERSEARCH {
+                margin: 10px;
+                border-radius: 500px;
+                border: none;
+                width: 250px;
+                font-size: 20px;
+            }
+
+            .HEADERSEARCH:enabled {
+                outline: none;
+            }
+
+            .LANGSELECT {
+                height: 50px;
+                user-select: none;
+                cursor: pointer;
+                border: none;
+            }
+
+            #LOGINBUTTON,
+            #PROFILEIMAGE {
+                display: none;
+            }
+
+            #PROFILEIMAGE {
+                padding: 10px;
+                width: 55px;
+                height: 55px;
+            }
+
+            #PROFILEIMAGE:hover {
+                background-color: #FAD473;
+            }
+
+            #HOMEBUTTON:hover #HOMEBUTTONSVG {
+                fill: #ef9d6e;
+                cursor: pointer;
+            }
+
+            #PROFILEIMAGE:hover #PROFILEIMAGESVG {
+                fill: #ef9d6e;
+            }
+
+            .HEADERSIDEMENU {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                top: 0;
+                left: 100%;
+                background-color: #fff0cc;
+                z-index: 2;
+                transition: left 0.5s;
+            }
+
+            .HEADERSIDEMENUCONTENT {
+                display: none;
+            }
+
+            .HEADERSIDEMENUOPENED {
+                left: 50%;
+            }
+
+            @media (min-width: 1100px) {
+                .HEADERSIDEMENUOPENED {
+                    left: 100%;
+                }
+            }
+
+            @media (max-width: 1100px) {
+                .MENUBUTTON,
+                .HEADERSEARCH,
+                .LANGSELECT,
+                .DROPDOWNMENU,
+                #LOGINBUTTONDIV {
+                    display: none;
+                }
+                .DROPDOWNMENUSMALLSCREEN {
+                    display: block;
+                }
+            }
+
+            @media (max-width: 500px) {
+                .HEADERSIDEMENUOPENED {
+                    left: 0;
+                }
             }
         </style>
         <title>
@@ -96,140 +283,175 @@
 </head>
 
 <body>
-
     <%- include('components/header') %>
 
-        <div class="PAGE">
-            <div class="CENTER">
-                <div class="REGISTERCONTAINER">
-                    <div class="REGISTERCONTAINERCONTENT">
-                        <img src="https://raw.githubusercontent.com/JineenRihawi/htmltoheroassets/1e4e4bd65bfed1479c5e272f2a43b8da9f849aa7/html2hero.svg"
-                            height="150px" style="margin-bottom: 35px;">
-                        <div class="REGISTERINPUTDIV">
-                            <input class="REGISTERINPUT" id="emailInput" type="email"
-                                placeholder="<%= t('registerPage.email') %>">
-                        </div>
-                        <div class="REGISTERINPUTDIV">
-                            <input class="REGISTERINPUT" id="usernameInput" type="text"
-                                placeholder="<%= t('registerPage.username') %>">
-                        </div>
-                        <div class="REGISTERINPUTDIV">
-                            <input class="REGISTERINPUT" id="password1Input" type="password"
-                                placeholder="<%= t('registerPage.password1') %>">
-                            <input type="checkbox" id="SHOWPASSWORDCHECK1">
-                        </div>
-                        <div class="REGISTERINPUTDIV">
-                            <input class="REGISTERINPUT" id="password2Input" type="password"
-                                placeholder="<%= t('registerPage.password2') %>">
-                            <input type="checkbox" id="SHOWPASSWORDCHECK2">
-                        </div>
-                        <div class="REGISTERINPUTDIV">
-                            <label class="BIRTHDAYLABEL"><%= t('registerPage.birthday') %></label>
-                            <input class="REGISTERINPUT" id="birthdayInput" type="date">
-                        </div>
-                        <div class="REGISTERINPUTDIV" style="background-color: #FAD473;">
-                            <div class="REGISTERBUTTON">
-                                <%= t('registerPage.registerButton') %>
-                            </div>
+    <div class="PAGE">
+        <div class="CENTER">
+            <div class="REGISTERCONTAINER">
+                <div class="REGISTERCONTAINERCONTENT">
+                    <img src="https://raw.githubusercontent.com/JineenRihawi/htmltoheroassets/1e4e4bd65bfed1479c5e272f2a43b8da9f849aa7/html2hero.svg"
+                        height="150px" style="margin-bottom: 35px;">
+                    <div class="REGISTERINPUTDIV">
+                        <input class="REGISTERINPUT" id="emailInput" type="email"
+                            placeholder="<%= t('registerPage.email') %>">
+                    </div>
+                    <div class="REGISTERINPUTDIV">
+                        <input class="REGISTERINPUT" id="usernameInput" type="text"
+                            placeholder="<%= t('registerPage.username') %>">
+                    </div>
+                    <div class="REGISTERINPUTDIV">
+                        <input class="REGISTERINPUT" id="password1Input" type="password"
+                            placeholder="<%= t('registerPage.password1') %>">
+                        <input type="checkbox" id="SHOWPASSWORDCHECK1">
+                    </div>
+                    <div class="REGISTERINPUTDIV">
+                        <input class="REGISTERINPUT" id="password2Input" type="password"
+                            placeholder="<%= t('registerPage.password2') %>">
+                        <input type="checkbox" id="SHOWPASSWORDCHECK2">
+                    </div>
+                    <div class="REGISTERINPUTDIV">
+                        <label class="BIRTHDAYLABEL">
+                            <%= t('registerPage.birthday') %>
+                        </label>
+                        <input class="REGISTERINPUT" id="birthdayInput" type="date">
+                    </div>
+                    <div class="REGISTERINPUTDIV" style="background-color: #FAD473;">
+                        <div class="REGISTERBUTTON">
+                            <%= t('registerPage.registerButton') %>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <%- include('components/footer') %>
-
         </div>
 
-        <script>
+        <%- include('components/footer') %>
+    </div>
 
-            function getCookie(name) {
-                // Construct the cookie name as a search pattern
-                const cookiePattern = `${name}=`;
-                const cookies = document.cookie.split('; '); // Split cookies into individual parts
-
-                for (let cookie of cookies) {
-                    if (cookie.startsWith(cookiePattern)) {
-                        // Extract the cookie value
-                        return decodeURIComponent(cookie.substring(cookiePattern.length));
-                    }
+    <script>
+        function getCookie(name) {
+            const cookiePattern = `${name}=`;
+            const cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                if (cookie.startsWith(cookiePattern)) {
+                    return decodeURIComponent(cookie.substring(cookiePattern.length));
                 }
-
-                // Return null if cookie is not found
-                return null;
             }
+            return null;
+        }
 
-            function deleteCookie(cookieName) {
-                document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-            }
+        function deleteCookie(cookieName) {
+            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        }
 
-            document.addEventListener("DOMContentLoaded", (event) => { // Logout if password and email dont match ( prevent hacking accounts )
-                fetch("/api/getAccount", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        email: getCookie("currentEmail"),
-                    })
-                }).then(response => response.json())
-                    .then(data => {
-                        if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
-                            deleteCookie("isLoggedIn");
-                            deleteCookie("currentEmail");
-                            deleteCookie("currentPassword");
-                            window.location.href = "/" + lang_code;
-                        }
-                    })
-            });
-
-            async function logIn(email, password) {
-                const response = await fetch("/api/login", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        password: password,
-                    })
+        document.addEventListener("DOMContentLoaded", (event) => {
+            fetch("/api/getAccount", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: getCookie("currentEmail"),
+                })
+            }).then(response => response.json())
+                .then(data => {
+                    if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
+                        deleteCookie("isLoggedIn");
+                        deleteCookie("currentEmail");
+                        deleteCookie("currentPassword");
+                        window.location.href = "/" + lang_code;
+                    }
                 });
-                const data = await response.json();
-                const isLoggedIn = data.isLoggedIn;
-                if (isLoggedIn !== null && isLoggedIn !== "" && isLoggedIn !== undefined) {
-                    if (isLoggedIn === true) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
+        });
+
+        async function register(email, username, password, birthyear, birthmonth, birthday) {
+            const response = await fetch("/api/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    username: username,
+                    password: password,
+                    birthyear: birthyear,
+                    birthmonth: birthmonth,
+                    birthday: birthday,
+                })
+            });
+            const data = await response.json();
+            const error = data.errorName;
+            if (error === "noerror") {
+                return true;
+            } else {
+                return error;
+            }
+        }
+
+        const EMAILINPUT = document.querySelector("#emailInput");
+        const USERNAMEINPUT = document.querySelector("#usernameInput");
+        const PASSWORDINPUT1 = document.querySelector("#password1Input");
+        const PASSWORDINPUT2 = document.querySelector("#password2Input");
+        const BIRTHDAYINPUT = document.querySelector("#birthdayInput");
+
+        let REGISTERBUTTON = document.querySelector(".REGISTERBUTTON");
+        REGISTERBUTTON.addEventListener("click", (event) => {
+            const [yearStr, monthStr, dayStr] = BIRTHDAYINPUT.value.split("-");
+            const year = parseInt(yearStr);
+            const month = parseInt(monthStr);
+            const day = parseInt(dayStr);
+
+            if (EMAILINPUT.value.length <= 0) {
+                window.alert("<%= t('registerPage.emptyEmailError') %>");
+                return;
+            }
+            if (USERNAMEINPUT.value.length <= 0) {
+                window.alert("<%= t('registerPage.emptyUsernameError') %>");
+                return;
+            }
+            if (PASSWORDINPUT1.value.length <= 0) {
+                window.alert("<%= t('registerPage.emptyPasswordError') %>");
+                return;
+            }
+            if (PASSWORDINPUT2.value.length <= 0) {
+                window.alert("<%= t('registerPage.emptyPasswordError') %>");
+                return;
+            }
+            if (year === 0 || isNaN(year) || month === 0 || isNaN(month) || day === 0 || isNaN(day)) {
+                window.alert("<%= t('registerPage.invalidDateError') %>");
+                return;
             }
 
-            let LoginButton = document.querySelector(".LOGINBUTTON");
-            LoginButton.addEventListener("click", (event) => {
+            if (PASSWORDINPUT1.value !== PASSWORDINPUT2.value) {
+                window.alert("<%= t('registerPage.passwordNotEqualError') %>");
+                return;
+            }
+
+            register(EMAILINPUT.value, USERNAMEINPUT.value, PASSWORDINPUT1.value, year, month, day).then(error => {
+                if (error === "emailExsists") {
+                    window.alert("<%= t('registerPage.emailExsistsError') %>");
+                } else if (error === true) {
+                    window.location.href = "/" + lang_code + "/profile";
+                }
             });
+        });
 
-            SHOWPASSWORDCHECK1 = document.querySelector("#SHOWPASSWORDCHECK1");
-            SHOWPASSWORDCHECK2 = document.querySelector("#SHOWPASSWORDCHECK2");
-            PASSWORDINPUT1 = document.querySelector("#password1Input");
-            PASSWORDINPUT2 = document.querySelector("#password2Input");
-            SHOWPASSWORDCHECK1.addEventListener("change", (event) => {
-                if (event.target.checked === true) {
-                    PASSWORDINPUT1.type = "text";
-                } else if (event.target.checked === false || event.target.checked === undefined) {
-                    PASSWORDINPUT1.type = "password";
-                }
-            })
-            SHOWPASSWORDCHECK2.addEventListener("change", (event) => {
-                if (event.target.checked === true) {
-                    PASSWORDINPUT2.type = "text";
-                } else if (event.target.checked === false || event.target.checked === undefined) {
-                    PASSWORDINPUT2.type = "password";
-                }
-            })
-
-        </script>
+        const SHOWPASSWORDCHECK1 = document.querySelector("#SHOWPASSWORDCHECK1");
+        const SHOWPASSWORDCHECK2 = document.querySelector("#SHOWPASSWORDCHECK2");
+        SHOWPASSWORDCHECK1.addEventListener("change", (event) => {
+            if (event.target.checked === true) {
+                PASSWORDINPUT1.type = "text";
+            } else {
+                PASSWORDINPUT1.type = "password";
+            }
+        });
+        SHOWPASSWORDCHECK2.addEventListener("change", (event) => {
+            if (event.target.checked === true) {
+                PASSWORDINPUT2.type = "text";
+            } else {
+                PASSWORDINPUT2.type = "password";
+            }
+        });
+    </script>
 </body>
 
 </html>

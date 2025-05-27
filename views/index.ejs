@@ -63,7 +63,7 @@
 
             .CONTAINERSMALLTEXT {
                 color: white;
-                font-size: 25px;
+                font-size: 100%;
                 user-select: none;
                 font-family: "Arial";
                 padding: 30px;
@@ -71,12 +71,33 @@
 
             .CONTAINERTEXT {
                 text-align: center;
-                font-size: 80px;
+                font-size: 85px;
                 font-family: "Arial";
                 font-weight: bold;
                 user-select: none;
                 color: white;
                 text-shadow: 0px 5px #445368;
+            }
+
+            @media (max-width: 1000px) {
+                .CONTAINERSMALLTEXT {
+                    display: none;
+                }
+                #HTMLSPLITCONTAINER, #JSSPLITCONTAINER {
+                    grid-template-columns: 100% 0%;
+                }
+                #CSSSPLITCONTAINER{
+                    grid-template-columns: 0% 100%;
+                }
+            }
+
+            @media (max-width: 500px) {
+                .CONTAINERTEXT {
+                    font-size: 2rem;
+                }
+                .CONTAINER {
+                    height: auto;
+                }
             }
 
             .PAGE {
@@ -91,8 +112,9 @@
                 margin: 10px;
                 border-radius: 500px;
                 border: none;
-                width: 250px;
+                width: 100%;
                 font-size: 20px;
+                padding: 5%;
             }
 
             .SEARCH:enabled {
@@ -115,20 +137,19 @@
                         <span class="CONTAINERTEXT">
                             <%= t('mainpage.discovercontainer.discover') %>
                         </span>
-                        <input class="SEARCH" type="search" placeholder="<%= t('mainpage.discovercontainer.search') %>"
-                            style="width: 550px; height: 90px;">
+                        <input class="SEARCH" type="search" placeholder="<%= t('mainpage.discovercontainer.search') %>">
                     </div>
                 </div>
             </div>
 
             <div class="CONTAINER" id="HTMLCONTAINER">
-                <div class="SPLITCONTAINER">
+                <div class="SPLITCONTAINER" id="HTMLSPLITCONTAINER">
                     <div class="CENTER">
                         <span class="CONTAINERTEXT">
                             <%= t('mainpage.htmlcontainer.html') %>
                         </span>
                     </div>
-                    <div class="CENTER">
+                    <div class="CENTER" id="CONTAINERCENTER">
                         <div class="CONTAINERSMALLTEXT">
                             <%= t('mainpage.htmlcontainer.description') %>
                         </div>
@@ -137,8 +158,8 @@
             </div>
 
             <div class="CONTAINER" id="CSSCONTAINER">
-                <div class="SPLITCONTAINER">
-                    <div class="CENTER">
+                <div class="SPLITCONTAINER" id="CSSSPLITCONTAINER">
+                    <div class="CENTER" id="CONTAINERCENTER">
                         <div class="CONTAINERSMALLTEXT">
                             <%= t('mainpage.csscontainer.description') %>
                         </div>
@@ -152,13 +173,13 @@
             </div>
 
             <div class="CONTAINER" id="JSCONTAINER">
-                <div class="SPLITCONTAINER">
+                <div class="SPLITCONTAINER" id="JSSPLITCONTAINER">
                     <div class="CENTER">
-                        <span class="CONTAINERTEXT">
+                        <span class="CONTAINERTEXT" id="JSCONTAINERTEXT">
                             <%= t('mainpage.jscontainer.js') %>
                         </span>
                     </div>
-                    <div class="CENTER">
+                    <div class="CENTER" id="CONTAINERCENTER">
                         <div class="CONTAINERSMALLTEXT">
                             <%= t('mainpage.jscontainer.description') %>
                         </div>

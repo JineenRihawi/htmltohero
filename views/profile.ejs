@@ -3,206 +3,281 @@
 
 <head>
     <%- include('components/metadata_info')%>
-    <style>
-        html,
-        body {
-            height: 100%;
-            width: 100%;
-            overflow-x: hidden;
-            margin: 0%;
-        }
+        <style>
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                overflow-x: hidden;
+                margin: 0%;
+            }
 
-        .CENTER {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+            .CENTER {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
-        .PAGE {
-            height: calc(100% - 80px);
-            /*100% - header*/
-            width: 100%;
-            overflow-x: hidden;
-            overflow-y: scroll;
-        }
+            .PAGE {
+                height: calc(100% - 80px);
+                /*100% - header*/
+                width: 100%;
+                overflow-x: hidden;
+                overflow-y: scroll;
+            }
 
-        .PAGECONTAINERS {
-            width: 100%;
-            height: 100%;
-            display: grid;
-            grid-template-columns: 5% 20% 5% 65% 5%;
-            grid-template-rows: 5% 44% 2% 44% 5%;
-            grid-template-areas:
-                ". . . . ."
-                ". data . continue ."
-                ". data . . ."
-                ". data . continue2 ."
-                ". . . . .";
-        }
+            .PAGECONTAINERS {
+                width: 100%;
+                height: 100%;
+                display: grid;
+                grid-template-columns: 5% 20% 5% 65% 5%;
+                grid-template-rows: 5% 44% 2% 44% 5%;
+                grid-template-areas:
+                    ". . . . ."
+                    ". data . continue ."
+                    ". data . . ."
+                    ". data . continue2 ."
+                    ". . . . .";
+            }
 
-        .PROFILEDATACONTAINER {
-            grid-area: data;
-            width: 100%;
-            height: 100%;
-            background-color: rgb(248, 208, 208);
-            border-radius: 20px;
-            overflow-x: scroll;
-        }
+            .PROFILEDATACONTAINER {
+                grid-area: data;
+                width: 100%;
+                height: 100%;
+                background-color: rgb(248, 208, 208);
+                border-radius: 20px;
+                overflow-x: scroll;
+            }
 
-        .CONTINUECONTAINER {
-            grid-area: continue;
-            width: calc(100% - 40px);
-            height: calc(100% - 40px);
-            background-color: rgb(252, 193, 193);
-            border-radius: 20px;
-            padding: 20px;
-            overflow-x:scroll;
-        }
+            .CONTINUECONTAINER {
+                grid-area: continue;
+                width: calc(100% - 40px);
+                height: calc(100% - 40px);
+                background-color: rgb(252, 193, 193);
+                border-radius: 20px;
+                padding: 20px;
+                overflow-x: scroll;
+            }
 
-        .CONTINUE2CONTAINER {
-            grid-area: continue2;
-            width: calc(100% - 40px);
-            height: calc(100% - 40px);
-            background-color: rgb(250, 150, 150);
-            border-radius: 20px;
-            padding: 20px;
-            overflow-x: scroll;
-        }
+            .CONTINUE2CONTAINER {
+                grid-area: continue2;
+                width: calc(100% - 40px);
+                height: calc(100% - 40px);
+                background-color: rgb(250, 150, 150);
+                border-radius: 20px;
+                padding: 20px;
+                overflow-x: scroll;
+            }
 
-        .POINTSRANGE {
-            width: 100%;
-            height: 25px;
-            background-color: white;
-            position: relative;
-        }
+            .POINTSRANGE {
+                width: 100%;
+                height: 25px;
+                background-color: white;
+                position: relative;
+            }
 
-        .POINTSRANGEBAR {
-            height: 100%;
-            background-color: rgb(250, 150, 150);
-        }
+            .POINTSRANGEBAR {
+                height: 100%;
+                background-color: rgb(250, 150, 150);
+            }
 
-        .DATACONTAINERDATA {
-            padding: 0 15px 0 15px;
-            width: calc(100% - 30px);
-            height: calc(100% - 150px);
-            color: #445368;
-            font-family: "Arial";
-            user-select: none;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
+            .DATACONTAINERDATA {
+                padding: 0 15px 0 15px;
+                width: calc(100% - 30px);
+                height: calc(100% - 150px);
+                color: #445368;
+                font-family: "Arial";
+                user-select: none;
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
 
-        .POINTSRANGEPERCENTAGE {
-            font-size: 14px;
-            position: absolute;
-            top: 25%;
-            right: 5px;
-        }
+            .POINTSRANGEPERCENTAGE {
+                font-size: 14px;
+                position: absolute;
+                top: 25%;
+                right: 5px;
+            }
 
-        .CONTAINERTITLE {
-            width: 100%;
-            height: 50px;
-            font-size: 50px;
-            user-select: none;
-            color: #445368;
-        }
+            .CONTAINERTITLE {
+                width: 100%;
+                height: 50px;
+                font-size: 2rem;
+                user-select: none;
+                color: #445368;
+            }
 
-        .CONTAINERBUTTONS {
-            width: 100%;
-            height: auto;
-            display: flex;
-            justify-content: space-around;
-            gap: 5%;
-        }
+            .CONTAINERBUTTONS {
+                width: 100%;
+                height: auto;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                gap: 5%;
+            }
 
-        .CONTAINERBUTTON {
-            padding: 25px;
-            color: white;
-            background-color: #445368;
-            font-size: 24px;
-            font-family: "Arial";
-            font-weight: bold;
-            user-select: none;
-            height: 30px;
-            /*80 - 2*padding */
-            flex: 1;
-        }
+            .CONTAINERBUTTON {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 25px;
+                color: white;
+                background-color: #445368;
+                font-size: 24px;
+                font-family: "Arial";
+                font-weight: bold;
+                user-select: none;
+                height: 30px;
+                /*80 - 2*padding */
+                flex: 1;
+            }
 
-        .CONTAINERBUTTON:hover {
-            background-color: #303b4b;
-        }
-    </style>
-    <title>
-        HTMLtoHero
-    </title>
+            .CONTAINERBUTTON:hover {
+                background-color: #303b4b;
+            }
+
+            #PROFILEDATACENTER {
+                height: 150px;
+            }
+
+            #CONTINUECENTER {
+                height: calc(100% - 50px);
+            }
+
+            @media (max-width: 1100px) {
+                .PAGECONTAINERS {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .DATACONTAINERDATA,
+                .PROFILEDATACONTAINER,
+                .CONTINUECONTAINER,
+                .CONTINUE2CONTAINER {
+                    height: auto;
+                    width: auto;
+                    display: flex;
+                    flex-direction: column;
+                    border-radius: 0;
+                    padding-bottom: 5%;
+                }
+
+                .CONTAINERBUTTON {
+                    font-size: 100%;
+                }
+
+                #PROFILEDATACENTER {
+                    height: auto;
+                }
+
+                #CONTINUECENTER {
+                    height: auto;
+                }
+
+                .CONTAINERTITLE {
+                    font-size: 100%;
+                }
+            }
+        </style>
+        <title>
+            HTMLtoHero
+        </title>
 </head>
 
 <body>
-    
+
     <%- include("components/header") %>
 
-    <div class="PAGE">
-        <div class="PAGECONTAINERS">
-            <div class="PROFILEDATACONTAINER">
-                <div class="CENTER" style="height: 150px;">
-                    <svg id="PROFILEIMAGESVG" fill="#EF6E72" version="1.1" id="Capa_1"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100px"
-                        height="100px" viewBox="0 0 45.532 45.532" id="PROFILEIMAGE">
-                        <g>
-                            <circle cx="22.766" cy="22.766" r="17" fill="#ffffff" />
-                            <path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765
+        <div class="PAGE">
+            <div class="PAGECONTAINERS">
+                <div class="PROFILEDATACONTAINER">
+                    <div class="CENTER" id="PROFILEDATACENTER">
+                        <svg id="PROFILEIMAGESVG" fill="#EF6E72" version="1.1" id="Capa_1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100px"
+                            height="100px" viewBox="0 0 45.532 45.532" id="PROFILEIMAGE">
+                            <g>
+                                <circle cx="22.766" cy="22.766" r="17" fill="#ffffff" />
+                                <path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765
         S35.34,0.001,22.766,0.001z M22.766,6.808c4.16,0,7.531,3.372,7.531,7.53c0,4.159-3.371,7.53-7.531,7.53
         c-4.158,0-7.529-3.371-7.529-7.53C15.237,10.18,18.608,6.808,22.766,6.808z M22.761,39.579c-4.149,0-7.949-1.511-10.88-4.012
         c-0.714-0.609-1.126-1.502-1.126-2.439c0-4.217,3.413-7.592,7.631-7.592h8.762c4.219,0,7.619,3.375,7.619,7.592
         c0,0.938-0.41,1.829-1.125,2.438C30.712,38.068,26.911,39.579,22.761,39.579z" />
-                        </g>
-                    </svg>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="DATACONTAINERDATA"></div>
                 </div>
-                <div class="DATACONTAINERDATA"></div>
-            </div>
-            <div class="CONTINUECONTAINER">
-                <div class="CONTAINERTITLE" id="CONTINUECONTAINERTITLE"><%= t('profile.learningContainer.continueLearning')%></div>
-                <div class="CENTER" style="height: calc(100% - 50px);">
-                    <div class="CONTAINERBUTTONS" id="CONTINUECONTAINERBUTTONS"></div>
+                <div class="CONTINUECONTAINER">
+                    <div class="CONTAINERTITLE" id="CONTINUECONTAINERTITLE">
+                        <%= t('profile.learningContainer.continueLearning')%>
+                    </div>
+                    <div class="CENTER" id="CONTINUECENTER">
+                        <div class="CONTAINERBUTTONS" id="CONTINUECONTAINERBUTTONS"></div>
+                    </div>
+                </div>
+                <div class="CONTINUE2CONTAINER">
+                    <div class="CONTAINERTITLE" id="CONTINUE2CONTAINERTITLE">
+                        <%= t('profile.exercisingContainer.continueExercising')%>
+                    </div>
+                    <div class="CENTER" id="CONTINUECENTER">
+                        <div class="CONTAINERBUTTONS" id="CONTINUE2CONTAINERBUTTONS"></div>
+                    </div>
                 </div>
             </div>
-            <div class="CONTINUE2CONTAINER">
-                <div class="CONTAINERTITLE" id="CONTINUE2CONTAINERTITLE"><%= t('profile.exercisingContainer.continueExercising')%></div>
-                <div class="CENTER" style="height: calc(100% - 50px);">
-                    <div class="CONTAINERBUTTONS" id="CONTINUE2CONTAINERBUTTONS"></div>
-                </div>
-            </div>
+
+            <%- include('components/footer') %>
         </div>
 
-        <%- include('components/footer') %>
-    </div>
+        <script>
 
-    <script>
+            function getCookie(name) {
+                // Construct the cookie name as a search pattern
+                const cookiePattern = `${name}=`;
+                const cookies = document.cookie.split('; '); // Split cookies into individual parts
 
-        function getCookie(name) {
-            // Construct the cookie name as a search pattern
-            const cookiePattern = `${name}=`;
-            const cookies = document.cookie.split('; '); // Split cookies into individual parts
-
-            for (let cookie of cookies) {
-                if (cookie.startsWith(cookiePattern)) {
-                    // Extract the cookie value
-                    return decodeURIComponent(cookie.substring(cookiePattern.length));
+                for (let cookie of cookies) {
+                    if (cookie.startsWith(cookiePattern)) {
+                        // Extract the cookie value
+                        return decodeURIComponent(cookie.substring(cookiePattern.length));
+                    }
                 }
+
+                // Return null if cookie is not found
+                return null;
             }
 
-            // Return null if cookie is not found
-            return null;
-        }
+            function deleteCookie(cookieName) {
+                document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            }
 
-        function deleteCookie(cookieName) {
-            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-        }
+            document.addEventListener("DOMContentLoaded", (event) => { // Logout if password and email dont match ( prevent hacking accounts )
+                fetch("/api/getAccount", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email: getCookie("currentEmail"),
+                    })
+                }).then(response => response.json())
+                    .then(data => {
+                        if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
+                            deleteCookie("isLoggedIn");
+                            deleteCookie("currentEmail");
+                            deleteCookie("currentPassword");
+                            window.location.href = "/" + lang_code;
+                        }
+                    })
+            });
 
-        document.addEventListener("DOMContentLoaded", (event) => { // Logout if password and email dont match ( prevent hacking accounts )
+            let DATACONTAINERDATA = document.querySelector(".DATACONTAINERDATA");
+            let CONTINUECONTAINERBUTTONS = document.querySelector("#CONTINUECONTAINERBUTTONS");
+            let CONTINUE2CONTAINERBUTTONS = document.querySelector("#CONTINUE2CONTAINERBUTTONS");
             fetch("/api/getAccount", {
                 method: "POST",
                 headers: {
@@ -210,143 +285,121 @@
                 },
                 body: JSON.stringify({
                     email: getCookie("currentEmail"),
+                    password: getCookie("currentPassword")
                 })
-            }).then(response => response.json())
-                .then(data => {
-                    if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
-                        deleteCookie("isLoggedIn");
-                        deleteCookie("currentEmail");
-                        deleteCookie("currentPassword");
-                        window.location.href = "/" + lang_code;
+            }).then(response => response.json()).then(data => {
+                let name = document.createElement("div");
+                name.innerText = "<%= t('profile.profileContainer.name') %> : " + data.name;
+                let birth = document.createElement("div");
+                birth.innerText = "<%= t('profile.profileContainer.birthday') %> : " + data.birthyear + "-" + data.birthmonth + "-" + data.birthday;
+                let create = document.createElement("div");
+                create.innerText = "<%= t('profile.profileContainer.accountCreationDate') %> : " + data.createyear + "-" + data.createmonth + "-" + data.createday;
+                let level = document.createElement("div");
+                level.innerText = "<%= t('profile.profileContainer.level') %> : " + data.level;
+                let pointsRange = document.createElement("div");
+                pointsRange.classList.add("POINTSRANGE");
+                let pointsRangeBar = document.createElement("div");
+                pointsRangeBar.classList.add("POINTSRANGEBAR");
+                let pointsPercentage = (data.points / data.level);
+                pointsRangeBar.style.width = pointsPercentage + "%";
+                pointsRange.appendChild(pointsRangeBar);
+                let pointsRangePercentage = document.createElement("div");
+                pointsRangePercentage.classList.add("POINTSRANGEPERCENTAGE");
+                pointsRangePercentage.innerText = data.points + "/" + data.level * 100;
+                pointsRange.appendChild(pointsRangePercentage);
+
+                DATACONTAINERDATA.appendChild(name);
+                DATACONTAINERDATA.appendChild(birth);
+                DATACONTAINERDATA.appendChild(create);
+                DATACONTAINERDATA.appendChild(level);
+                DATACONTAINERDATA.appendChild(pointsRange);
+
+                let html = document.createElement("div");
+                html.classList.add("CONTAINERBUTTON");
+                html.innerText = "<%= t('profile.learningContainer.html') %>";
+                if (data.lastCheckedHtmlPageLink == "null") {
+                    html.onclick = () => {
+                        window.location.href = "/" + lang_code + "/tutorials/HTML";
                     }
-                })
-        });
+                } else {
+                    html.onclick = () => {
+                        window.location.href = "/" + lang_code + "/tutorials/HTML/" + data.lastCheckedHtmlPageLink;
+                    }
+                }
+                CONTINUECONTAINERBUTTONS.appendChild(html);
 
-        let DATACONTAINERDATA = document.querySelector(".DATACONTAINERDATA");
-        let CONTINUECONTAINERBUTTONS = document.querySelector("#CONTINUECONTAINERBUTTONS");
-        let CONTINUE2CONTAINERBUTTONS = document.querySelector("#CONTINUE2CONTAINERBUTTONS");
-        fetch("/api/getAccount", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email: getCookie("currentEmail"),
-                password: getCookie("currentPassword")
-            })
-        }).then(response => response.json()).then(data => {
-            let name = document.createElement("div");
-            name.innerText = "<%= t('profile.profileContainer.name') %> : " + data.name;
-            let birth = document.createElement("div");
-            birth.innerText = "<%= t('profile.profileContainer.birthday') %> : " + data.birthyear + "-" + data.birthmonth + "-" + data.birthday;
-            let create = document.createElement("div");
-            create.innerText = "<%= t('profile.profileContainer.accountCreationDate') %> : " + data.createyear + "-" + data.createmonth + "-" + data.createday;
-            let level = document.createElement("div");
-            level.innerText = "<%= t('profile.profileContainer.level') %> : " + data.level;
-            let pointsRange = document.createElement("div");
-            pointsRange.classList.add("POINTSRANGE");
-            let pointsRangeBar = document.createElement("div");
-            pointsRangeBar.classList.add("POINTSRANGEBAR");
-            let pointsPercentage = (data.points / data.level);
-            pointsRangeBar.style.width = pointsPercentage + "%";
-            pointsRange.appendChild(pointsRangeBar);
-            let pointsRangePercentage = document.createElement("div");
-            pointsRangePercentage.classList.add("POINTSRANGEPERCENTAGE");
-            pointsRangePercentage.innerText = data.points + "/" + data.level * 100;
-            pointsRange.appendChild(pointsRangePercentage);
+                let css = document.createElement("div");
+                css.classList.add("CONTAINERBUTTON");
+                css.innerText = "<%= t('profile.learningContainer.css') %>";
+                if (data.lastCheckedCssPageLink == "null") {
+                    css.onclick = () => {
+                        window.location.href = "/" + lang_code + "/tutorials/CSS";
+                    }
+                } else {
+                    css.onclick = () => {
+                        window.location.href = "/" + lang_code + "/tutorials/CSS/" + data.lastCheckedCssPageLink;
+                    }
+                }
+                CONTINUECONTAINERBUTTONS.appendChild(css);
 
-            DATACONTAINERDATA.appendChild(name);
-            DATACONTAINERDATA.appendChild(birth);
-            DATACONTAINERDATA.appendChild(create);
-            DATACONTAINERDATA.appendChild(level);
-            DATACONTAINERDATA.appendChild(pointsRange);
+                let js = document.createElement("div");
+                js.classList.add("CONTAINERBUTTON");
+                js.innerText = "<%= t('profile.learningContainer.js') %>";
+                if (data.lastCheckedJsPageLink == "null") {
+                    js.onclick = () => {
+                        window.location.href = "/" + lang_code + "/tutorials/JS";
+                    }
+                } else {
+                    js.onclick = () => {
+                        window.location.href = "/" + lang_code + "/tutorials/JS/" + data.lastCheckedJsPageLink;
+                    }
+                }
+                CONTINUECONTAINERBUTTONS.appendChild(js);
 
-            let html = document.createElement("div");
-            html.classList.add("CONTAINERBUTTON");
-            html.innerText = "<%= t('profile.learningContainer.html') %>";
-            if (data.lastCheckedHtmlPageLink == "null") {
-                html.onclick = () => {
-                    window.location.href = "/" + lang_code + "/tutorials/HTML";
+                let html2 = document.createElement("div");
+                html2.classList.add("CONTAINERBUTTON");
+                html2.innerText = "<%= t('profile.exercisingContainer.html') %>";
+                if (data.lastCheckedHtmlExerciseLink == "null") {
+                    html2.onclick = () => {
+                        window.location.href = "/" + lang_code + "/exercises/HTML";
+                    }
+                } else {
+                    html2.onclick = () => {
+                        window.location.href = "/" + lang_code + "/exercises/HTML/" + data.lastCheckedHtmlExerciseLink;
+                    }
                 }
-            } else {
-                html.onclick = () => {
-                    window.location.href = "/" + lang_code + "/tutorials/HTML/" + data.lastCheckedHtmlPageLink;
-                }
-            }
-            CONTINUECONTAINERBUTTONS.appendChild(html);
+                CONTINUE2CONTAINERBUTTONS.appendChild(html2);
 
-            let css = document.createElement("div");
-            css.classList.add("CONTAINERBUTTON");
-            css.innerText = "<%= t('profile.learningContainer.css') %>";
-            if (data.lastCheckedCssPageLink == "null") {
-                css.onclick = () => {
-                    window.location.href = "/" + lang_code + "/tutorials/CSS";
+                let css2 = document.createElement("div");
+                css2.classList.add("CONTAINERBUTTON");
+                css2.innerText = "<%= t('profile.exercisingContainer.css') %>";
+                if (data.lastCheckedCssExerciseLink == "null") {
+                    css2.onclick = () => {
+                        window.location.href = "/" + lang_code + "/exercises/CSS";
+                    }
+                } else {
+                    css2.onclick = () => {
+                        window.location.href = "/" + lang_code + "/exercises/CSS/" + data.lastCheckedCssExerciseLink;
+                    }
                 }
-            } else {
-                css.onclick = () => {
-                    window.location.href = "/" + lang_code + "/tutorials/CSS/" + data.lastCheckedCssPageLink;
-                }
-            }
-            CONTINUECONTAINERBUTTONS.appendChild(css);
+                CONTINUE2CONTAINERBUTTONS.appendChild(css2);
 
-            let js = document.createElement("div");
-            js.classList.add("CONTAINERBUTTON");
-            js.innerText = "<%= t('profile.learningContainer.js') %>";
-            if (data.lastCheckedJsPageLink == "null") {
-                js.onclick = () => {
-                    window.location.href = "/" + lang_code + "/tutorials/JS";
+                let js2 = document.createElement("div");
+                js2.classList.add("CONTAINERBUTTON");
+                js2.innerText = "<%= t('profile.exercisingContainer.js') %>";
+                if (data.lastCheckedJsExerciseLink == "null") {
+                    js2.onclick = () => {
+                        window.location.href = "/" + lang_code + "/exercises/JS";
+                    }
+                } else {
+                    js2.onclick = () => {
+                        window.location.href = "/" + lang_code + "/exercises/JS/" + data.lastCheckedJsExerciseLink;
+                    }
                 }
-            } else {
-                js.onclick = () => {
-                    window.location.href = "/" + lang_code + "/tutorials/JS/" + data.lastCheckedJsPageLink;
-                }
-            }
-            CONTINUECONTAINERBUTTONS.appendChild(js);
+                CONTINUE2CONTAINERBUTTONS.appendChild(js2);
+            });
 
-            let html2 = document.createElement("div");
-            html2.classList.add("CONTAINERBUTTON");
-            html2.innerText = "<%= t('profile.exercisingContainer.html') %>";
-            if (data.lastCheckedHtmlExerciseLink == "null") {
-                html2.onclick = () => {
-                    window.location.href = "/" + lang_code + "/exercises/HTML";
-                }
-            } else {
-                html2.onclick = () => {
-                    window.location.href = "/" + lang_code + "/exercises/HTML/" + data.lastCheckedHtmlExerciseLink;
-                }
-            }
-            CONTINUE2CONTAINERBUTTONS.appendChild(html2);
-
-            let css2 = document.createElement("div");
-            css2.classList.add("CONTAINERBUTTON");
-            css2.innerText = "<%= t('profile.exercisingContainer.css') %>";
-            if (data.lastCheckedCssExerciseLink == "null") {
-                css2.onclick = () => {
-                    window.location.href = "/" + lang_code + "/exercises/CSS";
-                }
-            } else {
-                css2.onclick = () => {
-                    window.location.href = "/" + lang_code + "/exercises/CSS/" + data.lastCheckedCssExerciseLink;
-                }
-            }
-            CONTINUE2CONTAINERBUTTONS.appendChild(css2);
-
-            let js2 = document.createElement("div");
-            js2.classList.add("CONTAINERBUTTON");
-            js2.innerText = "<%= t('profile.exercisingContainer.js') %>";
-            if (data.lastCheckedJsExerciseLink == "null") {
-                js2.onclick = () => {
-                    window.location.href = "/" + lang_code + "/exercises/JS";
-                }
-            } else {
-                js2.onclick = () => {
-                    window.location.href = "/" + lang_code + "/exercises/JS/" + data.lastCheckedJsExerciseLink;
-                }
-            }
-            CONTINUE2CONTAINERBUTTONS.appendChild(js2);
-        });
-
-    </script>
+        </script>
 </body>
 
 </html>
