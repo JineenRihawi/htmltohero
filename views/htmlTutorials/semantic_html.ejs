@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html dir="<%= t('direction') %>" lang="<%= lang %>">
 <head>
-    <%- include('../components/metadata_info')%>
+    <%- include('../components/metadata_info') %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
@@ -12,7 +12,7 @@
             height: 100%;
             width: 100%;
             overflow: hidden;
-            margin: 0%;
+            margin: 0;
         }
 
         .PAGE {
@@ -57,7 +57,7 @@
             color: white;
         }
 
-        #SIDEMENUBUTTON-22 {
+        #SIDEMENUBUTTON-40 {
             background-color: #684444;
             color: white;
         }
@@ -75,98 +75,102 @@
 <body>
     <%- include('../components/header') %>
     <div class="PAGE">
-            <%- include('../components/htmlTutorialsSideMenu') %>
+        <%- include('../components/htmlTutorialsSideMenu') %>
         <div class="BODY">
             <div class="BODYCONTENT">
-                <h1><%= t('htmlTutorials.chapter5.page4.title1') %></h1>
-                <p><%= t('htmlTutorials.chapter5.page4.paragraph1') %></p>
+                <h1><%= t('htmlTutorials.chapter9.page1.title1') %></h1>
+                <p><%= t('htmlTutorials.chapter9.page1.paragraph1') %></p>
+                <p><%= t('htmlTutorials.chapter9.page1.paragraph1a') %></p>
+                <p><%= t('htmlTutorials.chapter9.page1.paragraph1b') %></p>
 
                 <hr>
 
-                <h1><%= t('htmlTutorials.chapter5.page4.title2') %></h1>
-                <p><%= t('htmlTutorials.chapter5.page4.paragraph2') %></p>
+                <h1><%= t('htmlTutorials.chapter9.page1.title2') %></h1>
+                <p><%= t('htmlTutorials.chapter9.page1.paragraph2') %></p>
+                <p><%= t('htmlTutorials.chapter9.page1.paragraph2a') %></p>
                 <ul>
-                    <li><%= t('htmlTutorials.chapter5.page4.list1Item1') %></li>
-                    <li><%= t('htmlTutorials.chapter5.page4.list1Item2') %></li>
+                    <li><%= t('htmlTutorials.chapter9.page1.list1Item1') %></li>
+                    <li><%= t('htmlTutorials.chapter9.page1.list1Item2') %></li>
                 </ul>
-                <h3><%= t('htmlTutorials.chapter5.page4.codeTitle1') %></h3>
+                <h3><%= t('htmlTutorials.chapter9.page1.codeTitle1') %></h3>
                 <textarea id="CODE1">
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Nested List</title>
+    <title>Semantic HTML Example</title>
 </head>
 <body>
-    <h1>Travel Itinerary</h1>
-    <ul>
-        <li>Day 1
+    <header>
+        <h1>Welcome to My Website</h1>
+        <nav>
             <ul>
-                <li>Visit museum</li>
-                <li>City tour</li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-        </li>
-        <li>Day 2
-            <ul>
-                <li>Hiking</li>
-                <li>Dinner at local restaurant</li>
-            </ul>
-        </li>
-    </ul>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <h2>About Us</h2>
+            <p>This is the main content of the page.</p>
+        </article>
+    </main>
+    <footer>
+        <p>© 2025 My Website</p>
+    </footer>
 </body>
 </html>
                 </textarea>
 
                 <hr>
 
-                <h1><%= t('htmlTutorials.chapter5.page4.title3') %></h1>
-                <p><%= t('htmlTutorials.chapter5.page4.paragraph3') %></p>
-                <h3><%= t('htmlTutorials.chapter5.page4.codeTitle2') %></h3>
+                <h1><%= t('htmlTutorials.chapter9.page1.title3') %></h1>
+                <p><%= t('htmlTutorials.chapter9.page1.paragraph3') %></p>
+                <p><%= t('htmlTutorials.chapter9.page1.paragraph3a') %></p>
+                <h3><%= t('htmlTutorials.chapter9.page1.codeTitle2') %></h3>
                 <textarea id="CODE2">
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mixed Nested List</title>
+    <title>Non-Semantic HTML Example</title>
 </head>
 <body>
-    <h1>Study Guide</h1>
-    <ol>
-        <li>Mathematics
-            <ul>
-                <li>Algebra
-                    <ol>
-                        <li>Linear equations</li>
-                        <li>Quadratic equations</li>
-                    </ol>
-                </li>
-                <li>Geometry</li>
-            </ul>
-        </li>
-        <li>Science
-            <ul>
-                <li>Physics</li>
-                <li>Biology</li>
-            </ul>
-        </li>
-    </ol>
+    <div>
+        <h1>Welcome to My Website</h1>
+        <div>
+            <a href="#home">Home</a> |
+            <a href="#about">About</a> |
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+    <div>
+        <h2>About Us</h2>
+        <p>This is the main content of the page.</p>
+    </div>
+    <div>
+        <p>© 2025 My Website</p>
+    </div>
 </body>
 </html>
                 </textarea>
 
                 <div class="NOTE">
-                    <p><%= t('htmlTutorials.chapter5.page4.note1') %></p>
+                    <p><%= t('htmlTutorials.chapter9.page1.note1') %></p>
                 </div>
 
                 <hr>
 
-                <h1><%= t('htmlTutorials.chapter5.page4.title4') %></h1>
-                <p><%= t('htmlTutorials.chapter5.page4.paragraph4') %></p>
+                <h1><%= t('htmlTutorials.chapter9.page1.title4') %></h1>
+                <p><%= t('htmlTutorials.chapter9.page1.paragraph4') %></p>
+                <p><%= t('htmlTutorials.chapter9.page1.paragraph4a') %></p>
                 <ul>
-                    <li><%= t('htmlTutorials.chapter5.page4.list2Item1') %></li>
-                    <li><%= t('htmlTutorials.chapter5.page4.list2Item2') %></li>
+                    <li><%= t('htmlTutorials.chapter9.page1.list2Item1') %></li>
+                    <li><%= t('htmlTutorials.chapter9.page1.list2Item2') %></li>
                 </ul>
             </div>
             <div class="CHECKBAR">
@@ -193,7 +197,7 @@
             document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
         }
 
-        let page_link = 'nesting_lists';
+        let page_link = 'semantic_html';
 
         document.addEventListener("DOMContentLoaded", (event) => {
             fetch("/api/getAccount", {
@@ -241,7 +245,7 @@
             lineWrapping: true,
             readOnly: true,
         });
-        editor1.setSize(null, 410);
+        editor1.setSize(null, 470);
 
         var editor2 = CodeMirror.fromTextArea(document.getElementById("CODE2"), {
             lineNumbers: true,
@@ -252,17 +256,16 @@
             lineWrapping: true,
             readOnly: true,
         });
-        editor2.setSize(null, 480);
+        editor2.setSize(null, 410);
 
-        checkpage.addEventListener("change", (event) => {
+        checkpage.addEventListener("change", (e) => {
             if (checkpage.checked) {
                 checkpage.disabled = true;
                 const isLoggedIn = getCookie("isLoggedIn");
                 if (isLoggedIn === null || isLoggedIn == "false") {
-                    event.target.checked = false;
+                    e.target.checked = false;
                     window.location.href = "/" + lang_code + "/" + "login";
-                }
-                if (isLoggedIn == "true") {
+                } else {
                     fetch("/api/checkHtmlPage", {
                         method: "POST",
                         headers: {

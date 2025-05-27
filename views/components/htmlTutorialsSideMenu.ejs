@@ -56,35 +56,64 @@
     @media (max-width: 1100px) {
         .SIDEMENUCLOSE {
             display: block;
+            position: sticky;
         }
+
         .SIDEMENU {
             width: fit-content;
             display: none;
             position: absolute;
-            right: 100%;
             bottom: 0;
             top: 0;
-            left: 0;
             background-color: #fff0cc;
             z-index: 2;
-        }
-
-        .SIDEMENUOPENED {
-            display: block;
-            right: 50%;
         }
 
         .PAGE {
             display: block;
         }
 
-        .SIDEMENUOPENBUTTON {
-            position: relative;
-            top: 5px;
-            left: 5px;
-            display: block;
-            cursor: pointer;
-            width: fit-content;
+        :dir(ltr) {
+            .SIDEMENUOPENBUTTON {
+                position: absolute;
+                top: 85px;
+                left: 5px;
+                display: block;
+                cursor: pointer;
+                width: fit-content;
+            }
+
+            .SIDEMENUOPENED {
+                display: block;
+                right: 50%;
+            }
+
+            .SIDEMENU {
+                left: 0;
+                right: auto;
+            }
+        }
+
+        :dir(rtl) {
+            .SIDEMENUOPENBUTTON {
+                position: absolute;
+                top: 85px;
+                right: 5px;
+                display: block;
+                cursor: pointer;
+                width: fit-content;
+                transform: rotate(180deg);
+            }
+
+            .SIDEMENUOPENED {
+                display: block;
+                left: 50%;
+            }
+
+            .SIDEMENU {
+                right: 0;
+                left: auto;
+            }
         }
     }
 </style>
@@ -98,8 +127,8 @@
 <div class="SIDEMENU">
     <div class="SIDEMENUCLOSE">
         <svg width="30px" height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M8 10L8 14L6 14L-2.62268e-07 8L6 2L8 2L8 6L16 6L16 10L8 10Z" fill="#684444"/>
-</svg>
+            <path d="M8 10L8 14L6 14L-2.62268e-07 8L6 2L8 2L8 6L16 6L16 10L8 10Z" fill="#684444" />
+        </svg>
     </div>
     <div class="CHAPTER">
         <%= t('htmlTutorials.chapter1.title') %>
@@ -256,58 +285,73 @@
         <%= t('htmlTutorials.chapter9.title') %>
     </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/semantic_html';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-40"> Importance of semantic HTML</div>
+        id="SIDEMENUBUTTON-40"> <%= t('htmlTutorials.chapter9.page1.pageTitle') %>
+    </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/semantic_elements';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-41"> Semantic elements</div>
+        id="SIDEMENUBUTTON-41"> <%= t('htmlTutorials.chapter9.page2.pageTitle') %>
+    </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/non_semantic_html';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-42"> The &lt;div&gt; and &lt;span&gt; elements for non-semantic containers</div>
+        id="SIDEMENUBUTTON-42"> <%= t('htmlTutorials.chapter9.page3.pageTitle') %>
+    </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/quoting';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-43"> The &lt;blockquote&gt; and &lt;cite&gt; elements for quoting text</div>
+        id="SIDEMENUBUTTON-43"> <%= t('htmlTutorials.chapter9.page4.pageTitle') %>
+    </div>
 
     <div class="CHAPTER">
         <%= t('htmlTutorials.chapter10.title') %>
     </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/semantic_html5';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-44"> New semantic elements introduced in HTML5</div>
+        id="SIDEMENUBUTTON-44"> <%= t('htmlTutorials.chapter10.page1.pageTitle') %>
+    </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/canvas';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-45"> The &lt;canvas&gt; tag for drawing graphics</div>
+        id="SIDEMENUBUTTON-45"> <%= t('htmlTutorials.chapter10.page2.pageTitle') %>
+    </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/inputs';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-46"> HTML5 form input types: date, time, number, range, etc.</div>
+        id="SIDEMENUBUTTON-46"> <%= t('htmlTutorials.chapter10.page3.pageTitle') %>
+    </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/storage';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-47"> HTML5 local storage (using localStorage and sessionStorage)</div>
+        id="SIDEMENUBUTTON-47"> <%= t('htmlTutorials.chapter10.page4.pageTitle') %>
+    </div>
 
     <div class="CHAPTER">
         <%= t('htmlTutorials.chapter11.title') %>
     </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/entities';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-48"> What are HTML entities?</div>
+        id="SIDEMENUBUTTON-48"> <%= t('htmlTutorials.chapter11.page1.pageTitle') %>
+    </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/common_entities';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-49"> Common HTML entities</div>
+        id="SIDEMENUBUTTON-49"> <%= t('htmlTutorials.chapter11.page2.pageTitle') %>
+    </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/special_entities';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-50"> Displaying special characters in HTML using entities</div>
+        id="SIDEMENUBUTTON-50"> <%= t('htmlTutorials.chapter11.page3.pageTitle') %>
+    </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/utf8';" class="SIDEMENUBUTTON"
         id="SIDEMENUBUTTON-51">
-         Character encoding and its importance (UTF-8)</div>
+         <%= t('htmlTutorials.chapter11.page4.pageTitle') %>
+    </div>
 
     <div class="CHAPTER">
         <%= t('htmlTutorials.chapter12.title') %>
     </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/seo_heading';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-52"> Importance of heading tags for SEO</div>
+        id="SIDEMENUBUTTON-52"> <%= t('htmlTutorials.chapter12.page1.pageTitle') %>
+    </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/linking';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-53"> Using &lt;link&gt; for linking external resources like favicons</div>
+        id="SIDEMENUBUTTON-53"> <%= t('htmlTutorials.chapter12.page2.pageTitle') %>
+    </div>
 
     <div class="CHAPTER">
         <%= t('htmlTutorials.chapter13.title') %>
     </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/html_validator';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-54"> Introduction to HTML validators (e.g., W3C Validator)</div>
+        id="SIDEMENUBUTTON-54"> <%= t('htmlTutorials.chapter13.page1.pageTitle') %>
+    </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/html_errors';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-55"> Common HTML errors and how to fix them</div>
+        id="SIDEMENUBUTTON-55"> <%= t('htmlTutorials.chapter13.page2.pageTitle') %>
+    </div>
     <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/inspect';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-56"> Using browser developer tools to inspect and debug HTML</div>
-    <div onclick="window.location.href = '/<%= lang %>/tutorials/HTML/browser_compatibility';" class="SIDEMENUBUTTON"
-        id="SIDEMENUBUTTON-57"> Ensuring cross-browser compatibility</div>
+        id="SIDEMENUBUTTON-56"> <%= t('htmlTutorials.chapter13.page3.pageTitle') %>
+    </div>
 </div>
 
 <script>

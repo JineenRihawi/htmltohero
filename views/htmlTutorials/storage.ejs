@@ -12,7 +12,7 @@
             height: 100%;
             width: 100%;
             overflow: hidden;
-            margin: 0%;
+            margin: 0;
         }
 
         .PAGE {
@@ -27,7 +27,7 @@
             height: auto;
             padding: 30px;
             font-family: "Arial";
-            color: #1a202c;
+            color: #1a2028;
         }
 
         .BODY {
@@ -38,7 +38,7 @@
         }
 
         .BODYCONTENT h1 {
-            color: #445368;
+            color: #fdc535;
         }
 
         .BODYCONTENT h3 {
@@ -57,7 +57,7 @@
             color: white;
         }
 
-        #SIDEMENUBUTTON-33 {
+        #SIDEMENUBUTTON-47 {
             background-color: #684444;
             color: white;
         }
@@ -65,9 +65,9 @@
         .NOTE {
             background-color: #f0f4f8;
             padding: 15px;
-            border-left: 4px solid #d3d6db;
+            border-left: 4px solid #fdc535;
             margin: 20px 0;
-            font-style: normal;
+            font-style: italic;
         }
     </style>
     <title>HTMLtoHero</title>
@@ -75,149 +75,165 @@
 <body>
     <%- include('../components/header') %>
     <div class="PAGE">
-            <%- include('../components/htmlTutorialsSideMenu') %>
+        <%- include('../components/htmlTutorialsSideMenu') %>
         <div class="BODY">
             <div class="BODYCONTENT">
-                <h1><%= t('htmlTutorials.chapter7.page6.title1') %></h1>
-                <p><%= t('htmlTutorials.chapter7.page6.paragraph1') %></p>
-                <p><%= t('htmlTutorials.chapter7.page6.paragraph1a') %></p>
-                <p><%= t('htmlTutorials.chapter7.page6.paragraph1b') %></p>
+                <h1><%= t('htmlTutorials.chapter10.page4.title1') %></h1>
+                <p><%= t('htmlTutorials.chapter10.page4.paragraph1') %></p>
+                <p><%= t('htmlTutorials.chapter10.page4.paragraph1a') %></p>
+                <p><%= t('htmlTutorials.chapter10.page4.paragraph1b') %></p>
 
                 <hr>
 
-                <h1><%= t('htmlTutorials.chapter7.page6.title2') %></h1>
-                <p><%= t('htmlTutorials.chapter7.page6.paragraph2') %></p>
-                <p><%= t('htmlTutorials.chapter7.page6.paragraph2a') %></p>
-                <p><%= t('htmlTutorials.chapter7.page6.paragraph2b') %></p>
+                <h1><%= t('htmlTutorials.chapter10.page4.title2') %></h1>
+                <p><%= t('htmlTutorials.chapter10.page4.paragraph2') %></p>
+                <p><%= t('htmlTutorials.chapter10.page4.paragraph2a') %></p>
+                <p><%= t('htmlTutorials.chapter10.page4.paragraph2b') %></p>
                 <ul>
-                    <li><%= t('htmlTutorials.chapter7.page6.list1Item1') %></li>
-                    <li><%= t('htmlTutorials.chapter7.page6.list1Item2') %></li>
+                    <li><%= t('htmlTutorials.chapter10.page4.list1Item1') %></li>
+                    <li><%= t('htmlTutorials.chapter10.page4.list1Item2') %></li>
+                    <li><%= t('htmlTutorials.chapter10.page4.list1Item3') %></li>
                 </ul>
-                <h3><%= t('htmlTutorials.chapter7.page6.codeTitle1') %></h3>
+                <h3><%= t('htmlTutorials.chapter10.page4.codeTitle1') %></h3>
                 <textarea id="CODE1">
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Caption</title>
+    <title>Using localStorage</title>
 </head>
 <body>
-    <h1>Weekly Plan</h1>
-    <table>
-        <caption>Summary of Weekly Activities</caption>
-        <tr>
-            <th>Day</th>
-            <th>Task</th>
-        </tr>
-        <tr>
-            <td>Monday</td>
-            <td>Planning</td>
-        </tr>
-        <tr>
-            <td>Tuesday</td>
-            <td>Execution</td>
-        </tr>
-    </table>
+    <main>
+        <h1>User Preferences</h1>
+        <form>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+            <button type="button" onclick="saveUsername()">Save Username</button>
+        </form>
+        <p>Saved Username: <span id="saved-username"></span></p>
+        <script>
+            function saveUsername() {
+                const username = document.getElementById('username').value;
+                localStorage.setItem('username', username);
+                document.getElementById('saved-username').textContent = username;
+            }
+            window.onload = function() {
+                const savedUsername = localStorage.getItem('username');
+                if (savedUsername) {
+                    document.getElementById('saved-username').textContent = savedUsername;
+                }
+            };
+        </script>
+    </main>
 </body>
 </html>
                 </textarea>
 
                 <hr>
 
-                <h1><%= t('htmlTutorials.chapter7.page6.title3') %></h1>
-                <p><%= t('htmlTutorials.chapter7.page6.paragraph3') %></p>
-                <p><%= t('htmlTutorials.chapter7.page6.paragraph3a') %></p>
-                <p><%= t('htmlTutorials.chapter7.page6.paragraph3b') %></p>
-                <h3><%= t('htmlTutorials.chapter7.page6.codeTitle2') %></h3>
+                <h1><%= t('htmlTutorials.chapter10.page4.title3') %></h1>
+                <p><%= t('htmlTutorials.chapter10.page4.paragraph3') %></p>
+                <p><%= t('htmlTutorials.chapter10.page4.paragraph3a') %></p>
+                <p><%= t('htmlTutorials.chapter10.page4.paragraph3b') %></p>
+                <h3><%= t('htmlTutorials.chapter10.page4.codeTitle2') %></h3>
                 <textarea id="CODE2">
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Descriptive Caption</title>
+    <title>Using sessionStorage</title>
 </head>
 <body>
-    <h1>Sales Data</h1>
-    <table>
-        <caption>Monthly Sales Figures for Q1 2025</caption>
-        <tr>
-            <th>Month</th>
-            <th>Revenue</th>
-            <th>Units Sold</th>
-        </tr>
-        <tr>
-            <td>January</td>
-            <td>$10,000</td>
-            <td>200</td>
-        </tr>
-        <tr>
-            <td>February</td>
-            <td>$12,000</td>
-            <td>250</td>
-        </tr>
-        <tr>
-            <td>March</td>
-            <td>$15,000</td>
-            <td>300</td>
-        </tr>
-    </table>
+    <main>
+        <h1>Temporary Form Data</h1>
+        <form>
+            <label for="temp-data">Temporary Note:</label>
+            <input type="text" id="temp-data" name="temp-data">
+            <button type="button" onclick="saveTempData()">Save Note</button>
+        </form>
+        <p>Current Note: <span id="saved-note"></span></p>
+        <script>
+            function saveTempData() {
+                const tempData = document.getElementById('temp-data').value;
+                sessionStorage.setItem('tempNote', tempData);
+                document.getElementById('saved-note').textContent = tempData;
+            }
+            window.onload = function() {
+                const savedNote = sessionStorage.getItem('tempNote');
+                if (savedNote) {
+                    document.getElementById('saved-note').textContent = savedNote;
+                }
+            };
+        </script>
+    </main>
 </body>
 </html>
                 </textarea>
 
                 <hr>
 
-                <h1><%= t('htmlTutorials.chapter7.page6.title4') %></h1>
-                <p><%= t('htmlTutorials.chapter7.page6.paragraph4') %></p>
-                <p><%= t('htmlTutorials.chapter7.page6.paragraph4a') %></p>
-                <p><%= t('htmlTutorials.chapter7.page6.paragraph4b') %></p>
-                <h3><%= t('htmlTutorials.chapter7.page6.codeTitle3') %></h3>
+                <h1><%= t('htmlTutorials.chapter10.page4.title4') %></h1>
+                <p><%= t('htmlTutorials.chapter10.page4.paragraph4') %></p>
+                <p><%= t('htmlTutorials.chapter10.page4.paragraph4a') %></p>
+                <p><%= t('htmlTutorials.chapter10.page4.paragraph4b') %></p>
+                <h3><%= t('htmlTutorials.chapter10.page4.codeTitle3') %></h3>
                 <textarea id="CODE3">
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caption with Complex Table</title>
+    <title>Clearing Storage</title>
 </head>
 <body>
-    <h1>Employee Performance</h1>
-    <table>
-        <caption>Performance Metrics for Team Members, Q1 2025</caption>
-        <tr>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Score</th>
-        </tr>
-        <tr>
-            <td>Alice</td>
-            <td>Developer</td>
-            <td>85</td>
-        </tr>
-        <tr>
-            <td>Bob</td>
-            <td>Designer</td>
-            <td>90</td>
-        </tr>
-    </table>
+    <main>
+        <h1>Manage Storage</h1>
+        <form>
+            <label for="theme">Theme Preference:</label>
+            <input type="text" id="theme" name="theme">
+            <button type="button" onclick="saveTheme()">Save Theme</button>
+            <button type="button" onclick="clearStorage()">Clear Storage</button>
+        </form>
+        <p>Saved Theme: <span id="saved-theme"></span></p>
+        <script>
+            function saveTheme() {
+                const theme = document.getElementById('theme').value;
+                localStorage.setItem('theme', theme);
+                document.getElementById('saved-theme').textContent = theme;
+            }
+            function clearStorage() {
+                localStorage.removeItem('theme');
+                document.getElementById('saved-theme').textContent = '';
+            }
+            window.onload = function() {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme) {
+                    document.getElementById('saved-theme').textContent = savedTheme;
+                }
+            };
+        </script>
+    </main>
 </body>
 </html>
                 </textarea>
 
                 <div class="NOTE">
-                    <p><%= t('htmlTutorials.chapter7.page6.note1') %></p>
+                    <p><%= t('htmlTutorials.chapter10.page4.note1') %></p>
                 </div>
 
                 <hr>
 
-                <h1><%= t('htmlTutorials.chapter7.page6.title5') %></h1>
-                <p><%= t('htmlTutorials.chapter7.page6.paragraph5') %></p>
-                <p><%= t('htmlTutorials.chapter7.page6.paragraph5a') %></p>
+                <h1><%= t('htmlTutorials.chapter10.page4.title5') %></h1>
+                <p><%= t('htmlTutorials.chapter10.page4.paragraph5') %></p>
+                <p><%= t('htmlTutorials.chapter10.page4.paragraph5a') %></p>
+                <p><%= t('htmlTutorials.chapter10.page4.paragraph5b') %></p>
                 <ul>
-                    <li><%= t('htmlTutorials.chapter7.page6.list2Item1') %></li>
-                    <li><%= t('htmlTutorials.chapter7.page6.list2Item2') %></li>
+                    <li><%= t('htmlTutorials.chapter10.page4.list2Item1') %></li>
+                    <li><%= t('htmlTutorials.chapter10.page4.list2Item2') %></li>
+                    <li><%= t('htmlTutorials.chapter10.page4.list2Item3') %></li>
+                    <li><%= t('htmlTutorials.chapter10.page4.list2Item4') %></li>
                 </ul>
             </div>
             <div class="CHECKBAR">
@@ -244,7 +260,7 @@
             document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
         }
 
-        let page_link = 'table_caption';
+        let page_link = 'storage';
 
         document.addEventListener("DOMContentLoaded", (event) => {
             fetch("/api/getAccount", {
@@ -292,7 +308,7 @@
             lineWrapping: true,
             readOnly: true,
         });
-        editor1.setSize(null, 420);
+        editor1.setSize(null, 510);
 
         var editor2 = CodeMirror.fromTextArea(document.getElementById("CODE2"), {
             lineNumbers: true,
@@ -303,7 +319,7 @@
             lineWrapping: true,
             readOnly: true,
         });
-        editor2.setSize(null, 540);
+        editor2.setSize(null, 510);
 
         var editor3 = CodeMirror.fromTextArea(document.getElementById("CODE3"), {
             lineNumbers: true,
@@ -314,17 +330,16 @@
             lineWrapping: true,
             readOnly: true,
         });
-        editor3.setSize(null, 470);
+        editor3.setSize(null, 600);
 
-        checkpage.addEventListener("change", (event) => {
+        checkpage.addEventListener("change", (e) => {
             if (checkpage.checked) {
                 checkpage.disabled = true;
                 const isLoggedIn = getCookie("isLoggedIn");
                 if (isLoggedIn === null || isLoggedIn == "false") {
-                    event.target.checked = false;
+                    e.target.checked = false;
                     window.location.href = "/" + lang_code + "/" + "login";
-                }
-                if (isLoggedIn == "true") {
+                } else {
                     fetch("/api/checkHtmlPage", {
                         method: "POST",
                         headers: {

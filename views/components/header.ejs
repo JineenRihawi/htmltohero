@@ -75,12 +75,18 @@
         align-items: center;
     }
 
-    .HEADERSEARCH {
+    .HEADERSEARCH,
+    .HEADERSIDEMENUSEARCH {
         margin: 10px;
         border-radius: 500px;
         border: none;
         width: 250px;
         font-size: 20px;
+    }
+
+    .HEADERSIDEMENUSEARCH {
+        width: 96%;
+        padding: 2%;
     }
 
     .HEADERSEARCH:enabled {
@@ -122,16 +128,31 @@
         fill: #ef9d6e;
     }
 
-    .HEADERSIDEMENU {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        top: 0;
-        left: 100%;
-        background-color: #fff0cc;
-        z-index: 2;
-        transition: left 0.5s;
+    :dir(rtl) {
+        .HEADERSIDEMENU {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            top: 0;
+            right: 100%;
+            background-color: #fff0cc;
+            z-index: 2;
+        }
     }
+
+    :dir(ltr) {
+        .HEADERSIDEMENU {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            left: 100%;
+            background-color: #fff0cc;
+            z-index: 2;
+        }
+    }
+
+
 
     .HEADERSIDEMENUCONTENT {
         display: none;
@@ -139,8 +160,17 @@
         overflow-y: scroll;
     }
 
-    .HEADERSIDEMENUOPENED {
-        left: 50%;
+
+    :dir(rtl) {
+        .HEADERSIDEMENUOPENED {
+            right: 50%;
+        }
+    }
+
+    :dir(ltr) {
+        .HEADERSIDEMENUOPENED {
+            left: 50%;
+        }
     }
 
     .HEADERSIDEMENUCLOSE {
@@ -180,8 +210,16 @@
     }
 
     @media (min-width: 1100px) {
-        .HEADERSIDEMENUOPENED {
-            left: 100%;
+        :dir(rtl) {
+            .HEADERSIDEMENUOPENED {
+                right: 100%;
+            }
+        }
+
+        :dir(ltr) {
+            .HEADERSIDEMENUOPENED {
+                left: 100%;
+            }
         }
     }
 
@@ -200,8 +238,16 @@
     }
 
     @media (max-width: 500px) {
-        .HEADERSIDEMENUOPENED {
-            left: 0;
+        :dir(rtl) {
+            .HEADERSIDEMENUOPENED {
+                right: 0;
+            }
+        }
+
+        :dir(ltr) {
+            .HEADERSIDEMENUOPENED {
+                left: 0;
+            }
         }
     }
 </style>
@@ -209,29 +255,30 @@
 <div class="HEADERSIDEMENU">
     <div class="HEADERSIDEMENUCONTENT">
         <div class="HEADERSIDEMENUCLOSE">X</div>
+        <input class="HEADERSIDEMENUSEARCH" type="search" placeholder=" <%= t('header.search') %> ">
         <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENUTUTORIALSHTML">
             <%= t('header.html') %>
-                <%= t('header.htmlTutorials') %>
+                ( - <%= t('header.htmlTutorials') %> )
         </div>
         <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENUEXERCISESHTML">
             <%= t('header.html') %>
-                <%= t('header.htmlExercises') %>
+                ( - <%= t('header.htmlExercises') %> )
         </div>
         <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENUTUTORIALSCSS">
             <%= t('header.css') %>
-                <%= t('header.cssTutorials') %>
+                ( - <%= t('header.cssTutorials') %> )
         </div>
         <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENUEXERCISESCSS">
             <%= t('header.css') %>
-                <%= t('header.cssExercises') %>
+                ( - <%= t('header.cssExercises') %> )
         </div>
         <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENUTUTORIALSJS">
             <%= t('header.js') %>
-                <%= t('header.jsTutorials') %>
+                ( - <%= t('header.jsTutorials') %> )
         </div>
         <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENUEXERCISESJS">
             <%= t('header.js') %>
-                <%= t('header.jsExercises') %>
+                ( - <%= t('header.jsExercises') %> )
         </div>
         <div class="HEADERSIDEMENUBUTTON" id="HEADERSIDEMENUCODEEDITOR">
             <%= t('header.codeEditor') %>
@@ -387,7 +434,15 @@
     })
 
     let SEARCHBAR = document.querySelector(".HEADERSEARCH")
+    let HEADERSIDEMENUSEARCH = document.querySelector(".HEADERSIDEMENUSEARCH")
     SEARCHBAR.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            if (event.target.value.length > 0) {
+                window.location.href = "/" + lang_code + "/" + "search/" + event.target.value;
+            }
+        }
+    })
+    HEADERSIDEMENUSEARCH.addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
             if (event.target.value.length > 0) {
                 window.location.href = "/" + lang_code + "/" + "search/" + event.target.value;
