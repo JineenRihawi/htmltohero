@@ -482,6 +482,33 @@ app.get("/:lang/tutorials/css", (req, res) => {
     }
 });
 
+app.get("/:lang/tutorials/css/:page", (req, res) => {
+
+    try {
+        const lang = req.params.lang;
+        const page = req.params.page;
+        const viewPath = path.join(__dirname, "views", "cssTutorials", page + ".ejs");
+        if (!fs.existsSync(viewPath)) {
+            return res.redirect("/404");
+        }
+
+
+        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+            return res.redirect("/404")
+        }
+
+        t = i18n.getFixedT(lang);
+
+        res.render(`cssTutorials/${page}`, {
+            t,
+            lang
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 app.get("/:lang/codeeditor", (req, res) => {
 
     try {

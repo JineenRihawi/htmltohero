@@ -1,68 +1,215 @@
-<div class="CHAPTER">Chapter 1: Introduction to CSS</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-1"> What is CSS?</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/css_use';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-2"> Why we use it (separation of structure and style)</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/css_apply';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-3"> Ways to apply CSS: Inline, Internal, External</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/syntax';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-4"> CSS Syntax and Comments</div>
+<style>
+    .CHAPTER {
+        padding: 10px 10px 0 10px;
+        color: #684444;
+        background-color: #fff0cc;
+        font-size: 14px;
+        font-family: "Arial";
+        font-weight: bold;
+    }
 
-<div class="CHAPTER">Chapter 2: Selectors and Colors</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/basic_selectors';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-5"> Basic Selectors: Element, Class, ID</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/grouping_selectors';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-6"> Grouping & Combinator Selectors</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/attr_selectors';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-7"> Attribute Selectors</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/colors';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-8"> Color Formats: HEX, RGB, HSL, rgba, hsla</div>
+    .SIDEMENUBUTTON:hover {
+        background-color: #fee9b6;
+    }
 
-<div class="CHAPTER">Chapter 3: Text and Fonts</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/font';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-9"> Font Family, Size, Weight, Style</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/text';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-10"> Text Alignment, Decoration, Transform</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/line_height';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-11"> Line Height, Letter Spacing</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/google_fonts';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-12"> Using Google Fonts and @font-face</div>
+    .SIDEMENU {
+        height: 100%;
+        width: 100%;
+        overflow-y: scroll;
+        background-color: #fff0cc;
+    }
 
-<div class="CHAPTER">Chapter 4: The Box Model</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/box_model';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-13"> Understanding Box Model: Content, Padding, Border, Margin</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/box_sizing';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-14"> box-sizing Property</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/outline_borders';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-15"> Outline vs Border</div>
+    .SIDEMENUBUTTON {
+        padding: 10px;
+        color: #445368;
+        background-color: #fff0cc;
+        font-size: 14px;
+        font-family: "Arial";
+        font-weight: bold;
+        user-select: none;
+        cursor: pointer;
+    }
 
-<div class="CHAPTER">Chapter 5: Backgrounds and Borders</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/background';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-16"> background-color, background-image</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/background_properties';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-17"> Background Repeat, Size, Position</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/gradients';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-18"> Gradients</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/border_style';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-19"> Border Style, Width, Radius</div>
+    .SIDEMENUOPENBUTTON {
+        display: none;
+    }
 
-<div class="CHAPTER">Chapter 6: Display, Position, and Z-Index</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/display';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-20"> display: block, inline, inline-block, none</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/visibility';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-21"> visibility, opacity, overflow</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/positioning';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-22"> Positioning: static, relative, absolute, fixed, sticky</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/z_index';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-23"> z-index and stacking</div>
+    .SIDEMENUCLOSE {
+        display: none;
+        position: relative;
+        top: 0;
+        right: 0;
+        font-size: 100%;
+        user-select: none;
+        padding: 5%;
+        font-family: "Arial";
+        font-weight: bold;
+        color: #445368;
+        cursor: pointer;
+        width: fit-content;
+    }
 
-<div class="CHAPTER">Chapter 7: Flexbox Layout</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/flexbox';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-24"> Introduction to Flexbox</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/flex_container';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-25"> Flex Container & Flex Items</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/aligning';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-26"> justify-content, align-items, flex-direction</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/wrap';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-27"> Flex Wrap, Order, grow/shrink</div>
+    :dir(rtl) {
+        .SIDEMENUCLOSE {
+            transform: rotate(180deg);
+        }
+    }
 
-<div class="CHAPTER">Chapter 8: CSS Grid Layout</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/grid';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-28"> Grid Container & Grid Items</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/grid_layout';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-29"> Defining Rows, Columns, Gaps</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/grid_areas';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-30"> Grid Areas and Template Layouts</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/grid_alignment';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-31"> Auto-Placement & Alignment</div>
+    @media (max-width: 1100px) {
+        .SIDEMENUCLOSE {
+            display: block;
+            position: sticky;
+        }
 
-<div class="CHAPTER">Chapter 9: Responsive Design</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/media_queries';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-32"> Media Queries (min-width, max-width)</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/mobile_first_approach';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-33"> Mobile-First Approach</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/viewport';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-34"> Viewport Units (vw, vh), %, em, rem</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/responsive_images';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-35"> Responsive Images & Elements</div>
+        .SIDEMENU {
+            width: fit-content;
+            display: none;
+            position: absolute;
+            bottom: 0;
+            top: 0;
+            background-color: #fff0cc;
+            z-index: 2;
+        }
 
-<div class="CHAPTER">Chapter 10: Transitions, Transforms, and Animations</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/transition';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-36"> CSS Transitions & Timing Functions</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/2d_transforms';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-37"> 2D Transforms: scale, rotate, translate, skew</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/animations_keyframes';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-38"> Animations with @keyframes</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/combining_animations';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-39"> Combining Animations & Transforms</div>
+        .PAGE {
+            display: block;
+        }
 
-<div class="CHAPTER">Chapter 11: Pseudo-classes and Pseudo-elements</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/pseudo_classes';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-40"> Pseudo-classes: :hover, :active, :nth-child, :not</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/pseudo_elements';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-41"> Pseudo-elements: ::before, ::after</div>
+        :dir(ltr) {
+            .SIDEMENUOPENBUTTON {
+                position: absolute;
+                top: 85px;
+                left: 5px;
+                display: block;
+                cursor: pointer;
+                width: fit-content;
+            }
 
-<div class="CHAPTER">Chapter 12: Modern CSS and Best Practices</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/variables';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-42"> CSS Variables (Custom Properties)</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/calculations';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-43"> calc(), clamp(), min(), max()</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/logical_properties';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-44"> Logical Properties (margin-inline, etc.)</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/bem_naming';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-45"> BEM Naming Convention Basics</div>
+            .SIDEMENUOPENED {
+                display: block;
+                right: 50%;
+            }
+
+            .SIDEMENU {
+                left: 0;
+                right: auto;
+            }
+        }
+
+        :dir(rtl) {
+            .SIDEMENUOPENBUTTON {
+                position: absolute;
+                top: 85px;
+                right: 5px;
+                display: block;
+                cursor: pointer;
+                width: fit-content;
+                transform: rotate(180deg);
+            }
+
+            .SIDEMENUOPENED {
+                display: block;
+                left: 50%;
+            }
+
+            .SIDEMENU {
+                right: 0;
+                left: auto;
+            }
+        }
+    }
+</style>
+
+<div class="SIDEMENUOPENBUTTON">
+    <svg width="30px" height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 6L8 2L10 2L16 8L10 14L8 14L8 10L-1.74845e-07 10L-3.01991e-07 6L8 6Z" fill="#684444" />
+    </svg>
+</div>
+
+<div class="SIDEMENU">
+    <div class="SIDEMENUCLOSE">
+        <svg width="30px" height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 10L8 14L6 14L-2.62268e-07 8L6 2L8 2L8 6L16 6L16 10L8 10Z" fill="#684444" />
+        </svg>
+    </div>
+    <div class="CHAPTER"><%= t('cssTutorials.chapter1.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-1"> <%= t('cssTutorials.chapter1.page1.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/css_use';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-2"> <%= t('cssTutorials.chapter1.page2.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/css_apply';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-3"> <%= t('cssTutorials.chapter1.page3.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/syntax';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-4"> <%= t('cssTutorials.chapter1.page4.pageTitle') %></div>
+
+    <div class="CHAPTER"><%= t('cssTutorials.chapter2.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/basic_selectors';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-5"> <%= t('cssTutorials.chapter2.page1.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/grouping_selectors';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-6"> <%= t('cssTutorials.chapter2.page2.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/attr_selectors';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-7"> <%= t('cssTutorials.chapter2.page3.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/colors';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-8"> <%= t('cssTutorials.chapter2.page4.pageTitle') %></div>
+
+    <div class="CHAPTER"><%= t('cssTutorials.chapter3.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/font';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-9"> <%= t('cssTutorials.chapter3.page1.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/text';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-10"> <%= t('cssTutorials.chapter3.page2.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/line_height';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-11"> <%= t('cssTutorials.chapter3.page3.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/google_fonts';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-12"> <%= t('cssTutorials.chapter3.page4.pageTitle') %></div>
+
+    <div class="CHAPTER"><%= t('cssTutorials.chapter4.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/box_model';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-13"> Understanding Box Model: Content, Padding, Border, Margin</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/box_sizing';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-14"> box-sizing Property</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/outline_borders';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-15"> Outline vs Border</div>
+
+    <div class="CHAPTER"><%= t('cssTutorials.chapter5.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/background';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-16"> background-color, background-image</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/background_properties';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-17"> Background Repeat, Size, Position</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/gradients';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-18"> Gradients</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/border_style';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-19"> Border Style, Width, Radius</div>
+
+    <div class="CHAPTER"><%= t('cssTutorials.chapter6.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/display';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-20"> display: block, inline, inline-block, none</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/visibility';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-21"> visibility, opacity, overflow</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/positioning';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-22"> Positioning: static, relative, absolute, fixed, sticky</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/z_index';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-23"> z-index and stacking</div>
+
+    <div class="CHAPTER"><%= t('cssTutorials.chapter7.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/flexbox';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-24"> Introduction to Flexbox</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/flex_container';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-25"> Flex Container & Flex Items</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/aligning';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-26"> justify-content, align-items, flex-direction</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/wrap';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-27"> Flex Wrap, Order, grow/shrink</div>
+
+    <div class="CHAPTER"><%= t('cssTutorials.chapter8.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/grid';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-28"> Grid Container & Grid Items</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/grid_layout';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-29"> Defining Rows, Columns, Gaps</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/grid_areas';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-30"> Grid Areas and Template Layouts</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/grid_alignment';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-31"> Auto-Placement & Alignment</div>
+
+    <div class="CHAPTER"><%= t('cssTutorials.chapter9.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/media_queries';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-32"> Media Queries (min-width, max-width)</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/mobile_first_approach';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-33"> Mobile-First Approach</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/viewport';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-34"> Viewport Units (vw, vh), %, em, rem</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/responsive_images';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-35"> Responsive Images & Elements</div>
+
+    <div class="CHAPTER"><%= t('cssTutorials.chapter10.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/transition';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-36"> CSS Transitions & Timing Functions</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/2d_transforms';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-37"> 2D Transforms: scale, rotate, translate, skew</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/animations_keyframes';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-38"> Animations with @keyframes</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/combining_animations';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-39"> Combining Animations & Transforms</div>
+
+    <div class="CHAPTER"><%= t('cssTutorials.chapter11.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/pseudo_classes';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-40"> Pseudo-classes: :hover, :active, :nth-child, :not</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/pseudo_elements';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-41"> Pseudo-elements: ::before, ::after</div>
+
+    <div class="CHAPTER"><%= t('cssTutorials.chapter12.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/variables';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-42"> CSS Variables (Custom Properties)</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/calculations';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-43"> calc(), clamp(), min(), max()</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/logical_properties';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-44"> Logical Properties (margin-inline, etc.)</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/CSS/bem_naming';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-45"> BEM Naming Convention Basics</div>
+</div>
+
+<script>
+    let SIDEMENUOPENBUTTON = document.querySelector(".SIDEMENUOPENBUTTON");
+    let SIDEMENU = document.querySelector(".SIDEMENU");
+    SIDEMENUOPENBUTTON.addEventListener("click", (event) => {
+        SIDEMENU.classList.add("SIDEMENUOPENED");
+    })
+    let SIDEMENUCLOSE = document.querySelector(".SIDEMENUCLOSE");
+    SIDEMENUCLOSE.addEventListener("click", (event) => {
+        SIDEMENU.classList.remove("SIDEMENUOPENED");
+    })
+</script>
