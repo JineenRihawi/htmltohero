@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html dir="<%= t('direction') %>" lang="<%= lang %>">
+
+<head>
+    <%- include('../components/metadata_info') %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/javascript/javascript.min.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .PAGE {
+            width: 100%;
+            height: calc(100% - 80px);
+            display: grid;
+            grid-template-columns: 25% 75%;
+        }
+
+        .BODYCONTENT {
+            width: calc(100% - 60px);
+            height: auto;
+            padding: 30px;
+            font-family: "Arial";
+            color: #1a2028;
+        }
+
+        .BODY {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .BODYCONTENT h1 {
+            color: #fdc535;
+        }
+
+        #SIDEMENUBUTTON-30 {
+            background-color: #684444;
+            color: white;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 300px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            width: 33.33%;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .note {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #fdc535;
+            margin: 20px 0;
+        }
+
+        .CodeMirror {
+            background: #282a36 !important;
+            color: #f8f8f2 !important;
+            border: 1px solid #44475a;
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+        }
+
+        .CodeMirror-gutters {
+            background: #282a36 !important;
+            border-right: 1px solid #44475a;
+        }
+
+        @media screen and (max-width: 600px) {
+            th, td {
+                padding: 6px;
+                font-size: 14px;
+            }
+        }
+    </style>
+    <title>HTMLtoHero</title>
+</head>
+
+<body>
+    <%- include('../components/header') %>
+
+    <div class="PAGE">
+        <%- include('../components/cssTutorialsSideMenu') %>
+        <div class="BODY">
+            <div class="BODYCONTENT">
+                <h1><%= t('cssTutorials.chapter8.page3.pageTitle') %></h1>
+                <p><%= t('cssTutorials.chapter8.page3.paragraph1') %></p>
+                <p><%= t('cssTutorials.chapter8.page3.paragraph2') %></p>
+                <ul>
+                    <li><%= t('cssTutorials.chapter8.page3.listItem1') %></li>
+                    <li><%= t('cssTutorials.chapter8.page3.listItem2') %></li>
+                    <li><%= t('cssTutorials.chapter8.page3.listItem3') %></li>
+                </ul>
+                <hr>
+                
+                <h1><%= t('cssTutorials.chapter8.page3.title1') %></h1>
+                <p><%= t('cssTutorials.chapter8.page3.paragraph3') %></p>
+                <h3><%= t('cssTutorials.chapter8.page3.codeTitle1') %></h3>
+                <textarea id="CODE1">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Areas Example</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: 100px 200px 100px;
+            gap: 10px;
+            background-color: #e0f7fa;
+            padding: 15px;
+            margin: 20px;
+            border: 3px solid #0288d1;
+            grid-template-areas:
+                "header header header"
+                "sidebar main main"
+                "footer footer footer";
+        }
+        .grid-item {
+            background-color: #4fc3f7;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .header { grid-area: header; }
+        .sidebar { grid-area: sidebar; }
+        .main { grid-area: main; }
+        .footer { grid-area: footer; }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid-item header">Header</div>
+        <div class="grid-item sidebar">Sidebar</div>
+        <div class="grid-item main">Main Content</div>
+        <div class="grid-item footer">Footer</div>
+    </div>
+</body>
+</html>
+                </textarea>
+
+                <h1><%= t('cssTutorials.chapter8.page3.title2') %></h1>
+                <p><%= t('cssTutorials.chapter8.page3.paragraph4') %></p>
+                <h3><%= t('cssTutorials.chapter8.page3.codeTitle2') %></h3>
+                <textarea id="CODE2">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complex Grid Template Layout</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: 150px 1fr 150px;
+            grid-template-rows: 80px 1fr 80px;
+            gap: 15px;
+            background-color: #f3e5f5;
+            padding: 15px;
+            margin: 20px;
+            border: 3px solid #8e24aa;
+            grid-template-areas:
+                "nav nav nav"
+                "aside content ads"
+                "footer footer footer";
+        }
+        .grid-item {
+            background-color: #ce93d8;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .nav { grid-area: nav; }
+        .aside { grid-area: aside; }
+        .content { grid-area: content; }
+        .ads { grid-area: ads; }
+        .footer { grid-area: footer; }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid-item nav">Navigation</div>
+        <div class="grid-item aside">Sidebar</div>
+        <div class="grid-item content">Main Content</div>
+        <div class="grid-item ads">Advertisements</div>
+        <div class="grid-item footer">Footer</div>
+    </div>
+</body>
+</html>
+                </textarea>
+
+                <div class="note">
+                    <p><%= t('cssTutorials.chapter8.page3.note') %></p>
+                </div>
+
+                <h3><%= t('cssTutorials.chapter8.page3.tableTitle') %></h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th><%= t('cssTutorials.chapter8.page3.tableHeader1') %></th>
+                            <th><%= t('cssTutorials.chapter8.page3.tableHeader2') %></th>
+                            <th><%= t('cssTutorials.chapter8.page3.tableHeader3') %></th>
+                        </tr>
+                        <tr>
+                            <td><%= t('cssTutorials.chapter8.page3.tableRow1Col1') %></td>
+                            <td><%= t('cssTutorials.chapter8.page3.tableRow1Col2') %></td>
+                            <td><%= t('cssTutorials.chapter8.page3.tableRow1Col3') %></td>
+                        </tr>
+                        <tr>
+                            <td><%= t('cssTutorials.chapter8.page3.tableRow2Col1') %></td>
+                            <td><%= t('cssTutorials.chapter8.page3.tableRow2Col2') %></td>
+                            <td><%= t('cssTutorials.chapter8.page3.tableRow2Col3') %></td>
+                        </tr>
+                        <tr>
+                            <td><%= t('cssTutorials.chapter8.page3.tableRow3Col1') %></td>
+                            <td><%= t('cssTutorials.chapter8.page3.tableRow3Col2') %></td>
+                            <td><%= t('cssTutorials.chapter8.page3.tableRow3Col3') %></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <%- include('../components/cssTutorialsCheckbar', { page_link: 'grid_areas' }) %>
+
+            <%- include('../components/footer') %>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        function getCookie(name) {
+            const cookiePattern = `${name}=`;
+            const cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                if (cookie.startsWith(cookiePattern)) {
+                    return decodeURIComponent(cookie.substring(cookiePattern.length));
+                }
+            }
+            return null;
+        }
+
+        function deleteCookie(cookieName) {
+            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        }
+
+        var editor = CodeMirror.fromTextArea(document.getElementById("CODE1"), {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
+            readOnly: true,
+        });
+        editor.setSize(null, 700);
+
+        var editor2 = CodeMirror.fromTextArea(document.getElementById("CODE2"), {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
+            readOnly: true,
+        });
+        editor2.setSize(null, 730);
+    </script>
+</body>
+
+</html>

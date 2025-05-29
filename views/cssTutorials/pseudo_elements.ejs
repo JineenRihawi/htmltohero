@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html dir="<%= t('direction') %>" lang="<%= lang %>">
+
+<head>
+    <%- include('../components/metadata_info') %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/javascript/javascript.min.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .PAGE {
+            width: 100%;
+            height: calc(100% - 80px);
+            display: grid;
+            grid-template-columns: 25% 75%;
+        }
+
+        .BODYCONTENT {
+            width: calc(100% - 60px);
+            height: auto;
+            padding: 30px;
+            font-family: "Arial";
+            color: #1a2028;
+        }
+
+        .BODY {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .BODYCONTENT h1 {
+            color: #fdc535;
+        }
+
+        #SIDEMENUBUTTON-41 {
+            background-color: #684444;
+            color: white;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 300px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            width: 33.33%;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .note {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #fdc535;
+            margin: 20px 0;
+        }
+
+        .CodeMirror {
+            background: #282a36 !important;
+            color: #f8f8f2 !important;
+            border: 1px solid #44475a;
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+        }
+
+        .CodeMirror-gutters {
+            background: #282a36 !important;
+            border-right: 1px solid #44475a;
+        }
+
+        @media screen and (max-width: 600px) {
+            th, td {
+                padding: 6px;
+                font-size: 14px;
+            }
+        }
+    </style>
+    <title>HTMLtoHero</title>
+</head>
+
+<body>
+    <%- include('../components/header') %>
+
+    <div class="PAGE">
+        <%- include('../components/cssTutorialsSideMenu') %>
+        <div class="BODY">
+            <div class="BODYCONTENT">
+                <h1><%= t('cssTutorials.chapter11.page2.pageTitle') %></h1>
+                <p><%= t('cssTutorials.chapter11.page2.paragraph1') %></p>
+                <p><%= t('cssTutorials.chapter11.page2.paragraph2') %></p>
+                <ul>
+                    <li><%= t('cssTutorials.chapter11.page2.listItem1') %></li>
+                    <li><%= t('cssTutorials.chapter11.page2.listItem2') %></li>
+                    <li><%= t('cssTutorials.chapter11.page2.listItem3') %></li>
+                    <li><%= t('cssTutorials.chapter11.page2.listItem4') %></li>
+                </ul>
+                <hr>
+                
+                <h1><%= t('cssTutorials.chapter11.page2.title1') %></h1>
+                <p><%= t('cssTutorials.chapter11.page2.paragraph3') %></p>
+                <h3><%= t('cssTutorials.chapter11.page2.codeTitle1') %></h3>
+                <textarea id="CODE1">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic ::before and ::after</title>
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .quote {
+            position: relative;
+            padding: 20px;
+            background-color: #f0f0f0;
+            font-style: italic;
+        }
+        .quote::before {
+            content: '“';
+            position: absolute;
+            top: 0;
+            left: 10px;
+            font-size: 40px;
+            color: #0288d1;
+        }
+        .quote::after {
+            content: '”';
+            position: absolute;
+            bottom: 0;
+            right: 10px;
+            font-size: 40px;
+            color: #0288d1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="quote">This is an inspirational quote.</div>
+    </div>
+</body>
+</html>
+                </textarea>
+
+                <h1><%= t('cssTutorials.chapter11.page2.title2') %></h1>
+                <p><%= t('cssTutorials.chapter11.page2.paragraph4') %></p>
+                <h3><%= t('cssTutorials.chapter11.page2.codeTitle2') %></h3>
+                <textarea id="CODE2">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decorative ::before and ::after</title>
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            position: relative;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            background-color: #ad1457;
+            transform: rotate(45deg);
+        }
+        .card::after {
+            content: 'New!';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background-color: #0288d1;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">This is a featured card.</div>
+        <div class="card">Another featured card.</div>
+    </div>
+</body>
+</html>
+                </textarea>
+
+                <div class="note">
+                    <p><%= t('cssTutorials.chapter11.page2.note') %></p>
+                </div>
+
+                <h3><%= t('cssTutorials.chapter11.page2.tableTitle') %></h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th><%= t('cssTutorials.chapter11.page2.tableHeader1') %></th>
+                            <th><%= t('cssTutorials.chapter11.page2.tableHeader2') %></th>
+                            <th><%= t('cssTutorials.chapter11.page2.tableHeader3') %></th>
+                        </tr>
+                        <tr>
+                            <td><%= t('cssTutorials.chapter11.page2.tableRow1Col1') %></td>
+                            <td><%= t('cssTutorials.chapter11.page2.tableRow1Col2') %></td>
+                            <td><%= t('cssTutorials.chapter11.page2.tableRow1Col3') %></td>
+                        </tr>
+                        <tr>
+                            <td><%= t('cssTutorials.chapter11.page2.tableRow2Col1') %></td>
+                            <td><%= t('cssTutorials.chapter11.page2.tableRow2Col2') %></td>
+                            <td><%= t('cssTutorials.chapter11.page2.tableRow2Col3') %></td>
+                        </tr>
+                        <tr>
+                            <td><%= t('cssTutorials.chapter11.page2.tableRow3Col1') %></td>
+                            <td><%= t('cssTutorials.chapter11.page2.tableRow3Col2') %></td>
+                            <td><%= t('cssTutorials.chapter11.page2.tableRow3Col3') %></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <%- include('../components/cssTutorialsCheckbar', { page_link: 'pseudo_elements' }) %>
+
+            <%- include('../components/footer') %>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        function getCookie(name) {
+            const cookiePattern = `${name}=`;
+            const cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                if (cookie.startsWith(cookiePattern)) {
+                    return decodeURIComponent(cookie.substring(cookiePattern.length));
+                }
+            }
+            return null;
+        }
+
+        function deleteCookie(cookieName) {
+            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        }
+
+        var editor = CodeMirror.fromTextArea(document.getElementById("CODE1"), {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
+            readOnly: true,
+        });
+        editor.setSize(null, 720);
+
+        var editor2 = CodeMirror.fromTextArea(document.getElementById("CODE2"), {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
+            readOnly: true,
+        });
+        editor2.setSize(null, 890);
+    </script>
+</body>
+
+</html>

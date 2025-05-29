@@ -70,6 +70,10 @@
                 width: 100%;
             }
 
+            .REGISTERINPUT_ERROR {
+                border: 1px solid red;
+            }
+
             .REGISTERBUTTON:hover {
                 background-color: #ef9d6e;
                 cursor: pointer;
@@ -93,6 +97,21 @@
                 background-color: white;
             }
 
+            .REGISTERINPUTBIGDIV {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .REGISTERINPUTERROR {
+                color: red;
+                font-family: "Arial";
+                padding: 1px;
+                font-size: 75%;
+                display: flex;
+                align-items: center;
+            }
+
             .BIRTHDAYLABEL {
                 display: flex;
                 justify-content: center;
@@ -109,6 +128,7 @@
                     background-color: #e3a4a6;
                     margin: 0;
                 }
+
                 .REGISTERBUTTON {
                     font-size: 100%;
                 }
@@ -259,6 +279,7 @@
             }
 
             @media (max-width: 1100px) {
+
                 .MENUBUTTON,
                 .HEADERSEARCH,
                 .LANGSELECT,
@@ -266,6 +287,7 @@
                 #LOGINBUTTONDIV {
                     display: none;
                 }
+
                 .DROPDOWNMENUSMALLSCREEN {
                     display: block;
                 }
@@ -285,173 +307,221 @@
 <body>
     <%- include('components/header') %>
 
-    <div class="PAGE">
-        <div class="CENTER">
-            <div class="REGISTERCONTAINER">
-                <div class="REGISTERCONTAINERCONTENT">
-                    <img src="https://raw.githubusercontent.com/JineenRihawi/htmltoheroassets/1e4e4bd65bfed1479c5e272f2a43b8da9f849aa7/html2hero.svg"
-                        height="150px" style="margin-bottom: 35px;">
-                    <div class="REGISTERINPUTDIV">
-                        <input class="REGISTERINPUT" id="emailInput" type="email"
-                            placeholder="<%= t('registerPage.email') %>">
-                    </div>
-                    <div class="REGISTERINPUTDIV">
-                        <input class="REGISTERINPUT" id="usernameInput" type="text"
-                            placeholder="<%= t('registerPage.username') %>">
-                    </div>
-                    <div class="REGISTERINPUTDIV">
-                        <input class="REGISTERINPUT" id="password1Input" type="password"
-                            placeholder="<%= t('registerPage.password1') %>">
-                        <input type="checkbox" id="SHOWPASSWORDCHECK1">
-                    </div>
-                    <div class="REGISTERINPUTDIV">
-                        <input class="REGISTERINPUT" id="password2Input" type="password"
-                            placeholder="<%= t('registerPage.password2') %>">
-                        <input type="checkbox" id="SHOWPASSWORDCHECK2">
-                    </div>
-                    <div class="REGISTERINPUTDIV">
-                        <label class="BIRTHDAYLABEL">
-                            <%= t('registerPage.birthday') %>
-                        </label>
-                        <input class="REGISTERINPUT" id="birthdayInput" type="date">
-                    </div>
-                    <div class="REGISTERINPUTDIV" style="background-color: #FAD473;">
-                        <div class="REGISTERBUTTON">
-                            <%= t('registerPage.registerButton') %>
+        <div class="PAGE">
+            <div class="CENTER">
+                <div class="REGISTERCONTAINER">
+                    <div class="REGISTERCONTAINERCONTENT">
+                        <img src="https://raw.githubusercontent.com/JineenRihawi/htmltoheroassets/1e4e4bd65bfed1479c5e272f2a43b8da9f849aa7/html2hero.svg"
+                            height="150px" style="margin-bottom: 35px;">
+                        <div class="REGISTERINPUTBIGDIV">
+                            <span class="REGISTERINPUTERROR" id="emailInputError"></span>
+                            <div class="REGISTERINPUTDIV" id="EMAILINPUT">
+                                <input class="REGISTERINPUT" id="emailInput" type="email"
+                                    placeholder="<%= t('registerPage.email') %>">
+                            </div>
+                        </div>
+                        <div class="REGISTERINPUTBIGDIV">
+                            <span class="REGISTERINPUTERROR" id="usernameInputError"></span>
+                            <div class="REGISTERINPUTDIV" id="USERNAMEINPUT">
+                                <input class="REGISTERINPUT" id="usernameInput" type="text"
+                                    placeholder="<%= t('registerPage.username') %>">
+                            </div>
+                        </div>
+                        <div class="REGISTERINPUTBIGDIV">
+                            <span class="REGISTERINPUTERROR" id="password1InputError"></span>
+                            <div class="REGISTERINPUTDIV" id="PASSWORDINPUT1">
+                                <input class="REGISTERINPUT" id="password1Input" type="password"
+                                    placeholder="<%= t('registerPage.password1') %>">
+                                <input type="checkbox" id="SHOWPASSWORDCHECK1">
+                            </div>
+                        </div>
+                        <div class="REGISTERINPUTBIGDIV">
+                            <span class="REGISTERINPUTERROR" id="password2InputError"></span>
+                            <div class="REGISTERINPUTDIV" id="PASSWORDINPUT2">
+                                <input class="REGISTERINPUT" id="password2Input" type="password"
+                                    placeholder="<%= t('registerPage.password2') %>">
+                                <input type="checkbox" id="SHOWPASSWORDCHECK2">
+                            </div>
+                        </div>
+                        <div class="REGISTERINPUTBIGDIV">
+                            <span class="REGISTERINPUTERROR" id="birthdayInputError"></span>
+                            <div class="REGISTERINPUTDIV" id="BIRTHDAYINPUT">
+                                <label class="BIRTHDAYLABEL">
+                                    <%= t('registerPage.birthday') %>
+                                </label>
+                                <input class="REGISTERINPUT" id="birthdayInput" type="date">
+                            </div>
+                        </div>
+                        <div class="REGISTERINPUTDIV" style="background-color: #FAD473;">
+                            <div class="REGISTERBUTTON">
+                                <%= t('registerPage.registerButton') %>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <%- include('components/footer') %>
         </div>
 
-        <%- include('components/footer') %>
-    </div>
-
-    <script>
-        function getCookie(name) {
-            const cookiePattern = `${name}=`;
-            const cookies = document.cookie.split('; ');
-            for (let cookie of cookies) {
-                if (cookie.startsWith(cookiePattern)) {
-                    return decodeURIComponent(cookie.substring(cookiePattern.length));
-                }
-            }
-            return null;
-        }
-
-        function deleteCookie(cookieName) {
-            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-        }
-
-        document.addEventListener("DOMContentLoaded", (event) => {
-            fetch("/api/getAccount", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: getCookie("currentEmail"),
-                })
-            }).then(response => response.json())
-                .then(data => {
-                    if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
-                        deleteCookie("isLoggedIn");
-                        deleteCookie("currentEmail");
-                        deleteCookie("currentPassword");
-                        window.location.href = "/" + lang_code;
+        <script>
+            function getCookie(name) {
+                const cookiePattern = `${name}=`;
+                const cookies = document.cookie.split('; ');
+                for (let cookie of cookies) {
+                    if (cookie.startsWith(cookiePattern)) {
+                        return decodeURIComponent(cookie.substring(cookiePattern.length));
                     }
-                });
-        });
+                }
+                return null;
+            }
 
-        async function register(email, username, password, birthyear, birthmonth, birthday) {
-            const response = await fetch("/api/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: email,
-                    username: username,
-                    password: password,
-                    birthyear: birthyear,
-                    birthmonth: birthmonth,
-                    birthday: birthday,
-                })
+            function deleteCookie(cookieName) {
+                document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            }
+
+            const EMAILINPUTDIV = document.querySelector("#EMAILINPUT");
+            const EMAILINPUTERROR = document.querySelector("#emailInputError");
+            const USERNAMEINPUTDIV = document.querySelector("#USERNAMEINPUT");
+            const USERNAMEINPUTERROR = document.querySelector("#usernameInputError");
+            const PASSWORDINPUTDIV1 = document.querySelector("#PASSWORDINPUT1");
+            const PASSWORDINPUTERROR1 = document.querySelector("#password1InputError");
+            const PASSWORDINPUTDIV2 = document.querySelector("#PASSWORDINPUT2");
+            const PASSWORDINPUTERROR2 = document.querySelector("#password2InputError");
+            const BIRTHDAYINPUTDIV = document.querySelector("#BIRTHDAYINPUT");
+            const BIRTHDAYINPUTERROR = document.querySelector("#birthdayInputError");
+
+            EMAILINPUTDIV.addEventListener("click", (event) => {
+                EMAILINPUTDIV.classList.remove("REGISTERINPUT_ERROR");
+                EMAILINPUTERROR.innerHTML = "";
             });
-            const data = await response.json();
-            const error = data.errorName;
-            if (error === "noerror") {
-                return true;
-            } else {
+            USERNAMEINPUTDIV.addEventListener("click", (event) => {
+                USERNAMEINPUTDIV.classList.remove("REGISTERINPUT_ERROR");
+                USERNAMEINPUTERROR.innerHTML = "";
+            });
+            PASSWORDINPUTDIV1.addEventListener("click", (event) => {
+                PASSWORDINPUTDIV1.classList.remove("REGISTERINPUT_ERROR");
+                PASSWORDINPUTERROR1.innerHTML = "";
+            });
+            PASSWORDINPUTDIV2.addEventListener("click", (event) => {
+                PASSWORDINPUTDIV2.classList.remove("REGISTERINPUT_ERROR");
+                PASSWORDINPUTERROR2.innerHTML = "";
+            });
+            BIRTHDAYINPUTDIV.addEventListener("click", (event) => {
+                BIRTHDAYINPUTDIV.classList.remove("REGISTERINPUT_ERROR");
+                BIRTHDAYINPUTERROR.innerHTML = "";
+            });
+
+            function EMAILINPUTERRORFUNC(err) {
+                EMAILINPUTDIV.classList.add("REGISTERINPUT_ERROR");
+                EMAILINPUTERROR.innerHTML = err;
+            }
+            function USERNAMEINPUTERRORFUNC(err) {
+                USERNAMEINPUTDIV.classList.add("REGISTERINPUT_ERROR");
+                USERNAMEINPUTERROR.innerHTML = err;
+            }
+            function PASSWORDINPUTERRORFUNC1(err) {
+                PASSWORDINPUTDIV1.classList.add("REGISTERINPUT_ERROR");
+                PASSWORDINPUTERROR1.innerHTML = err;
+            }
+            function PASSWORDINPUTERRORFUNC2(err) {
+                PASSWORDINPUTDIV2.classList.add("REGISTERINPUT_ERROR");
+                PASSWORDINPUTERROR2.innerHTML = err;
+            }
+            function BIRTHDAYINPUTERRORFUNC(err) {
+                BIRTHDAYINPUTDIV.classList.add("REGISTERINPUT_ERROR");
+                BIRTHDAYINPUTERROR.innerHTML = err;
+            }
+
+            async function register(email, username, password, birthyear, birthmonth, birthday) {
+                const response = await fetch("/api/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        name: username,
+                        password: password,
+                        birthyear: birthyear,
+                        birthmonth: birthmonth,
+                        birthday: birthday,
+                    })
+                });
+                const data = await response.json();
+                const error = data.errorName;
                 return error;
             }
-        }
 
-        const EMAILINPUT = document.querySelector("#emailInput");
-        const USERNAMEINPUT = document.querySelector("#usernameInput");
-        const PASSWORDINPUT1 = document.querySelector("#password1Input");
-        const PASSWORDINPUT2 = document.querySelector("#password2Input");
-        const BIRTHDAYINPUT = document.querySelector("#birthdayInput");
+            const EMAILINPUT = document.querySelector("#emailInput");
+            const USERNAMEINPUT_ = document.querySelector("#usernameInput");
+            const PASSWORDINPUT1 = document.querySelector("#password1Input");
+            const PASSWORDINPUT2 = document.querySelector("#password2Input");
+            const BIRTHDAYINPUT = document.querySelector("#birthdayInput");
 
-        let REGISTERBUTTON = document.querySelector(".REGISTERBUTTON");
-        REGISTERBUTTON.addEventListener("click", (event) => {
-            const [yearStr, monthStr, dayStr] = BIRTHDAYINPUT.value.split("-");
-            const year = parseInt(yearStr);
-            const month = parseInt(monthStr);
-            const day = parseInt(dayStr);
+            let REGISTERBUTTON = document.querySelector(".REGISTERBUTTON");
+            REGISTERBUTTON.addEventListener("click", (event) => {
+                const [yearStr, monthStr, dayStr] = BIRTHDAYINPUT.value.split("-");
+                const year = parseInt(yearStr);
+                const month = parseInt(monthStr);
+                const day = parseInt(dayStr);
 
-            if (EMAILINPUT.value.length <= 0) {
-                window.alert("<%= t('registerPage.emptyEmailError') %>");
-                return;
-            }
-            if (USERNAMEINPUT.value.length <= 0) {
-                window.alert("<%= t('registerPage.emptyUsernameError') %>");
-                return;
-            }
-            if (PASSWORDINPUT1.value.length <= 0) {
-                window.alert("<%= t('registerPage.emptyPasswordError') %>");
-                return;
-            }
-            if (PASSWORDINPUT2.value.length <= 0) {
-                window.alert("<%= t('registerPage.emptyPasswordError') %>");
-                return;
-            }
-            if (year === 0 || isNaN(year) || month === 0 || isNaN(month) || day === 0 || isNaN(day)) {
-                window.alert("<%= t('registerPage.invalidDateError') %>");
-                return;
-            }
+                if (EMAILINPUT.value.length <= 0) {
+                    EMAILINPUTERRORFUNC("<%= t('registerPage.emptyEmailError') %>");
+                    return;
+                }
+                if (USERNAMEINPUT_.value.length <= 0) {
+                    USERNAMEINPUTERRORFUNC("<%= t('registerPage.emptyUsernameError') %>");
+                    return;
+                }
+                if (PASSWORDINPUT1.value.length <= 0) {
+                    PASSWORDINPUTERRORFUNC1("<%= t('registerPage.emptyPasswordError') %>");
+                    return;
+                }
+                if (PASSWORDINPUT2.value.length <= 0) {
+                    PASSWORDINPUTERRORFUNC2("<%= t('registerPage.emptyPasswordError') %>");
+                    return;
+                }
+                if (PASSWORDINPUT1.value !== PASSWORDINPUT2.value) {
+                    PASSWORDINPUTERRORFUNC1("<%= t('registerPage.passwordNotEqualError') %>");
+                    PASSWORDINPUTERRORFUNC2("<%= t('registerPage.passwordNotEqualError') %>");
+                    return;
+                }
+                if (!BIRTHDAYINPUT.value || isNaN(year) || isNaN(month) || isNaN(day)) {
+                    BIRTHDAYINPUTERRORFUNC("<%= t('registerPage.invalidDateError') %>");
+                    return;
+                }
 
-            if (PASSWORDINPUT1.value !== PASSWORDINPUT2.value) {
-                window.alert("<%= t('registerPage.passwordNotEqualError') %>");
-                return;
-            }
+                register(EMAILINPUT.value, USERNAMEINPUT_.value, PASSWORDINPUT1.value, year, month, day).then(error => {
+                    if (error === "noerror") {
+                        window.location.href = "/" + lang_code + "/login";
+                    } else if (error === "emailExsists") {
+                        EMAILINPUTERRORFUNC("<%= t('registerPage.emailExsistsError') %>");
+                    } else {
+                        EMAILINPUTERRORFUNC("An unexpected error occurred. Please try again.");
+                    }
+                }).catch(err => {
+                    EMAILINPUTERRORFUNC("An unexpected error occurred. Please try again.");
+                });
+            });
 
-            register(EMAILINPUT.value, USERNAMEINPUT.value, PASSWORDINPUT1.value, year, month, day).then(error => {
-                if (error === "emailExsists") {
-                    window.alert("<%= t('registerPage.emailExsistsError') %>");
-                } else if (error === true) {
-                    window.location.href = "/" + lang_code + "/profile";
+            const SHOWPASSWORDCHECK1 = document.querySelector("#SHOWPASSWORDCHECK1");
+            const SHOWPASSWORDCHECK2 = document.querySelector("#SHOWPASSWORDCHECK2");
+            SHOWPASSWORDCHECK1.addEventListener("change", (event) => {
+                if (event.target.checked === true) {
+                    PASSWORDINPUT1.type = "text";
+                } else {
+                    PASSWORDINPUT1.type = "password";
                 }
             });
-        });
-
-        const SHOWPASSWORDCHECK1 = document.querySelector("#SHOWPASSWORDCHECK1");
-        const SHOWPASSWORDCHECK2 = document.querySelector("#SHOWPASSWORDCHECK2");
-        SHOWPASSWORDCHECK1.addEventListener("change", (event) => {
-            if (event.target.checked === true) {
-                PASSWORDINPUT1.type = "text";
-            } else {
-                PASSWORDINPUT1.type = "password";
-            }
-        });
-        SHOWPASSWORDCHECK2.addEventListener("change", (event) => {
-            if (event.target.checked === true) {
-                PASSWORDINPUT2.type = "text";
-            } else {
-                PASSWORDINPUT2.type = "password";
-            }
-        });
-    </script>
+            SHOWPASSWORDCHECK2.addEventListener("change", (event) => {
+                if (event.target.checked === true) {
+                    PASSWORDINPUT2.type = "text";
+                } else {
+                    PASSWORDINPUT2.type = "password";
+                }
+            });
+        </script>
 </body>
 
 </html>

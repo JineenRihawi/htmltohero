@@ -255,26 +255,6 @@
                 document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
             }
 
-            document.addEventListener("DOMContentLoaded", (event) => { // Logout if password and email dont match ( prevent hacking accounts )
-                fetch("/api/getAccount", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        email: getCookie("currentEmail"),
-                    })
-                }).then(response => response.json())
-                    .then(data => {
-                        if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
-                            deleteCookie("isLoggedIn");
-                            deleteCookie("currentEmail");
-                            deleteCookie("currentPassword");
-                            window.location.href = "/" + lang_code;
-                        }
-                    })
-            });
-
             let DATACONTAINERDATA = document.querySelector(".DATACONTAINERDATA");
             let CONTINUECONTAINERBUTTONS = document.querySelector("#CONTINUECONTAINERBUTTONS");
             let CONTINUE2CONTAINERBUTTONS = document.querySelector("#CONTINUE2CONTAINERBUTTONS");
@@ -317,7 +297,7 @@
                 let html = document.createElement("div");
                 html.classList.add("CONTAINERBUTTON");
                 html.innerText = "<%= t('profile.learningContainer.html') %>";
-                if (data.lastCheckedHtmlPageLink == "null") {
+                if (data.lastCheckedHtmlPageLink === "null" || data.lastCheckedHtmlPageLink === "tutorialsHtml") {
                     html.onclick = () => {
                         window.location.href = "/" + lang_code + "/tutorials/HTML";
                     }
@@ -331,7 +311,7 @@
                 let css = document.createElement("div");
                 css.classList.add("CONTAINERBUTTON");
                 css.innerText = "<%= t('profile.learningContainer.css') %>";
-                if (data.lastCheckedCssPageLink == "null") {
+                if (data.lastCheckedCssPageLink === "null" || data.lastCheckedCssPageLink === "tutorialsCss") {
                     css.onclick = () => {
                         window.location.href = "/" + lang_code + "/tutorials/CSS";
                     }
@@ -345,7 +325,7 @@
                 let js = document.createElement("div");
                 js.classList.add("CONTAINERBUTTON");
                 js.innerText = "<%= t('profile.learningContainer.js') %>";
-                if (data.lastCheckedJsPageLink == "null") {
+                if (data.lastCheckedJsPageLink === "null" || data.lastCheckedJsPageLink === "tutorialsJs") {
                     js.onclick = () => {
                         window.location.href = "/" + lang_code + "/tutorials/JS";
                     }
@@ -359,7 +339,7 @@
                 let html2 = document.createElement("div");
                 html2.classList.add("CONTAINERBUTTON");
                 html2.innerText = "<%= t('profile.exercisingContainer.html') %>";
-                if (data.lastCheckedHtmlExerciseLink == "null") {
+                if (data.lastCheckedHtmlExerciseLink === "null" || data.lastCheckedHtmlExerciseLink === "exercisesHtml") {
                     html2.onclick = () => {
                         window.location.href = "/" + lang_code + "/exercises/HTML";
                     }
@@ -373,7 +353,7 @@
                 let css2 = document.createElement("div");
                 css2.classList.add("CONTAINERBUTTON");
                 css2.innerText = "<%= t('profile.exercisingContainer.css') %>";
-                if (data.lastCheckedCssExerciseLink == "null") {
+                if (data.lastCheckedCssExerciseLink === "null" || data.lastCheckedCssExerciseLink === "exercisesCss") {
                     css2.onclick = () => {
                         window.location.href = "/" + lang_code + "/exercises/CSS";
                     }
@@ -387,7 +367,7 @@
                 let js2 = document.createElement("div");
                 js2.classList.add("CONTAINERBUTTON");
                 js2.innerText = "<%= t('profile.exercisingContainer.js') %>";
-                if (data.lastCheckedJsExerciseLink == "null") {
+                if (data.lastCheckedJsExerciseLink === "null" || data.lastCheckedJsExerciseLink === "exercisesJs") {
                     js2.onclick = () => {
                         window.location.href = "/" + lang_code + "/exercises/JS";
                     }

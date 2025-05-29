@@ -71,37 +71,84 @@ app.post("/api/consoleLog", (req, res) => { // Server tarafinda log cikartma
     }
 }*/
 
-app.post("/api/login", (req, res) => {
+app.post("/api/login", async (req, res) => {
     try {
+        const user = await findOneInDatabase("email", req.body.email);
 
-        findOneInDatabase("email", req.body.email).then(user => {
-            if (user) {
-                const email = user.email;
-                const password = user.password;
-                return { email, password };
-            }
-        }).then(({ email, password }) => {
+        if (!user) {
+            return res.json({ errorName: "invalidEmail" });
+        }
 
-            try {
-                if (password !== "" && password !== undefined && password !== null && email !== "" && email !== undefined && email !== null) {
-                    if (req.body.password === password) {
-                        res.cookie("isLoggedIn", true);
-                        res.cookie("currentEmail", email);
-                        res.cookie("currentPassword", password);
-                        res.json({ isLoggedIn: true });
-                    } else {
-                        res.cookie("isLoggedIn", false);
-                    }
-                } else {
-                    res.cookie("isLoggedIn", false);
-                }
-            } catch (error) {
-                console.log(error);
-            }
+        const { email, password } = user;
 
-        });
+        if (!password || !email) {
+            res.cookie("isLoggedIn", false);
+            return res.json({ errorName: "invalidCredentials" });
+        }
+
+        if (req.body.password === password) {
+            res.cookie("isLoggedIn", true);
+            res.cookie("currentEmail", email);
+            res.cookie("currentPassword", password);
+            return res.json({ isLoggedIn: true });
+        } else {
+            res.cookie("isLoggedIn", false);
+            return res.json({ errorName: "invalidPassword" });
+        }
     } catch (error) {
-        console.log(error);
+        console.error("Login error:", error);
+        res.cookie("isLoggedIn", false);
+        return res.status(500).json({ errorName: "serverError" });
+    }
+});
+
+app.post("/api/register", async (req, res) => {
+    try {
+        const { email, password, name, birthyear, birthmonth, birthday } = req.body;
+
+        const birthyearNum = parseInt(birthyear);
+        const birthmonthNum = parseInt(birthmonth);
+        const birthdayNum = parseInt(birthday);
+
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth() + 1;
+        const day = today.getDate();
+
+        const user = await findOneInDatabase("email", email);
+        if (user) {
+            return res.json({ errorName: "emailExsists" });
+        }
+
+        const USER = {
+            email: email,
+            password: password,
+            name: name,
+            birthyear: birthyearNum,
+            birthmonth: birthmonthNum,
+            birthday: birthdayNum,
+            level: 0,
+            points: 0,
+            createday: day,
+            createmonth: month,
+            createyear: year,
+            lastCheckedCssPageLink: null,
+            lastCheckedHtmlPageLink: null,
+            lastCheckedJsPageLink: null,
+            checkedCssPages: [],
+            checkedHtmlPages: [],
+            checkedJsPages: [],
+            lastCompletedCssExerciseNumber: 0,
+            lastCompletedCssJsNumber: 0,
+            lastCompletedHtmlExerciseNumber: 0,
+        };
+        await insertOneToDatabase(USER);
+
+        return res.json({ errorName: "noerror" });
+
+    } catch (error) {
+        console.error("Registration error:", error);
+        return res.json({ errorName: "serverError" });
     }
 });
 
@@ -132,6 +179,32 @@ app.post("/api/checkHtmlPage", async (req, res) => {
     }
 });
 
+app.post("/api/checkCssPage", async (req, res) => {
+    try {
+        const isLoggedIn = req.cookies.isLoggedIn;
+        const email = req.cookies.currentEmail;
+        if (isLoggedIn == "true") {
+            await updateOneInDatabase("email", email, { $push: { checkedCssPages: req.body.link } });
+            await updateOneInDatabase("email", email, { $set: { lastCheckedCssPageLink: req.body.link } });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.post("/api/checkJsPage", async (req, res) => {
+    try {
+        const isLoggedIn = req.cookies.isLoggedIn;
+        const email = req.cookies.currentEmail;
+        if (isLoggedIn == "true") {
+            await updateOneInDatabase("email", email, { $push: { checkedJsPages: req.body.link } });
+            await updateOneInDatabase("email", email, { $set: { lastCheckedJsPageLink: req.body.link } });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 app.post("/api/checkCheckedHtmlPage", async (req, res) => {
     try {
 
@@ -141,6 +214,45 @@ app.post("/api/checkCheckedHtmlPage", async (req, res) => {
             await findOneInDatabase("email", email).then(user => {
                 if (user) {
                     if (user.checkedHtmlPages.includes(req.body.PAGELINK)) res.json({ PAGECHECKED: true })
+                }
+            })
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.json({ PAGECHECKED: false })
+    }
+});
+
+app.post("/api/checkCheckedCssPage", async (req, res) => {
+    try {
+
+        const isLoggedIn = req.cookies.isLoggedIn;
+        const email = req.cookies.currentEmail;
+        if (isLoggedIn == "true") {
+            await findOneInDatabase("email", email).then(user => {
+                if (user) {
+                    if (user.checkedCssPages.includes(req.body.PAGELINK)) res.json({ PAGECHECKED: true })
+                }
+            })
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.json({ PAGECHECKED: false })
+    }
+});
+
+
+app.post("/api/checkCheckedJsPage", async (req, res) => {
+    try {
+
+        const isLoggedIn = req.cookies.isLoggedIn;
+        const email = req.cookies.currentEmail;
+        if (isLoggedIn == "true") {
+            await findOneInDatabase("email", email).then(user => {
+                if (user) {
+                    if (user.checkedJsPages.includes(req.body.PAGELINK)) res.json({ PAGECHECKED: true })
                 }
             })
         }
@@ -304,7 +416,7 @@ app.get("/:lang/404", (req, res) => {
     try {
         const lang = req.params.lang;
 
-        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
             return res.redirect("/404")
         }
 
@@ -330,7 +442,7 @@ app.get("/:lang/profile", (req, res) => {
             return res.redirect('/' + lang + '/login');
         }
 
-        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
             return res.redirect("/404")
         }
 
@@ -352,7 +464,7 @@ app.get("/:lang/search", (req, res) => {
         const lang = req.params.lang;
         const content = "";
 
-        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
             return res.redirect("/404")
         }
 
@@ -374,7 +486,7 @@ app.get("/:lang/register", (req, res) => {
     try {
         const lang = req.params.lang;
 
-        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
             return res.redirect("/404")
         }
 
@@ -396,7 +508,7 @@ app.get("/:lang/search/:content", (req, res) => {
         const lang = req.params.lang;
         const content = req.params.content;
 
-        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
             return res.redirect("/404")
         }
 
@@ -418,7 +530,7 @@ app.get("/:lang/tutorials/html", (req, res) => {
     try {
         const lang = req.params.lang;
 
-        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
             return res.redirect("/404")
         }
 
@@ -445,7 +557,7 @@ app.get("/:lang/tutorials/html/:page", (req, res) => {
         }
 
 
-        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
             return res.redirect("/404")
         }
 
@@ -461,12 +573,55 @@ app.get("/:lang/tutorials/html/:page", (req, res) => {
     }
 });
 
+app.get("/:lang/exercises/html", (req, res) => {
+
+    try {
+        const lang = req.params.lang;
+
+        const isLoggedIn = req.cookies.isLoggedIn;
+        if (isLoggedIn === undefined || isLoggedIn === null || isLoggedIn == "false") {
+            return res.redirect('/' + lang + '/login');
+        }
+
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+            return res.redirect("/404")
+        }
+
+        /*
+        let user = findOneInDatabase("email", req.cookies.email);
+        if (!user) {
+            return res.redirect('/');
+        }
+
+        let qnumber = user.lastCompletedHtmlExerciseNumber;
+        if (!qnumber || isNaN(qnumber) || qnumber <= 0) {
+            return res.redirect('/');
+        }*/
+
+        /*
+        let partials = [];
+        for (let i = 1; i <= qnumber; i++) {
+            partials.push(`${i}`);
+        }*/
+
+        t = i18n.getFixedT(lang);
+
+        res.render('exercisesHtml', {
+            t,
+            lang
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 app.get("/:lang/tutorials/css", (req, res) => {
 
     try {
         const lang = req.params.lang;
 
-        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
             return res.redirect("/404")
         }
 
@@ -493,7 +648,7 @@ app.get("/:lang/tutorials/css/:page", (req, res) => {
         }
 
 
-        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
             return res.redirect("/404")
         }
 
@@ -509,12 +664,38 @@ app.get("/:lang/tutorials/css/:page", (req, res) => {
     }
 });
 
+app.get("/:lang/exercises/css", (req, res) => {
+
+    try {
+        const lang = req.params.lang;
+
+        const isLoggedIn = req.cookies.isLoggedIn;
+        if (isLoggedIn === undefined || isLoggedIn === null || isLoggedIn == "false") {
+            return res.redirect('/' + lang + '/login');
+        }
+
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+            return res.redirect("/404")
+        }
+
+        t = i18n.getFixedT(lang);
+
+        res.render('exercisesCss', {
+            t,
+            lang
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 app.get("/:lang/codeeditor", (req, res) => {
 
     try {
         const lang = req.params.lang;
 
-        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
             return res.redirect("/404")
         }
 
@@ -535,13 +716,66 @@ app.get("/:lang/tutorials/js", (req, res) => {
     try {
         const lang = req.params.lang;
 
-        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
             return res.redirect("/404")
         }
 
         t = i18n.getFixedT(lang);
 
         res.render('tutorialsJs', {
+            t,
+            lang
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get("/:lang/tutorials/js/:page", (req, res) => {
+
+    try {
+        const lang = req.params.lang;
+        const page = req.params.page;
+        const viewPath = path.join(__dirname, "views", "jsTutorials", page + ".ejs");
+        if (!fs.existsSync(viewPath)) {
+            return res.redirect("/404");
+        }
+
+
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+            return res.redirect("/404")
+        }
+
+        t = i18n.getFixedT(lang);
+
+        res.render(`jsTutorials/${page}`, {
+            t,
+            lang
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get("/:lang/exercises/js", (req, res) => {
+
+    try {
+        const lang = req.params.lang;
+
+        const isLoggedIn = req.cookies.isLoggedIn;
+        if (isLoggedIn === undefined || isLoggedIn === null || isLoggedIn == "false") {
+            return res.redirect('/' + lang + '/login');
+        }
+
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+            return res.redirect("/404")
+        }
+
+        t = i18n.getFixedT(lang);
+
+        res.render('exercisesJs', {
             t,
             lang
         })
@@ -560,7 +794,7 @@ app.get("/:lang/login", (req, res) => {
             async: true
         }
 
-        if(!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
+        if (!["en", "tr", "es", "fr", "de", "pt", "ar", "ru"].includes(lang)) {
             return res.redirect("/404")
         }
 

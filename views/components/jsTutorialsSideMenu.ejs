@@ -1,71 +1,218 @@
-<div class="CHAPTER">Chapter 1: Introduction to JavaScript</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-1"> What is JavaScript?</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/environments';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-2"> JavaScript in Browsers vs. Node.js</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/setup';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-3"> Setting Up: Writing and running your first script</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/console';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-4"> JavaScript Console and Debugging Basics</div>
+<style>
+    .CHAPTER {
+        padding: 10px 10px 0 10px;
+        color: #684444;
+        background-color: #fff0cc;
+        font-size: 14px;
+        font-family: "Arial";
+        font-weight: bold;
+    }
 
-<div class="CHAPTER">Chapter 2: Variables and Data Types</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/variables';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-5"> Declaring Variables: var, let, const</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/primitive_types';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-6"> Primitive Types: String, Number, Boolean, null, undefined</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/objects_arrays';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-7"> Objects and Arrays</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/type_coercion';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-8"> Type Coercion and typeof Operator</div>
+    .SIDEMENUBUTTON:hover {
+        background-color: #fee9b6;
+    }
 
-<div class="CHAPTER">Chapter 3: Operators and Expressions</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/operators';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-9"> Arithmetic, Comparison, and Logical Operators</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/assignment_spread';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-10"> Assignment and Spread Operators</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/precedence';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-11"> Operator Precedence</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/truthy_falsy';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-12"> Truthy and Falsy Values</div>
+    .SIDEMENU {
+        height: 100%;
+        width: 100%;
+        overflow-y: scroll;
+        background-color: #fff0cc;
+    }
 
-<div class="CHAPTER">Chapter 4: Control Flow</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/conditionals';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-13"> Conditional Statements: if, else, switch</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/ternary';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-14"> Ternary Operator</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/loops';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-15"> Loops: for, while, do-while</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/break_continue';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-16"> Break and Continue Statements</div>
+    .SIDEMENUBUTTON {
+        padding: 10px;
+        color: #445368;
+        background-color: #fff0cc;
+        font-size: 14px;
+        font-family: "Arial";
+        font-weight: bold;
+        user-select: none;
+        cursor: pointer;
+    }
 
-<div class="CHAPTER">Chapter 5: Functions</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/functions';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-17"> Function Declarations and Expressions</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/arrow_functions';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-18"> Arrow Functions</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/parameters';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-19"> Parameters: Defaults, Rest, and Spread</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/scope_closures';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-20"> Scope and Closures</div>
+    .SIDEMENUOPENBUTTON {
+        display: none;
+    }
 
-<div class="CHAPTER">Chapter 6: Objects and Arrays</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/object_creation';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-21"> Creating and Modifying Objects</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/object_methods';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-22"> Object Methods and this Keyword</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/array_methods';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-23"> Array Methods: map, filter, reduce, forEach</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/destructuring';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-24"> Destructuring Objects and Arrays</div>
+    .SIDEMENUCLOSE {
+        display: none;
+        position: relative;
+        top: 0;
+        right: 0;
+        font-size: 100%;
+        user-select: none;
+        padding: 5%;
+        font-family: "Arial";
+        font-weight: bold;
+        color: #445368;
+        cursor: pointer;
+        width: fit-content;
+    }
 
-<div class="CHAPTER">Chapter 7: DOM Manipulation</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/dom';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-25"> What is the DOM?</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/selecting_elements';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-26"> Selecting Elements: querySelector, getElementById</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/modifying_elements';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-27"> Modifying Elements: innerHTML, textContent, styles</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/event_listeners';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-28"> Event Listeners and Event Handling</div>
+    :dir(rtl) {
+        .SIDEMENUCLOSE {
+            transform: rotate(180deg);
+        }
+    }
 
-<div class="CHAPTER">Chapter 8: Events and Event Loop</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/event_types';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-29"> Event Types: Click, Input, Mouse, Keyboard</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/event_bubbling';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-30"> Event Bubbling and Capturing</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/event_delegation';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-31"> Event Delegation</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/event_loop';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-32"> Understanding the Event Loop and Call Stack</div>
+    @media (max-width: 1100px) {
+        .SIDEMENUCLOSE {
+            display: block;
+            position: sticky;
+        }
 
-<div class="CHAPTER">Chapter 9: Asynchronous JavaScript</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/callbacks';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-33"> Callbacks and Callback Hell</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/promises';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-34"> Promises: Creation, Chaining, Error Handling</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/async_await';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-35"> Async/Await Syntax</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/fetch_api';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-36"> Fetch API for HTTP Requests</div>
+        .SIDEMENU {
+            width: fit-content;
+            display: none;
+            position: absolute;
+            bottom: 0;
+            top: 0;
+            background-color: #fff0cc;
+            z-index: 2;
+        }
 
-<div class="CHAPTER">Chapter 10: Error Handling and Debugging</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/try_catch';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-37"> try, catch, finally</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/custom_errors';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-38"> Throwing Custom Errors</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/debugging_tools';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-39"> Debugging Tools: Breakpoints, Console Methods</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/common_errors';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-40"> Common Errors and How to Fix Them</div>
+        .PAGE {
+            display: block;
+        }
 
-<div class="CHAPTER">Chapter 11: Modules and Tooling</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/es_modules';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-41"> ES Modules: import and export</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/commonjs';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-42"> CommonJS Basics</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/bundlers';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-43"> Bundlers: Webpack, Vite Overview</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/package_managers';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-44"> Package Managers: npm, yarn Basics</div>
+        :dir(ltr) {
+            .SIDEMENUOPENBUTTON {
+                position: absolute;
+                top: 85px;
+                left: 5px;
+                display: block;
+                cursor: pointer;
+                width: fit-content;
+            }
 
-<div class="CHAPTER">Chapter 12: Modern JavaScript and Best Practices</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/es6_features';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-45"> ES6+ Features: Template Literals, Optional Chaining</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/functional_programming';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-46"> Functional Programming Basics</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/code_organization';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-47"> Code Organization: MVC Pattern Introduction</div>
-<div onclick="window.location.href = '/<%= lang %>/tutorials/JavaScript/clean_code';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-48"> Writing Clean Code: Linting with ESLint</div>
+            .SIDEMENUOPENED {
+                display: block;
+                right: 50%;
+            }
+
+            .SIDEMENU {
+                left: 0;
+                right: auto;
+            }
+        }
+
+        :dir(rtl) {
+            .SIDEMENUOPENBUTTON {
+                position: absolute;
+                top: 85px;
+                right: 5px;
+                display: block;
+                cursor: pointer;
+                width: fit-content;
+                transform: rotate(180deg);
+            }
+
+            .SIDEMENUOPENED {
+                display: block;
+                left: 50%;
+            }
+
+            .SIDEMENU {
+                right: 0;
+                left: auto;
+            }
+        }
+    }
+</style>
+
+<div class="SIDEMENUOPENBUTTON">
+    <svg width="30px" height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 6L8 2L10 2L16 8L10 14L8 14L8 10L-1.74845e-07 10L-3.01991e-07 6L8 6Z" fill="#684444" />
+    </svg>
+</div>
+
+<div class="SIDEMENU">
+    <div class="SIDEMENUCLOSE">
+        <svg width="30px" height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 10L8 14L6 14L-2.62268e-07 8L6 2L8 2L8 6L16 6L16 10L8 10Z" fill="#684444" />
+        </svg>
+    </div>
+    <div class="CHAPTER"><%= t('jsTutorials.chapter1.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-1"> <%= t('jsTutorials.chapter1.page1.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/environments';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-2"> <%= t('jsTutorials.chapter1.page2.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/setup';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-3"> <%= t('jsTutorials.chapter1.page3.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/console';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-4"> <%= t('jsTutorials.chapter1.page4.pageTitle') %></div>
+
+    <div class="CHAPTER"><%= t('jsTutorials.chapter2.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/variables';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-5"> <%= t('jsTutorials.chapter2.page1.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/primitive_types';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-6"> <%= t('jsTutorials.chapter2.page2.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/objects_arrays';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-7"> <%= t('jsTutorials.chapter2.page3.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/type_coercion';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-8"> <%= t('jsTutorials.chapter2.page4.pageTitle') %></div>
+
+    <div class="CHAPTER"><%= t('jsTutorials.chapter3.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/operators';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-9"> <%= t('jsTutorials.chapter3.page1.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/assignment_spread';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-10"> <%= t('jsTutorials.chapter3.page2.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/precedence';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-11"> <%= t('jsTutorials.chapter3.page3.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/truthy_falsy';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-12"> <%= t('jsTutorials.chapter3.page4.pageTitle') %></div>
+
+    <div class="CHAPTER"><%= t('jsTutorials.chapter4.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/conditionals';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-13"> <%= t('jsTutorials.chapter4.page1.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/ternary';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-14"> <%= t('jsTutorials.chapter4.page2.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/loops';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-15"> <%= t('jsTutorials.chapter4.page3.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/break_continue';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-16"> <%= t('jsTutorials.chapter4.page4.pageTitle') %></div>
+
+    <div class="CHAPTER"><%= t('jsTutorials.chapter5.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/functions';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-17"> <%= t('jsTutorials.chapter5.page1.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/arrow_functions';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-18"> <%= t('jsTutorials.chapter5.page2.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/parameters';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-19"> <%= t('jsTutorials.chapter5.page3.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/scope_closures';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-20"> <%= t('jsTutorials.chapter5.page4.pageTitle') %></div>
+
+    <div class="CHAPTER"><%= t('jsTutorials.chapter6.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/object_creation';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-21"> <%= t('jsTutorials.chapter6.page1.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/object_methods';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-22"> <%= t('jsTutorials.chapter6.page2.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/array_methods';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-23"> <%= t('jsTutorials.chapter6.page3.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/destructuring';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-24"> <%= t('jsTutorials.chapter6.page4.pageTitle') %></div>
+
+    <div class="CHAPTER"><%= t('jsTutorials.chapter7.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/dom';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-25"> <%= t('jsTutorials.chapter7.page1.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/selecting_elements';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-26"> <%= t('jsTutorials.chapter7.page2.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/modifying_elements';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-27"> <%= t('jsTutorials.chapter7.page3.pageTitle') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/event_listeners';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-28"> <%= t('jsTutorials.chapter7.page4.pageTitle') %></div>
+
+    <div class="CHAPTER"><%= t('jsTutorials.chapter8.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/event_types';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-29"> Event Types: Click, Input, Mouse, Keyboard</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/event_bubbling';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-30"> Event Bubbling and Capturing</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/event_delegation';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-31"> Event Delegation</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/event_loop';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-32"> Understanding the Event Loop and Call Stack</div>
+
+    <div class="CHAPTER"><%= t('jsTutorials.chapter9.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/callbacks';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-33"> Callbacks and Callback Hell</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/promises';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-34"> Promises: Creation, Chaining, Error Handling</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/async_await';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-35"> Async/Await Syntax</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/fetch_api';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-36"> Fetch API for HTTP Requests</div>
+
+    <div class="CHAPTER"><%= t('jsTutorials.chapter10.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/try_catch';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-37"> try, catch, finally</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/custom_errors';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-38"> Throwing Custom Errors</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/debugging_tools';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-39"> Debugging Tools: Breakpoints, Console Methods</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/common_errors';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-40"> Common Errors and How to Fix Them</div>
+
+    <div class="CHAPTER"><%= t('jsTutorials.chapter11.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/es_modules';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-41"> ES Modules: import and export</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/commonjs';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-42"> CommonJS Basics</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/bundlers';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-43"> Bundlers: Webpack, Vite Overview</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/package_managers';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-44"> Package Managers: npm, yarn Basics</div>
+
+    <div class="CHAPTER"><%= t('jsTutorials.chapter12.title') %></div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/es6_features';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-45"> ES6+ Features: Template Literals, Optional Chaining</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/functional_programming';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-46"> Functional Programming Basics</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/code_organization';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-47"> Code Organization: MVC Pattern Introduction</div>
+    <div onclick="window.location.href = '/<%= lang %>/tutorials/js/clean_code';" class="SIDEMENUBUTTON" id="SIDEMENUBUTTON-48"> Writing Clean Code: Linting with ESLint</div>
+</div>
+
+<script>
+    let SIDEMENUOPENBUTTON = document.querySelector(".SIDEMENUOPENBUTTON");
+    let SIDEMENU = document.querySelector(".SIDEMENU");
+    SIDEMENUOPENBUTTON.addEventListener("click", (event) => {
+        SIDEMENU.classList.add("SIDEMENUOPENED");
+    })
+    let SIDEMENUCLOSE = document.querySelector(".SIDEMENUCLOSE");
+    SIDEMENUCLOSE.addEventListener("click", (event) => {
+        SIDEMENU.classList.remove("SIDEMENUOPENED");
+    })
+</script>

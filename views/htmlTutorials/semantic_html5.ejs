@@ -45,18 +45,6 @@
             color: #445368;
         }
 
-        .CHECKBAR {
-            background-color: #445368;
-            margin-bottom: 10px;
-            width: calc(100% - 6px);
-            padding: 3px;
-            display: flex;
-            flex-direction: row-reverse;
-            user-select: none;
-            font-family: "Arial";
-            color: white;
-        }
-
         #SIDEMENUBUTTON-44 {
             background-color: #684444;
             color: white;
@@ -175,10 +163,7 @@
                     <li><%= t('htmlTutorials.chapter10.page1.list2Item2') %></li>
                 </ul>
             </div>
-            <div class="CHECKBAR">
-                <input type="checkbox" id="CHECKPAGE">
-                <%= t('htmlTutorials.markAsCompleted') %>
-            </div>
+            <%- include('../components/htmlTutorialsCheckbar', { page_link: 'semantic_html5' }) %>
             <%- include('../components/footer') %>
         </div>
     </div>
@@ -198,45 +183,6 @@
         function deleteCookie(cookieName) {
             document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
         }
-
-        let page_link = 'semantic_html5';
-
-        document.addEventListener("DOMContentLoaded", (event) => {
-            fetch("/api/getAccount", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: getCookie("currentEmail"),
-                })
-            }).then(response => response.json())
-                .then(data => {
-                    if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
-                        deleteCookie("isLoggedIn");
-                        deleteCookie("currentEmail");
-                        deleteCookie("currentPassword");
-                        window.location.href = "/" + lang_code;
-                    }
-                })
-        });
-
-        let checkpage = document.querySelector("#CHECKPAGE");
-
-        fetch("/api/checkCheckedHtmlPage", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                PAGELINK: page_link,
-            })
-        }).then(response => response.json()).then(data => {
-            if (data.PAGECHECKED === true) {
-                checkpage.checked = true;
-                checkpage.disabled = true;
-            }
-        });
 
         var editor1 = CodeMirror.fromTextArea(document.getElementById("CODE1"), {
             lineNumbers: true,
@@ -259,27 +205,6 @@
             readOnly: true,
         });
         editor2.setSize(null, 300);
-
-        checkpage.addEventListener("change", (e) => {
-            if (checkpage.checked) {
-                checkpage.disabled = true;
-                const isLoggedIn = getCookie("isLoggedIn");
-                if (isLoggedIn === null || isLoggedIn == "false") {
-                    e.target.checked = false;
-                    window.location.href = "/" + lang_code + "/" + "login";
-                } else {
-                    fetch("/api/checkHtmlPage", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            link: page_link,
-                        })
-                    });
-                }
-            }
-        });
     </script>
 </body>
 </html>

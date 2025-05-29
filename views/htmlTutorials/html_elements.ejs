@@ -48,18 +48,6 @@
             color: #fdc535;
         }
 
-        .CHECKBAR {
-            background-color: #445368;
-            margin-bottom: 10px;
-            width: calc(100%-6px);
-            padding: 3px;
-            display: flex;
-            flex-direction: row-reverse;
-            user-select: none;
-            font-family: "Arial";
-            color: white;
-        }
-
         #SIDEMENUBUTTON-3 {
             background-color: #684444;
             color: white;
@@ -149,10 +137,7 @@
                 </ul>
             </div>
 
-            <div class="CHECKBAR">
-                <input type="CHECKBOX" id="CHECKPAGE">
-                <%= t('htmlTutorials.markAsCompleted') %>
-            </div>
+            <%- include('../components/htmlTutorialsCheckbar', { page_link: 'html_elements' }) %>
 
             <%- include('../components/footer') %>
         </div>
@@ -180,45 +165,6 @@
         function deleteCookie(cookieName) {
             document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
         }
-
-        let page_link = 'html_elements';
-
-        document.addEventListener("DOMContentLoaded", (event) => { // Logout if password and email dont match ( prevent hacking accounts )
-            fetch("/api/getAccount", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: getCookie("currentEmail"),
-                })
-            }).then(response => response.json())
-                .then(data => {
-                    if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
-                        deleteCookie("isLoggedIn");
-                        deleteCookie("currentEmail");
-                        deleteCookie("currentPassword");
-                        window.location.href = "/" + lang_code;
-                    }
-                })
-        });
-
-        let checkpage = document.querySelector("#CHECKPAGE");
-
-        fetch("/api/checkCheckedHtmlPage", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                PAGELINK: page_link,
-            })
-        }).then(response => response.json()).then(data => {
-            if (data.PAGECHECKED === true) {
-                checkpage.checked = true;
-                checkpage.disabled = true;
-            }
-        })
 
         var editor = CodeMirror.fromTextArea(document.getElementById("CODE1"), {
             lineNumbers: true,  // Display line numbers
@@ -253,27 +199,6 @@
         });
         editor3.setSize(null, 90);
 
-        checkpage.addEventListener("change", (event) => {
-            if (checkpage.checked) {
-                checkpage.disabled = true;
-                const isLoggedIn = getCookie("isLoggedIn");
-                if (isLoggedIn === null || isLoggedIn == "false") {
-                    event.target.checked = false;
-                    window.location.href = "/" + lang_code + "/" + "login";
-                }
-                if (isLoggedIn == "true") {
-                    fetch("/api/checkHtmlPage", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            link: page_link,
-                        })
-                    });
-                }
-            }
-        });
     </script>
 </body>
 

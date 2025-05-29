@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html dir="<%= t('direction') %>" lang="<%= lang %>">
+
+<head>
+    <%- include('components/metadata_info')%>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css">
+
+        <!-- Include CodeMirror JavaScript library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
+
+        <!-- Include the JavaScript mode for syntax highlighting -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/javascript/javascript.min.js"></script>
+        <style>
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                margin: 0%;
+            }
+
+            .BODYCONTENT {
+                width: calc(100% - 60px);
+                /* 100% - 2*padding */
+                height: auto;
+                padding: 30px;
+                font-family: "Arial";
+                color: #1a2028;
+            }
+
+            .BODY {
+                width: 100%;
+                height: 100%;
+                overflow-x: hidden;
+                overflow-y: scroll;
+            }
+
+            .BODYCONTENT h1 {
+                color: #fdc535;
+            }
+
+            .CHAPTER {
+                background-color: #1a2028;
+                width: fit-content;
+                color: white;
+                padding: 5px;
+                font-family: "Arial";
+            }
+
+            .POINTS {
+                background-color: #16af0e;
+                width: fit-content;
+                color: white;
+                padding: 5px;
+                font-family: "Arial";
+            }
+
+            .ANSWERBUTTON {
+                background-color: #fdca87;
+                /* A modern blue for better visual appeal */
+                padding: 12px 20px;
+                /* Slightly more padding for a balanced look */
+                display: flex;
+                align-items: center;
+                color: #1a2028;
+                font-weight: 600;
+                /* Slightly lighter than bold for a cleaner look */
+                margin-bottom: 15px;
+                /* Reduced margin for tighter layout */
+                border: none;
+                /* Removed border for a sleeker appearance */
+                border-radius: 8px;
+                /* Rounded corners for a modern feel */
+                cursor: pointer;
+                /* Indicates interactivity */
+                transition: background-color 0.3s ease, transform 0.1s ease;
+                /* Smooth hover effects */
+            }
+
+            .ANSWERBUTTON:hover {
+                background-color: #fcb14e;
+                /* Darker blue on hover */
+                transform: translateY(-2px);
+                /* Subtle lift effect */
+            }
+
+            .ANSWERBUTTON:active {
+                transform: translateY(0);
+                /* Reset lift on click */
+            }
+        </style>
+        <title>
+            HTMLtoHero
+        </title>
+</head>
+
+<body>
+    <%- include('components/header') %>
+
+        <div class="BODY">
+
+            <div class="BODYCONTENT">
+
+                <div class="CHAPTER">Chapter 1: Introduction to HTML</div>
+                <h1 class="QUESTIONTITLE">
+                    Question 1 : What does HTML stand for?
+                </h1>
+                <div class="ANSWERBUTTON">
+                    Hyper Transfer Markup Language
+                </div>
+                <div class="ANSWERBUTTON">
+                    Hyper Text Markup Language
+                </div>
+                <div class="ANSWERBUTTON">
+                    High Text Modeling Language
+                </div>
+                <div class="ANSWERBUTTON">
+                    Hyperlink Text Management Language
+                </div>
+                <div class="ANSWERBUTTON">
+                    Home Text Markup Language
+                </div>
+                <div class="POINTS">10 Points
+                </div>
+
+                <hr>
+
+                <div class="CHAPTER">Chapter 3: Working with Text in HTML</div>
+                <h1 class="QUESTIONTITLE">
+                    Question 2 : Which tag creates a paragraph in HTML?
+                </h1>
+                <div class="ANSWERBUTTON">
+                    `&lt;p&gt;`
+                </div>
+                <div class="ANSWERBUTTON">
+                    `&lt;para&gt;`
+                </div>
+                <div class="ANSWERBUTTON">
+                    `&lt;text&gt;`
+                </div>
+                <div class="ANSWERBUTTON">
+                    `&lt;div&gt;`
+                </div>
+                <div class="ANSWERBUTTON">
+                    `&lt;span&gt;`
+                </div>
+                <div class="POINTS">10 Points
+                </div>
+            </div>45
+
+            <%- include('components/footer') %>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>
+            function getCookie(name) {
+                const cookiePattern = `${name}=`;
+                const cookies = document.cookie.split('; ');
+                for (let cookie of cookies) {
+                    if (cookie.startsWith(cookiePattern)) {
+                        return decodeURIComponent(cookie.substring(cookiePattern.length));
+                    }
+                }
+                return null;
+            }
+
+            function deleteCookie(cookieName) {
+                document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            }
+
+        </script>
+</body>
+
+</html>

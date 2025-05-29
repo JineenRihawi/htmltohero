@@ -180,10 +180,7 @@
                     <li><%= t('htmlTutorials.chapter11.page2.list2Item3') %></li>
                 </ul>
             </div>
-            <div class="CHECKBAR">
-                <input type="checkbox" id="CHECKPAGE">
-                <%= t('htmlTutorials.markAsCompleted') %>
-            </div>
+            <%- include('../components/htmlTutorialsCheckbar', { page_link: 'common_entities' }) %>
             <%- include('../components/footer') %>
         </div>
     </div>
@@ -204,44 +201,6 @@
             document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ";
         }
 
-        let page_link = 'common_entities';
-
-        document.addEventListener("DOMContentLoaded", (event) => {
-            fetch("/event", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: getCookie("email"),
-                })
-            }).then(response => response.json())
-                .then(data => {
-                    if (getCookie("email") !== data.email || getCookie("password") !== data.password) {
-                        deleteCookie("isLoggedIn");
-                        deleteCookie("email");
-                        deleteCookie("password");
-                        window.location.href = "/" + lang_code;
-                    }
-                })
-        });
-
-        let checkpage = document.querySelector("#CHECKPAGE");
-
-        fetch("/api/checkCheckedHtml", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                PAGELINK: page_link,
-            })
-        }).then(response => response.json()).then(data => {
-            if (data.PAGECHECKED === true) {
-                checkpage.checked = true;
-                checkpage.disabled = true;
-            }
-        });
 
         var editor1 = CodeMirror.fromTextArea(document.getElementById("CODE1"), {
             lineNumbers: true,
@@ -276,26 +235,6 @@
         });
         editor3.setSize(null, 250);
 
-        checkpage.addEventListener("change", (e) => {
-            if (checkpage.checked) {
-                checkpage.disabled = true;
-                const isLoggedIn = getCookie("isLoggedIn");
-                if (isLoggedIn === null || isLoggedIn == "false") {
-                    e.target.checked = false;
-                    window.location.href = "/" + lang_code + "/" + "login";
-                } else {
-                    fetch("/api/checkHtmlPage", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            link: page_link,
-                        })
-                    });
-                }
-            }
-        });
     </script>
 </body>
 </html>

@@ -168,26 +168,6 @@
                 doc.close();
             })
 
-            document.addEventListener("DOMContentLoaded", (event) => { // Logout if password and email dont match ( prevent hacking accounts )
-                fetch("/api/getAccount", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        email: getCookie("currentEmail"),
-                    })
-                }).then(response => response.json())
-                    .then(data => {
-                        if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
-                            deleteCookie("isLoggedIn");
-                            deleteCookie("currentEmail");
-                            deleteCookie("currentPassword");
-                            window.location.href = "/" + lang_code;
-                        }
-                    })
-            });
-
         </script>
 </body>
 

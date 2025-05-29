@@ -1,0 +1,61 @@
+<style>
+    .CHECKBAR {
+        background-color: #445368;
+        margin-bottom: 10px;
+        width: calc(100%-6px);
+        padding: 3px;
+        display: flex;
+        flex-direction: row-reverse;
+        user-select: none;
+        font-family: "Arial";
+        color: white;
+    }
+</style>
+
+<div class="CHECKBAR">
+    <input type="CHECKBOX" id="CHECKPAGE">
+    <%= t('jsTutorials.markAsCompleted') %>
+</div>
+
+<script>
+    let checkpage = document.querySelector("#CHECKPAGE");
+    let page_link = "<%=page_link%>";
+
+    fetch("/api/checkCheckedJsPage", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            PAGELINK: page_link,
+        })
+    }).then(response => response.json()).then(data => {
+        if (data.PAGECHECKED === true) {
+            checkpage.checked = true;
+            checkpage.disabled = true;
+        }
+    })
+
+    checkpage.addEventListener("change", (event) => {
+        if (checkpage.checked) {
+            checkpage.disabled = true;
+            const isLoggedIn = getCookie("isLoggedIn");
+            if (isLoggedIn === null || isLoggedIn == "false") {
+                event.target.checked = false;
+                checkpage.disabled = false;
+                window.location.href = "/" + lang_code + "/" + "login";
+            }
+            if (isLoggedIn == "true") {
+                fetch("/api/checkJsPage", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        link: page_link,
+                    })
+                });
+            }
+        }
+    });
+</script>

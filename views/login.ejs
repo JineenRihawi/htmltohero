@@ -72,6 +72,10 @@
                 width: 100%;
             }
 
+            .LOGININPUT_ERROR {
+                border: 1px solid red;
+            }
+
             .LOGINBUTTON:hover {
                 background-color: #ef9d6e;
                 cursor: pointer;
@@ -93,6 +97,21 @@
                 display: flex;
                 width: 100%;
                 background-color: white;
+            }
+
+            .LOGININPUTBIGDIV {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .LOGININPUTERROR {
+                color: red;
+                font-family: "Arial";
+                padding: 1px;
+                font-size: 75%;
+                display: flex;
+                align-items: center;
             }
 
             @media (max-width: 500px) {
@@ -123,14 +142,20 @@
                     <div class="LOGINCONTAINERCONTENT">
                         <img src="https://raw.githubusercontent.com/JineenRihawi/htmltoheroassets/1e4e4bd65bfed1479c5e272f2a43b8da9f849aa7/html2hero.svg"
                             height="150px" style="margin-bottom: 35px;">
-                        <div class="LOGININPUTDIV">
-                            <input class="LOGININPUT" id="emailInput" type="email"
-                                placeholder="<%= t('loginPage.email') %>">
+                        <div class="LOGININPUTBIGDIV">
+                            <span class="LOGININPUTERROR" id="emailInputError"></span>
+                            <div class="LOGININPUTDIV" id="EMAILINPUT">
+                                <input class="LOGININPUT" id="emailInput" type="email"
+                                    placeholder="<%= t('loginPage.email') %>">
+                            </div>
                         </div>
-                        <div class="LOGININPUTDIV">
-                            <input class="LOGININPUT" id="passwordInput" type="password"
-                                placeholder="<%= t('loginPage.password') %>">
-                            <input type="checkbox" id="SHOWPASSWORDCHECK">
+                        <div class="LOGININPUTBIGDIV">
+                            <span class="LOGININPUTERROR" id="passwordInputError"></span>
+                            <div class="LOGININPUTDIV" id="PASSWORDINPUT_">
+                                <input class="LOGININPUT" id="passwordInput" type="password"
+                                    placeholder="<%= t('loginPage.password') %>">
+                                <input type="checkbox" id="SHOWPASSWORDCHECK">
+                            </div>
                         </div>
                         <div class="LOGININPUTDIV" style="background-color: #FAD473;">
                             <div class="LOGINBUTTON">
@@ -170,25 +195,33 @@
                 document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
             }
 
-            document.addEventListener("DOMContentLoaded", (event) => { // Logout if password and email dont match ( prevent hacking accounts )
-                fetch("/api/getAccount", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        email: getCookie("currentEmail"),
-                    })
-                }).then(response => response.json())
-                    .then(data => {
-                        if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
-                            deleteCookie("isLoggedIn");
-                            deleteCookie("currentEmail");
-                            deleteCookie("currentPassword");
-                            window.location.href = "/" + lang_code;
-                        }
-                    })
+            let EMAILINPUT = document.querySelector("#EMAILINPUT");
+            let EMAILINPUTERROR = document.querySelector("#emailInputError");
+            let PASSWORDINPUT_ = document.querySelector("#PASSWORDINPUT_");
+            let PASSWORDINPUT2 = document.querySelector("#passwordInput")
+            let PASSWORDINPUTERROR = document.querySelector("#passwordInputError");
+
+            EMAILINPUT.addEventListener("click", (event) => {
+                EMAILINPUT.classList.remove("LOGININPUT_ERROR");
+                EMAILINPUTERROR.innerHTML = "";
             });
+            PASSWORDINPUT2.addEventListener("click", (event) => {
+                PASSWORDINPUT_.classList.remove("LOGININPUT_ERROR");
+                PASSWORDINPUTERROR.innerHTML = "";
+            });
+            PASSWORDINPUT_.addEventListener("click", (event) => {
+                PASSWORDINPUT_.classList.remove("LOGININPUT_ERROR");
+                PASSWORDINPUTERROR.innerHTML = "";
+            });
+
+            function EMAILINPUTERRORFUNC(err) {
+                EMAILINPUT.classList.add("LOGININPUT_ERROR");
+                EMAILINPUTERROR.innerHTML = err;
+            }
+            function PASSWORDINPUTERRORFUNC(err) {
+                PASSWORDINPUT_.classList.add("LOGININPUT_ERROR");
+                PASSWORDINPUTERROR.innerHTML = err;
+            }
 
             async function logIn(email, password) {
                 const response = await fetch("/api/login", {
@@ -217,11 +250,11 @@
                 const password = document.querySelector("#passwordInput").value;
 
                 if (email.length <= 0) {
-                    window.alert("<%= t('loginPage.emptyEmailError') %>");
+                    EMAILINPUTERRORFUNC("<%= t('loginPage.emptyEmailError') %>");
                     return;
                 }
                 if (password.length <= 0) {
-                    window.alert("<%= t('loginPage.emptyPasswordError') %>");
+                    PASSWORDINPUTERRORFUNC("<%= t('loginPage.emptyPasswordError') %>");
                     return;
                 }
 
@@ -229,9 +262,9 @@
                     if (result === true) {
                         window.location.href = "/" + lang_code + "/profile";
                     } else if (result === "invalidEmail") {
-                        window.alert("<%= t('loginPage.invalidEmailError') %>");
+                        EMAILINPUTERRORFUNC("<%= t('loginPage.invalidEmailError') %>");
                     } else if (result === "invalidPassword") {
-                        window.alert("<%= t('loginPage.invalidPasswordError') %>");
+                        PASSWORDINPUTERRORFUNC("<%= t('loginPage.invalidPasswordError') %>");
                     }
                 });
             });

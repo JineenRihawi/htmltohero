@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html dir="<%= t('direction') %>" lang="<%= lang %>">
+
+<head>
+    <%- include('../components/metadata_info') %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/javascript/javascript.min.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .PAGE {
+            width: 100%;
+            height: calc(100% - 80px);
+            display: grid;
+            grid-template-columns: 25% 75%;
+        }
+
+        .BODYCONTENT {
+            width: calc(100% - 60px);
+            height: auto;
+            padding: 30px;
+            font-family: "Arial";
+            color: #1a2028;
+        }
+
+        .BODY {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .BODYCONTENT h1 {
+            color: #fdc535;
+        }
+
+        #SIDEMENUBUTTON-21 {
+            background-color: #684444;
+            color: white;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 300px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            width: 33.33%;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .note {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #fdc535;
+            margin: 20px 0;
+        }
+
+        @media screen and (max-width: 600px) {
+            th, td {
+                padding: 6px;
+                font-size: 14px;
+            }
+        }
+    </style>
+    <title>HTMLtoHero</title>
+</head>
+
+<body>
+    <%- include('../components/header') %>
+
+    <div class="PAGE">
+        <%- include('../components/cssTutorialsSideMenu') %>
+        <div class="BODY">
+            <div class="BODYCONTENT">
+                <h1><%= t('cssTutorials.chapter6.page2.pageTitle') %></h1>
+                <p><%= t('cssTutorials.chapter6.page2.paragraph1') %></p>
+                <p><%= t('cssTutorials.chapter6.page2.paragraph2') %></p>
+                <ul>
+                    <li><%= t('cssTutorials.chapter6.page2.listItem1') %></li>
+                    <li><%= t('cssTutorials.chapter6.page2.listItem2') %></li>
+                    <li><%= t('cssTutorials.chapter6.page2.listItem3') %></li>
+                </ul>
+                <hr>
+                
+                <h1><%= t('cssTutorials.chapter6.page2.title1') %></h1>
+                <p><%= t('cssTutorials.chapter6.page2.paragraph3') %></p>
+                <h3><%= t('cssTutorials.chapter6.page2.codeTitle1') %></h3>
+                <textarea id="CODE1">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visibility Example</title>
+    <style>
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            background-color: #e0f7fa;
+            padding: 10px;
+            margin: 10px;
+            color: #01579b;
+            border: 1px solid #0288d1;
+        }
+        .tooltip-text {
+            visibility: hidden;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #0288d1;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            z-index: 1;
+        }
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <div class="tooltip">
+        Hover Me
+        <span class="tooltip-text">Tooltip Info</span>
+    </div>
+</body>
+</html>
+                </textarea>
+
+                <h1><%= t('cssTutorials.chapter6.page2.title2') %></h1>
+                <p><%= t('cssTutorials.chapter6.page2.paragraph4') %></p>
+                <h3><%= t('cssTutorials.chapter6.page2.codeTitle2') %></h3>
+                <textarea id="CODE2">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opacity Example</title>
+    <style>
+        .image-card {
+            width: 250px;
+            margin: 20px;
+            position: relative;
+        }
+        .image-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+        .image-card:hover .overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-card">
+        <img src="https://example.com/image.jpg" alt="Sample Image">
+        <div class="overlay">View Details</div>
+    </div>
+</body>
+</html>
+                </textarea>
+
+                <h1><%= t('cssTutorials.chapter6.page2.title3') %></h1>
+                <p><%= t('cssTutorials.chapter6.page2.paragraph5') %></p>
+                <h3><%= t('cssTutorials.chapter6.page2.codeTitle3') %></h3>
+                <textarea id="CODE3">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overflow Example</title>
+    <style>
+        .content-box {
+            width: 300px;
+            height: 150px;
+            margin: 20px;
+            padding: 15px;
+            background-color: #f3e5f5;
+            border: 2px solid #8e24aa;
+            color: #4a148c;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-box">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+    </div>
+</body>
+</html>
+                </textarea>
+
+                <div class="note">
+                    <p><%= t('cssTutorials.chapter6.page2.note') %></p>
+                </div>
+
+                <h3><%= t('cssTutorials.chapter6.page2.tableTitle') %></h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th><%= t('cssTutorials.chapter6.page2.tableHeader1') %></th>
+                            <th><%= t('cssTutorials.chapter6.page2.tableHeader2') %></th>
+                            <th><%= t('cssTutorials.chapter6.page2.tableHeader3') %></th>
+                        </tr>
+                        <tr>
+                            <td><%= t('cssTutorials.chapter6.page2.tableRow1Col1') %></td>
+                            <td><%= t('cssTutorials.chapter6.page2.tableRow1Col2') %></td>
+                            <td><%= t('cssTutorials.chapter6.page2.tableRow1Col3') %></td>
+                        </tr>
+                        <tr>
+                            <td><%= t('cssTutorials.chapter6.page2.tableRow2Col1') %></td>
+                            <td><%= t('cssTutorials.chapter6.page2.tableRow2Col2') %></td>
+                            <td><%= t('cssTutorials.chapter6.page2.tableRow2Col3') %></td>
+                        </tr>
+                        <tr>
+                            <td><%= t('cssTutorials.chapter6.page2.tableRow3Col1') %></td>
+                            <td><%= t('cssTutorials.chapter6.page2.tableRow3Col2') %></td>
+                            <td><%= t('cssTutorials.chapter6.page2.tableRow3Col3') %></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <%- include('../components/cssTutorialsCheckbar', { page_link: 'visibility' }) %>
+
+            <%- include('../components/footer') %>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        function getCookie(name) {
+            const cookiePattern = `${name}=`;
+            const cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                if (cookie.startsWith(cookiePattern)) {
+                    return decodeURIComponent(cookie.substring(cookiePattern.length));
+                }
+            }
+            return null;
+        }
+
+        function deleteCookie(cookieName) {
+            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        }
+
+        var editor = CodeMirror.fromTextArea(document.getElementById("CODE1"), {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
+            readOnly: true,
+        });
+        editor.setSize(null, 640);
+
+        var editor2 = CodeMirror.fromTextArea(document.getElementById("CODE2"), {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
+            readOnly: true,
+        });
+        editor2.setSize(null, 700);
+
+        var editor3 = CodeMirror.fromTextArea(document.getElementById("CODE3"), {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
+            readOnly: true,
+        });
+        editor3.setSize(null, 440);
+    </script>
+</body>
+
+</html>

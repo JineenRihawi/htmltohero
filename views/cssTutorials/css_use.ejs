@@ -41,18 +41,6 @@
             color: #fdc535;
         }
 
-        .CHECKBAR {
-            background-color: #445368;
-            margin-bottom: 10px;
-            width: calc(100% - 6px);
-            padding: 3px;
-            display: flex;
-            flex-direction: row-reverse;
-            user-select: none;
-            font-family: "Arial";
-            color: white;
-        }
-
         #SIDEMENUBUTTON-2 {
             background-color: #684444;
             color: white;
@@ -113,10 +101,7 @@
                 </textarea>
             </div>
 
-            <div class="CHECKBAR">
-                <input type="checkbox" id="CHECKPAGE">
-                <%= t('cssTutorials.markAsCompleted') %>
-            </div>
+            <%- include('../components/cssTutorialsCheckbar', { page_link: 'css_use' }) %>
 
             <%- include('../components/footer') %>
         </div>
@@ -139,45 +124,6 @@
             document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
         }
 
-        let page_link = 'css_use';
-
-        document.addEventListener("DOMContentLoaded", (event) => {
-            fetch("/api/getAccount", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: getCookie("currentEmail"),
-                })
-            }).then(response => response.json())
-                .then(data => {
-                    if (getCookie("currentEmail") !== data.email || getCookie("currentPassword") !== data.password) {
-                        deleteCookie("isLoggedIn");
-                        deleteCookie("currentEmail");
-                        deleteCookie("currentPassword");
-                        window.location.href = "/" + lang_code;
-                    }
-                });
-        });
-
-        let checkpage = document.querySelector("#CHECKPAGE");
-
-        fetch("/api/checkCheckedCssPage", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                PAGELINK: page_link,
-            })
-        }).then(response => response.json()).then(data => {
-            if (data.PAGECHECKED === true) {
-                checkpage.checked = true;
-                checkpage.disabled = true;
-            }
-        });
-
         var editor = CodeMirror.fromTextArea(document.getElementById("CODE1"), {
             lineNumbers: true,
             mode: "javascript",
@@ -199,28 +145,6 @@
             readOnly: true,
         });
         editor2.setSize(null, 370);
-
-        checkpage.addEventListener("change", (event) => {
-            if (checkpage.checked) {
-                checkpage.disabled = true;
-                const isLoggedIn = getCookie("isLoggedIn");
-                if (isLoggedIn === null || isLoggedIn == "false") {
-                    event.target.checked = false;
-                    window.location.href = "/" + lang_code + "/" + "login";
-                }
-                if (isLoggedIn == "true") {
-                    fetch("/api/checkCssPage", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            link: page_link,
-                        })
-                    });
-                }
-            }
-        });
     </script>
 </body>
 
