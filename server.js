@@ -11,7 +11,7 @@ const FormData = require('form-data');
 const DATABASE_URL = "mongodb+srv://RHRS_USER:Txtkai18@mycluster.xya3g.mongodb.net/HTMLtoHERO?retryWrites=true&w=majority&appName=MyCluster";
 const client = new MongoClient(DATABASE_URL);
 
-const upload = multer({ dest: path.join(__dirname, '/uploads') });
+const upload = multer({ storage: multer.memoryStorage() });
 
 let db, accountsCollection;
 
@@ -61,16 +61,17 @@ app.set('view engine', 'ejs')
 
 app.post("/upload", upload.single("image"), async (req, res) => {
     try {
-    const imagePath = path.join(__dirname, req.file.path);
     const form = new FormData();
-    form.append('image', fs.createReadStream(imagePath));
+    form.append('image', req.file.buffer, {
+        filename: req.file.originalname,
+        contentType: req.file.mimetype
+    });
     const response = await axios.post('https://api.imgur.com/3/image', form, {
         headers: {
             Authorization: `Client-ID 80ad94d3d67f0af`,
             ...form.getHeaders(),
         },
     });
-    fs.unlinkSync(imagePath);
 
     let LINK = response.data.data.link;
     let OBJECTID = ObjectId.createFromHexString(req.cookies.TOKEN);
