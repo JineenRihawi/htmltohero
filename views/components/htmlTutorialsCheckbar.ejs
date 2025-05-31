@@ -39,23 +39,23 @@
     checkpage.addEventListener("change", (event) => {
         if (checkpage.checked) {
             checkpage.disabled = true;
-            const isLoggedIn = getCookie("isLoggedIn");
-            if (isLoggedIn === null || isLoggedIn == "false") {
-                event.target.checked = false;
-                checkpage.disabled = false;
-                window.location.href = "/" + lang_code + "/" + "login";
-            }
-            if (isLoggedIn == "true") {
-                fetch("/api/checkHtmlPage", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        link: page_link,
-                    })
-                });
-            }
+
+            fetch("/api/checkHtmlPage", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    link: page_link,
+                })
+            }).then(data => data.json()).then(data => {
+                const r = data.redirectToLoginPage;
+                if (r === true) {
+                    checkpage.disabled = false;
+                    event.target.checked = false;
+                    window.location.href = "/" + lang_code + "/" + "login";
+                }
+            });
         }
     });
 </script>

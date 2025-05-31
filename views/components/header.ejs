@@ -462,15 +462,14 @@
     let profilePicture = document.querySelector("#PROFILEIMAGE");
     let HEADERSIDEMENUPROFILE = document.querySelector("#HEADERSIDEMENUPROFILE")
     let HEADERSIDEMENULOGOUT = document.querySelector("#HEADERSIDEMENULOGOUT")
-    const isLoggedIn = getCookie("isLoggedIn");
-    if (isLoggedIn === null || isLoggedIn == "false") {
-        loginButton.style.display = "flex";
-        HEADERSIDEMENULOGIN.style.display = "flex";
-    }
-    if (isLoggedIn == "true") {
+    const TOKEN = getCookie("TOKEN");
+    if (TOKEN) {
         profilePicture.style.display = "inline";
         HEADERSIDEMENUPROFILE.style.display = "flex";
         HEADERSIDEMENULOGOUT.style.display = "flex";
+    } else {
+        loginButton.style.display = "flex";
+        HEADERSIDEMENULOGIN.style.display = "flex";
     }
 
     let HEADERLOGO = document.querySelector(".HEADERLOGO");
@@ -491,7 +490,7 @@
     })
 
     let exercisesHtml = document.querySelector(".HEADEREXERCISESHTMLBUTTON");
-    let HEADERSIDEMENUEXERCISESHTML = document.querySelector("#HEADERSIDEMENUEXERCISESCSS");
+    let HEADERSIDEMENUEXERCISESHTML = document.querySelector("#HEADERSIDEMENUEXERCISESHTML");
     HEADERSIDEMENUEXERCISESHTML.addEventListener("click", (event) => {
         window.location.href = "/" + lang_code + "/exercises/HTML";
     });
@@ -559,15 +558,11 @@
 
     let logoutButton = document.querySelector("#LOGOUTBUTTON");
     logoutButton.addEventListener("click", (event) => {
-        deleteCookie("isLoggedIn");
-        deleteCookie("currentEmail");
-        deleteCookie("currentPassword")
+        deleteCookie("TOKEN");
         window.location.href = "/" + lang_code;
     });
     HEADERSIDEMENULOGOUT.addEventListener("click", (event) => {
-        deleteCookie("isLoggedIn");
-        deleteCookie("currentEmail");
-        deleteCookie("currentPassword")
+        deleteCookie("TOKEN");
         window.location.href = "/" + lang_code;
     });
 

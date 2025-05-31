@@ -1,12 +1,18 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 const express = require('express');  //import express lib
 const cookieParser = require("cookie-parser");
 const path = require("path");
 const fs = require("fs")
-const i18n = require("./i18n")
+const i18n = require("./i18n");
+const multer = require('multer');
+const axios = require('axios');
+const FormData = require('form-data');
 
 const DATABASE_URL = "mongodb+srv://RHRS_USER:Txtkai18@mycluster.xya3g.mongodb.net/HTMLtoHERO?retryWrites=true&w=majority&appName=MyCluster";
 const client = new MongoClient(DATABASE_URL);
+
+const upload = multer({ dest: 'uploads/' });
+//const IMGUR_CLIENT_ID = '80ad94d3d67f0af';
 
 let db, accountsCollection;
 
@@ -54,6 +60,41 @@ app.use(cookieParser());
 app.set('trust proxy', true);
 app.set('view engine', 'ejs')
 
+app.post("/upload", upload.single("image"), async (req, res) => {
+    const imagePath = path.join(__dirname, req.file.path);
+    const form = new FormData();
+    form.append('image', fs.createReadStream(imagePath));
+    const response = await axios.post('https://api.imgur.com/3/image', form, {
+        headers: {
+            Authorization: `Client-ID 80ad94d3d67f0af`,
+            ...form.getHeaders(),
+        },
+    });
+    fs.unlinkSync(imagePath);
+
+    let LINK = response.data.data.link;
+    let OBJECTID = ObjectId.createFromHexString(req.cookies.TOKEN);
+    await updateOneInDatabase("_id", OBJECTID, { $set: { profileUrl: LINK } });
+
+    res.json({ imageUrl: response.data.data.link });
+});
+
+async function getAccount(TOKEN) {
+    const OBJECTID = ObjectId.createFromHexString(TOKEN);
+    const user = await findOneInDatabase("_id", OBJECTID);
+    if (!user) {
+        return "NOUSER";
+    }
+    return user;
+}
+
+async function isLoggedIn(TOKEN) {
+    if (!TOKEN) return false;
+    const USER = await getAccount(TOKEN);
+    if (!USER || USER === "NOUSER") return false;
+    return true;
+}
+
 app.post("/api/consoleLog", (req, res) => { // Server tarafinda log cikartma
     try {
         console.log(req.body.message);
@@ -62,43 +103,65 @@ app.post("/api/consoleLog", (req, res) => { // Server tarafinda log cikartma
     }
 });
 
-/*async function addPoints(email, amount) {
+async function addPoints(TOKEN, amount) {
     try {
-        let user = findOneInDatabase("email", email);
-        user.
-    } catch(error) {
+        let user = await getAccount(TOKEN);
+        if (!user || user === "NOUSER") return;
+        let points = user.points;
+        if (points === undefined || isNaN(points)) return;
+        let newPoints = points + amount;
+        let levelsToAdd = 0;
+        if (newPoints >= 500) {
+            levelsToAdd = Math.floor(newPoints / 500);
+            newPoints -= 500 * levelsToAdd;
+        }
+        const OBJECTID = ObjectId.createFromHexString(TOKEN);
+        await updateOneInDatabase("_id", OBJECTID, { $set: { points: newPoints } });
+        await updateOneInDatabase("_id", OBJECTID, { $inc: { level: levelsToAdd } });
+        if (levelsToAdd > 0) return true;
+        return false;
+    } catch (error) {
         console.log(error)
     }
-}*/
+}
+
+async function removePoints(TOKEN, amount) {
+    try {
+        let user = await getAccount(TOKEN);
+        if (!user || user === "NOUSER") return;
+        let points = user.points;
+        if (points === undefined || isNaN(points)) return;
+        let newPoints = points - amount;
+        if (newPoints < 0) newPoints = 0;
+        const OBJECTID = ObjectId.createFromHexString(TOKEN);
+        await updateOneInDatabase("_id", OBJECTID, { $set: { points: newPoints } });
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 app.post("/api/login", async (req, res) => {
     try {
         const user = await findOneInDatabase("email", req.body.email);
 
         if (!user) {
-            return res.json({ errorName: "invalidEmail" });
+            return res.json({ errorName: "invalidEmail", success: false });
         }
 
         const { email, password } = user;
 
         if (!password || !email) {
-            res.cookie("isLoggedIn", false);
-            return res.json({ errorName: "invalidCredentials" });
+            return res.json({ errorName: "invalidCredentials", success: false });
         }
 
         if (req.body.password === password) {
-            res.cookie("isLoggedIn", true);
-            res.cookie("currentEmail", email);
-            res.cookie("currentPassword", password);
-            return res.json({ isLoggedIn: true });
+            res.cookie("TOKEN", user._id);
+            return res.json({ errorName: "noerror", success: true });
         } else {
-            res.cookie("isLoggedIn", false);
-            return res.json({ errorName: "invalidPassword" });
+            return res.json({ errorName: "invalidPassword", success: false });
         }
     } catch (error) {
-        console.error("Login error:", error);
-        res.cookie("isLoggedIn", false);
-        return res.status(500).json({ errorName: "serverError" });
+        return res.json({ errorName: "serverError", success: false });
     }
 });
 
@@ -127,7 +190,7 @@ app.post("/api/register", async (req, res) => {
             birthyear: birthyearNum,
             birthmonth: birthmonthNum,
             birthday: birthdayNum,
-            level: 0,
+            level: 1,
             points: 0,
             createday: day,
             createmonth: month,
@@ -139,9 +202,11 @@ app.post("/api/register", async (req, res) => {
             checkedHtmlPages: [],
             checkedJsPages: [],
             lastCompletedCssExerciseNumber: 0,
-            lastCompletedCssJsNumber: 0,
+            lastCompletedJsExerciseNumber: 0,
             lastCompletedHtmlExerciseNumber: 0,
+            profileUrl: "",
         };
+
         await insertOneToDatabase(USER);
 
         return res.json({ errorName: "noerror" });
@@ -152,27 +217,18 @@ app.post("/api/register", async (req, res) => {
     }
 });
 
-app.post("/api/getAccount", (req, res) => {
-    try {
-
-        findOneInDatabase("email", req.body.email).then(user => {
-            if (user) {
-                let pass = user.password;
-                if (pass === req.body.password) res.json(user);
-            }
-        });
-    } catch (error) {
-        console.log(error);
-    }
-});
-
 app.post("/api/checkHtmlPage", async (req, res) => {
     try {
-        const isLoggedIn = req.cookies.isLoggedIn;
-        const email = req.cookies.currentEmail;
-        if (isLoggedIn == "true") {
-            await updateOneInDatabase("email", email, { $push: { checkedHtmlPages: req.body.link } });
-            await updateOneInDatabase("email", email, { $set: { lastCheckedHtmlPageLink: req.body.link } });
+        const TOKEN = req.cookies.TOKEN;
+        const LOGIN = await isLoggedIn(TOKEN);
+
+        if (LOGIN === true) {
+            const OBJECTID = ObjectId.createFromHexString(TOKEN);
+            await updateOneInDatabase("_id", OBJECTID, { $push: { checkedHtmlPages: req.body.link } });
+            await updateOneInDatabase("_id", OBJECTID, { $set: { lastCheckedHtmlPageLink: req.body.link } });
+            return res.json({ redirectToLoginPage: false });
+        } else {
+            return res.json({ redirectToLoginPage: true });
         }
     } catch (error) {
         console.log(error);
@@ -181,11 +237,16 @@ app.post("/api/checkHtmlPage", async (req, res) => {
 
 app.post("/api/checkCssPage", async (req, res) => {
     try {
-        const isLoggedIn = req.cookies.isLoggedIn;
-        const email = req.cookies.currentEmail;
-        if (isLoggedIn == "true") {
-            await updateOneInDatabase("email", email, { $push: { checkedCssPages: req.body.link } });
-            await updateOneInDatabase("email", email, { $set: { lastCheckedCssPageLink: req.body.link } });
+        const TOKEN = req.cookies.TOKEN;
+        const LOGIN = await isLoggedIn(TOKEN);
+
+        if (LOGIN === true) {
+            const OBJECTID = ObjectId.createFromHexString(TOKEN);
+            await updateOneInDatabase("_id", OBJECTID, { $push: { checkedCssPages: req.body.link } });
+            await updateOneInDatabase("_id", OBJECTID, { $set: { lastCheckedCssPageLink: req.body.link } });
+            return res.json({ redirectToLoginPage: false });
+        } else {
+            return res.json({ redirectToLoginPage: true });
         }
     } catch (error) {
         console.log(error);
@@ -194,11 +255,16 @@ app.post("/api/checkCssPage", async (req, res) => {
 
 app.post("/api/checkJsPage", async (req, res) => {
     try {
-        const isLoggedIn = req.cookies.isLoggedIn;
-        const email = req.cookies.currentEmail;
-        if (isLoggedIn == "true") {
-            await updateOneInDatabase("email", email, { $push: { checkedJsPages: req.body.link } });
-            await updateOneInDatabase("email", email, { $set: { lastCheckedJsPageLink: req.body.link } });
+        const TOKEN = req.cookies.TOKEN;
+        const LOGIN = await isLoggedIn(TOKEN);
+
+        if (LOGIN === true) {
+            const OBJECTID = ObjectId.createFromHexString(TOKEN);
+            await updateOneInDatabase("_id", OBJECTID, { $push: { checkedJsPages: req.body.link } });
+            await updateOneInDatabase("_id", OBJECTID, { $set: { lastCheckedJsPageLink: req.body.link } });
+            return res.json({ redirectToLoginPage: false });
+        } else {
+            return res.json({ redirectToLoginPage: true });
         }
     } catch (error) {
         console.log(error);
@@ -208,14 +274,18 @@ app.post("/api/checkJsPage", async (req, res) => {
 app.post("/api/checkCheckedHtmlPage", async (req, res) => {
     try {
 
-        const isLoggedIn = req.cookies.isLoggedIn;
-        const email = req.cookies.currentEmail;
-        if (isLoggedIn == "true") {
-            await findOneInDatabase("email", email).then(user => {
-                if (user) {
-                    if (user.checkedHtmlPages.includes(req.body.PAGELINK)) res.json({ PAGECHECKED: true })
-                }
-            })
+        const TOKEN = req.cookies.TOKEN;
+        const LOGIN = await isLoggedIn(TOKEN);
+
+        if (LOGIN === true) {
+            const user = await getAccount(TOKEN);
+            if (user.checkedHtmlPages.includes(req.body.PAGELINK)) {
+                res.json({ PAGECHECKED: true })
+            } else {
+                return res.json({ PAGECHECKED: false })
+            }
+        } else {
+            return res.json({ PAGECHECKED: false })
         }
 
     } catch (error) {
@@ -227,14 +297,18 @@ app.post("/api/checkCheckedHtmlPage", async (req, res) => {
 app.post("/api/checkCheckedCssPage", async (req, res) => {
     try {
 
-        const isLoggedIn = req.cookies.isLoggedIn;
-        const email = req.cookies.currentEmail;
-        if (isLoggedIn == "true") {
-            await findOneInDatabase("email", email).then(user => {
-                if (user) {
-                    if (user.checkedCssPages.includes(req.body.PAGELINK)) res.json({ PAGECHECKED: true })
-                }
-            })
+        const TOKEN = req.cookies.TOKEN;
+        const LOGIN = await isLoggedIn(TOKEN);
+
+        if (LOGIN === true) {
+            const user = await getAccount(TOKEN);
+            if (user.checkedCssPages.includes(req.body.PAGELINK)) {
+                res.json({ PAGECHECKED: true })
+            } else {
+                return res.json({ PAGECHECKED: false })
+            }
+        } else {
+            return res.json({ PAGECHECKED: false })
         }
 
     } catch (error) {
@@ -243,18 +317,21 @@ app.post("/api/checkCheckedCssPage", async (req, res) => {
     }
 });
 
-
 app.post("/api/checkCheckedJsPage", async (req, res) => {
     try {
 
-        const isLoggedIn = req.cookies.isLoggedIn;
-        const email = req.cookies.currentEmail;
-        if (isLoggedIn == "true") {
-            await findOneInDatabase("email", email).then(user => {
-                if (user) {
-                    if (user.checkedJsPages.includes(req.body.PAGELINK)) res.json({ PAGECHECKED: true })
-                }
-            })
+        const TOKEN = req.cookies.TOKEN;
+        const LOGIN = await isLoggedIn(TOKEN);
+
+        if (LOGIN === true) {
+            const user = await getAccount(TOKEN);
+            if (user.checkedJsPages.includes(req.body.PAGELINK)) {
+                res.json({ PAGECHECKED: true })
+            } else {
+                return res.json({ PAGECHECKED: false })
+            }
+        } else {
+            return res.json({ PAGECHECKED: false })
         }
 
     } catch (error) {
@@ -432,13 +509,15 @@ app.get("/:lang/404", (req, res) => {
     }
 });
 
-app.get("/:lang/profile", (req, res) => {
+app.get("/:lang/profile", async (req, res) => {
 
     try {
         const lang = req.params.lang;
 
-        const isLoggedIn = req.cookies.isLoggedIn;
-        if (isLoggedIn === undefined || isLoggedIn === null || isLoggedIn == "false") {
+        const TOKEN = req.cookies.TOKEN;
+        const LOGIN = await isLoggedIn(TOKEN);
+
+        if (LOGIN !== true) {
             return res.redirect('/' + lang + '/login');
         }
 
@@ -446,11 +525,55 @@ app.get("/:lang/profile", (req, res) => {
             return res.redirect("/404")
         }
 
+        let user = await getAccount(TOKEN);
+        if (!user || user === "NOUSER") return res.redirect("/");
+
+        let name = user.name;
+        let birthyear = user.birthyear;
+        let birthmonth = user.birthmonth;
+        let birthday = user.birthday;
+        let createyear = user.createyear;
+        let createmonth = user.createmonth;
+        let createday = user.createday;
+        let level = user.level;
+        let points = user.points;
+        let lastCheckedCssPageLink = user.lastCheckedCssPageLink;
+        let lastCheckedHtmlPageLink = user.lastCheckedHtmlPageLink;
+        let lastCheckedJsPageLink = user.lastCheckedJsPageLink;
+        let lastCompletedCssExerciseNumber = user.lastCompletedCssExerciseNumber;
+        let lastCompletedJsExerciseNumber = user.lastCompletedJsExerciseNumber;
+        let lastCompletedHtmlExerciseNumber = user.lastCompletedHtmlExerciseNumber;
+
+        let qnumberHtml = user.checkedHtmlPages.length;
+        let qnumberCss = user.checkedCssPages.length;
+        let qnumberJs = user.checkedJsPages.length;
+
+        let profileUrl = user.profileUrl;
+
         t = i18n.getFixedT(lang);
 
         res.render('profile', {
             t,
-            lang
+            lang,
+            name,
+            birthyear,
+            birthmonth,
+            birthday,
+            createyear,
+            createmonth,
+            createday,
+            level,
+            points,
+            lastCheckedCssPageLink,
+            lastCheckedHtmlPageLink,
+            lastCheckedJsPageLink,
+            lastCompletedCssExerciseNumber,
+            lastCompletedJsExerciseNumber,
+            lastCompletedHtmlExerciseNumber,
+            qnumberHtml,
+            qnumberCss,
+            qnumberJs,
+            profileUrl
         })
 
     } catch (error) {
@@ -573,13 +696,15 @@ app.get("/:lang/tutorials/html/:page", (req, res) => {
     }
 });
 
-app.get("/:lang/exercises/html", (req, res) => {
+app.get("/:lang/exercises/html", async (req, res) => {
 
     try {
         const lang = req.params.lang;
 
-        const isLoggedIn = req.cookies.isLoggedIn;
-        if (isLoggedIn === undefined || isLoggedIn === null || isLoggedIn == "false") {
+        const TOKEN = req.cookies.TOKEN;
+        const LOGIN = await isLoggedIn(TOKEN);
+
+        if (LOGIN !== true) {
             return res.redirect('/' + lang + '/login');
         }
 
@@ -587,29 +712,74 @@ app.get("/:lang/exercises/html", (req, res) => {
             return res.redirect("/404")
         }
 
-        /*
-        let user = findOneInDatabase("email", req.cookies.email);
-        if (!user) {
-            return res.redirect('/');
+        let USER = await getAccount(TOKEN);
+        if (!USER || USER === "NOUSER") {
+            return res.redirect(`/${lang}`);
         }
 
-        let qnumber = user.lastCompletedHtmlExerciseNumber;
-        if (!qnumber || isNaN(qnumber) || qnumber <= 0) {
-            return res.redirect('/');
-        }*/
+        let qnumber = USER.lastCompletedHtmlExerciseNumber;
+        if (!qnumber || isNaN(qnumber) || qnumber <= 0 || qnumber > 20) {
+            const OBJECTID = ObjectId.createFromHexString(TOKEN);
+            await updateOneInDatabase("_id", OBJECTID, { $set: { lastCompletedHtmlExerciseNumber: 1 } });
+            return res.redirect(`/${lang}`);
+        }
 
-        /*
         let partials = [];
         for (let i = 1; i <= qnumber; i++) {
             partials.push(`${i}`);
-        }*/
+        }
 
         t = i18n.getFixedT(lang);
 
         res.render('exercisesHtml', {
             t,
-            lang
+            lang,
+            qnumber,
+            partials
         })
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.post("/api/checkHtmlAnswer", async (req, res) => {
+    try {
+
+        const { question, answer } = req.body;
+
+        const TOKEN = req.cookies.TOKEN;
+
+        let user = await getAccount(TOKEN);
+        if (!user || user === "NOUSER") {
+            return res.json({ error: true, success: false, pointsAdd: 0, pointsRemove: 0, levelUp: false });
+        }
+
+        let qnumber = user.lastCompletedHtmlExerciseNumber;
+        if (!qnumber || isNaN(qnumber) || qnumber <= 0 || qnumber > 20) {
+            const OBJECTID = ObjectId.createFromHexString(TOKEN);
+            await updateOneInDatabase("_id", OBJECTID, { $set: { lastCompletedHtmlExerciseNumber: 1 } });
+            return res.json({ error: true, success: false, pointsAd: 0, pointsRemove: 0, levelUp: false });
+        }
+
+        if (!question || !answer) {
+            return res.json({ error: true, success: false, pointsAdd: 0, pointsRemove: 0, levelUp: false });
+        }
+
+        const answers = [3, 2, 4, 3, 2, 5, 2, 4, 3, 2, 5, 3, 4, 2, 5, 3, 4, 4, 2, 3];
+        const points = [10, 10, 20, 30, 40, 50, 60, 70, 80, 90, 90, 100, 100, 100, 120, 120, 150, 150, 150, 300];
+
+        if (question === qnumber) {
+            if (answer === answers[qnumber - 1]) {
+                const OBJECTID = ObjectId.createFromHexString(TOKEN);
+                await updateOneInDatabase("_id", OBJECTID, { $inc: { lastCompletedHtmlExerciseNumber: 1 } });
+                let result = await addPoints(TOKEN, points[qnumber - 1]);
+                return res.json({ error: false, success: true, pointsAdd: points[qnumber - 1], pointsRemove: 0, levelUp: result });
+            } else {
+                await removePoints(TOKEN, points[qnumber - 1] / 10);
+                return res.json({ error: false, success: false, pointsAdd: 0, pointsRemove: points[qnumber - 1] / 10, levelUp: false });
+            }
+        }
 
     } catch (error) {
         console.log(error);
@@ -664,13 +834,15 @@ app.get("/:lang/tutorials/css/:page", (req, res) => {
     }
 });
 
-app.get("/:lang/exercises/css", (req, res) => {
+app.get("/:lang/exercises/css", async (req, res) => {
 
     try {
         const lang = req.params.lang;
 
-        const isLoggedIn = req.cookies.isLoggedIn;
-        if (isLoggedIn === undefined || isLoggedIn === null || isLoggedIn == "false") {
+        const TOKEN = req.cookies.TOKEN;
+        const LOGIN = await isLoggedIn(TOKEN);
+
+        if (LOGIN !== true) {
             return res.redirect('/' + lang + '/login');
         }
 
@@ -678,12 +850,74 @@ app.get("/:lang/exercises/css", (req, res) => {
             return res.redirect("/404")
         }
 
+        let USER = await getAccount(TOKEN);
+        if (!USER || USER === "NOUSER") {
+            return res.redirect(`/${lang}`);
+        }
+
+        let qnumber = USER.lastCompletedCssExerciseNumber;
+        if (!qnumber || isNaN(qnumber) || qnumber <= 0 || qnumber > 20) {
+            const OBJECTID = ObjectId.createFromHexString(TOKEN);
+            await updateOneInDatabase("_id", OBJECTID, { $set: { lastCompletedCssExerciseNumber: 1 } });
+            return res.redirect(`/${lang}`);
+        }
+
+        let partials = [];
+        for (let i = 1; i <= qnumber; i++) {
+            partials.push(`${i}`);
+        }
+
         t = i18n.getFixedT(lang);
 
         res.render('exercisesCss', {
             t,
-            lang
+            lang,
+            qnumber,
+            partials
         })
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.post("/api/checkCssAnswer", async (req, res) => {
+    try {
+
+        const { question, answer } = req.body;
+
+        const TOKEN = req.cookies.TOKEN;
+
+        let user = await getAccount(TOKEN);
+        if (!user || user === "NOUSER") {
+            return res.json({ error: true, success: false, pointsAdd: 0, pointsRemove: 0, levelUp: false });
+        }
+
+        let qnumber = user.lastCompletedCssExerciseNumber;
+        if (!qnumber || isNaN(qnumber) || qnumber <= 0 || qnumber > 20) {
+            const OBJECTID = ObjectId.createFromHexString(TOKEN);
+            await updateOneInDatabase("_id", OBJECTID, { $set: { lastCompletedCssExerciseNumber: 1 } });
+            return res.json({ error: true, success: false, pointsAd: 0, pointsRemove: 0, levelUp: false });
+        }
+
+        if (!question || !answer) {
+            return res.json({ error: true, success: false, pointsAdd: 0, pointsRemove: 0, levelUp: false });
+        }
+
+        const answers = [3, 2, 4, 1, 5, 2, 3, 4, 1, 5, 2, 3, 4, 1, 5, 2, 3, 4, 1, 5];
+        const points = [10, 10, 10, 20, 50, 80, 80, 100, 100, 110, 140, 140, 140, 140, 150, 150, 180, 190, 200, 400];
+
+        if (question === qnumber) {
+            if (answer === answers[qnumber - 1]) {
+                const OBJECTID = ObjectId.createFromHexString(TOKEN);
+                await updateOneInDatabase("_id", OBJECTID, { $inc: { lastCompletedCssExerciseNumber: 1 } });
+                let result = await addPoints(TOKEN, points[qnumber - 1]);
+                return res.json({ error: false, success: true, pointsAdd: points[qnumber - 1], pointsRemove: 0, levelUp: result });
+            } else {
+                await removePoints(TOKEN, points[qnumber - 1] / 10);
+                return res.json({ error: false, success: false, pointsAdd: 0, pointsRemove: points[qnumber - 1] / 10, levelUp: false });
+            }
+        }
 
     } catch (error) {
         console.log(error);
@@ -759,13 +993,15 @@ app.get("/:lang/tutorials/js/:page", (req, res) => {
     }
 });
 
-app.get("/:lang/exercises/js", (req, res) => {
+app.get("/:lang/exercises/js", async (req, res) => {
 
     try {
         const lang = req.params.lang;
 
-        const isLoggedIn = req.cookies.isLoggedIn;
-        if (isLoggedIn === undefined || isLoggedIn === null || isLoggedIn == "false") {
+        const TOKEN = req.cookies.TOKEN;
+        const LOGIN = await isLoggedIn(TOKEN);
+
+        if (LOGIN !== true) {
             return res.redirect('/' + lang + '/login');
         }
 
@@ -773,11 +1009,30 @@ app.get("/:lang/exercises/js", (req, res) => {
             return res.redirect("/404")
         }
 
+        let USER = await getAccount(TOKEN);
+        if (!USER || USER === "NOUSER") {
+            return res.redirect(`/${lang}`);
+        }
+
+        let qnumber = USER.lastCompletedJsExerciseNumber;
+        if (!qnumber || isNaN(qnumber) || qnumber <= 0 || qnumber > 24) {
+            const OBJECTID = ObjectId.createFromHexString(TOKEN);
+            await updateOneInDatabase("_id", OBJECTID, { $set: { lastCompletedJsExerciseNumber: 1 } });
+            return res.redirect(`/${lang}`);
+        }
+
+        let partials = [];
+        for (let i = 1; i <= qnumber; i++) {
+            partials.push(`${i}`);
+        }
+
         t = i18n.getFixedT(lang);
 
         res.render('exercisesJs', {
             t,
-            lang
+            lang,
+            qnumber,
+            partials
         })
 
     } catch (error) {
@@ -785,7 +1040,50 @@ app.get("/:lang/exercises/js", (req, res) => {
     }
 });
 
-app.get("/:lang/login", (req, res) => {
+app.post("/api/checkJsAnswer", async (req, res) => {
+    try {
+
+        const { question, answer } = req.body;
+
+        const TOKEN = req.cookies.TOKEN;
+
+        let user = await getAccount(TOKEN);
+        if (!user || user === "NOUSER") {
+            return res.json({ error: true, success: false, pointsAdd: 0, pointsRemove: 0, levelUp: false });
+        }
+
+        let qnumber = user.lastCompletedJsExerciseNumber;
+        if (!qnumber || isNaN(qnumber) || qnumber <= 0 || qnumber > 24) {
+            const OBJECTID = ObjectId.createFromHexString(TOKEN);
+            await updateOneInDatabase("_id", OBJECTID, { $set: { lastCompletedJsExerciseNumber: 1 } });
+            return res.json({ error: true, success: false, pointsAd: 0, pointsRemove: 0, levelUp: false });
+        }
+
+        if (!question || !answer) {
+            return res.json({ error: true, success: false, pointsAdd: 0, pointsRemove: 0, levelUp: false });
+        }
+
+        const answers = [2, 2, 3, 2, 1, 3, 2, 3, 2, 2, 3, 2, 3, 3, 1, 2, 1, 2, 1, 2, 2, 3, 2, 2];
+        const points = [20, 20, 30, 40, 50, 50, 60, 60, 60, 70, 70, 90, 100, 120, 150, 150, 150, 180, 200, 200, 210, 240, 250, 500];
+
+        if (question === qnumber) {
+            if (answer === answers[qnumber - 1]) {
+                const OBJECTID = ObjectId.createFromHexString(TOKEN);
+                await updateOneInDatabase("_id", OBJECTID, { $inc: { lastCompletedJsExerciseNumber: 1 } });
+                let result = await addPoints(TOKEN, points[qnumber - 1]);
+                return res.json({ error: false, success: true, pointsAdd: points[qnumber - 1], pointsRemove: 0, levelUp: result });
+            } else {
+                await removePoints(TOKEN, points[qnumber - 1] / 10);
+                return res.json({ error: false, success: false, pointsAdd: 0, pointsRemove: points[qnumber - 1] / 10, levelUp: false });
+            }
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get("/:lang/login", async (req, res) => {
 
     try {
         const lang = req.params.lang;
@@ -798,8 +1096,9 @@ app.get("/:lang/login", (req, res) => {
             return res.redirect("/404")
         }
 
-        const isLoggedIn = req.cookies.isLoggedIn;
-        if (isLoggedIn === "true") {
+        const TOKEN = req.cookies.TOKEN;
+        const LOGIN = await isLoggedIn(TOKEN);
+        if (LOGIN === true) {
             return res.redirect('/' + lang + '/profile');
         }
 

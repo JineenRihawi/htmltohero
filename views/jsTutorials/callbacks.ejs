@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html dir="<%= t('direction') %>" lang="<%= lang %>">
+<head>
+    <%- include('../components/metadata_info')%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/javascript/javascript.min.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0%;
+        }
+
+        .PAGE {
+            width: 100%;
+            height: calc(100% - 80px);
+            display: grid;
+            grid-template-columns: 25% 75%;
+        }
+
+        .BODYCONTENT {
+            width: calc(100% - 60px);
+            height: auto;
+            padding: 30px;
+            font-family: "Arial";
+            color: #1a2028;
+        }
+
+        .BODY {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .BODYCONTENT h1 {
+            color: #fdc535;
+        }
+
+        .BODYCONTENT h3 {
+            color: #445368;
+        }
+
+        #SIDEMENUBUTTON-33 {
+            background-color: #684444;
+            color: white;
+        }
+
+        .NOTE {
+            background-color: #f0f4f8;
+            padding: 15px;
+            border-left: 4px solid #fdc535;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        .TABLE {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .TABLE th, .TABLE td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .TABLE th {
+            background-color: #f2f2f2;
+            color: #445368;
+        }
+    </style>
+    <title>HTMLtoHero</title>
+</head>
+<body>
+    <%- include('../components/header') %>
+    <div class="PAGE">
+        <%- include('../components/jsTutorialsSideMenu') %>
+        <div class="BODY">
+            <div class="BODYCONTENT">
+                <h1><%= t('jsTutorials.chapter9.page1.title1') %></h1>
+                <p><%= t('jsTutorials.chapter9.page1.paragraph1') %></p>
+                <p><%= t('jsTutorials.chapter9.page1.paragraph1a') %></p>
+
+                <hr>
+
+                <h1><%= t('jsTutorials.chapter9.page1.title2') %></h1>
+                <p><%= t('jsTutorials.chapter9.page1.paragraph2') %></p>
+                <p><%= t('jsTutorials.chapter9.page1.paragraph2a') %></p>
+                <table class="TABLE">
+                    <tr>
+                        <th><%= t('jsTutorials.chapter9.page1.tableHeader1') %></th>
+                        <th><%= t('jsTutorials.chapter9.page1.tableHeader2') %></th>
+                        <th><%= t('jsTutorials.chapter9.page1.tableHeader3') %></th>
+                    </tr>
+                    <tr>
+                        <td><%= t('jsTutorials.chapter9.page1.tableRow1Col1') %></td>
+                        <td><%= t('jsTutorials.chapter9.page1.tableRow1Col2') %></td>
+                        <td><%= t('jsTutorials.chapter9.page1.tableRow1Col3') %></td>
+                    </tr>
+                    <tr>
+                        <td><%= t('jsTutorials.chapter9.page1.tableRow2Col1') %></td>
+                        <td><%= t('jsTutorials.chapter9.page1.tableRow2Col2') %></td>
+                        <td><%= t('jsTutorials.chapter9.page1.tableRow2Col3') %></td>
+                    </tr>
+                </table>
+                <h3><%= t('jsTutorials.chapter9.page1.codeTitle1') %></h3>
+                <textarea id="CODE1">
+function fetchData(callback) {
+    setTimeout(() => {
+        callback("Data received!");
+    }, 1000);
+}
+
+fetchData((data) => {
+    console.log(data);
+});
+                </textarea>
+
+                <hr>
+
+                <h1><%= t('jsTutorials.chapter9.page1.title3') %></h1>
+                <p><%= t('jsTutorials.chapter9.page1.paragraph3') %></p>
+                <p><%= t('jsTutorials.chapter9.page1.paragraph3a') %></p>
+                <h3><%= t('jsTutorials.chapter9.page1.codeTitle2') %></h3>
+                <textarea id="CODE2">
+function getUser(userId, callback) {
+    setTimeout(() => {
+        callback({ id: userId, name: "John" });
+    }, 1000);
+}
+
+function getPosts(user, callback) {
+    setTimeout(() => {
+        callback(["Post 1", "Post 2"]);
+    }, 1000);
+}
+
+getUser(1, (user) => {
+    getPosts(user, (posts) => {
+        console.log(user, posts);
+    });
+});
+                </textarea>
+
+                <div class="NOTE">
+                    <p><%= t('jsTutorials.chapter9.page1.note1') %></p>
+                </div>
+
+                <hr>
+
+                <h1><%= t('jsTutorials.chapter9.page1.title4') %></h1>
+                <p><%= t('jsTutorials.chapter9.page1.paragraph4') %></p>
+                <p><%= t('jsTutorials.chapter9.page1.paragraph4a') %></p>
+                <h3><%= t('jsTutorials.chapter9.page1.codeTitle3') %></h3>
+                <textarea id="CODE3">
+function getUser(userId, callback) {
+    setTimeout(() => {
+        callback({ id: userId, name: "John" });
+    }, 1000);
+}
+
+function getPosts(user, callback) {
+    setTimeout(() => {
+        callback(["Post 1", "Post 2"]);
+    }, 1000);
+}
+
+function getComments(posts, callback) {
+    setTimeout(() => {
+        callback(["Comment 1", "Comment 2"]);
+    }, 1000);
+}
+
+getUser(1, (user) => {
+    getPosts(user, (posts) => {
+        getComments(posts, (comments) => {
+            console.log(user, posts, comments);
+        });
+    });
+});
+                </textarea>
+
+                <div class="NOTE">
+                    <p><%= t('jsTutorials.chapter9.page1.note2') %></p>
+                </div>
+            </div>
+            <%- include('../components/jsTutorialsCheckbar', { page_link: 'callbacks' }) %>
+            <%- include('../components/footer') %>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        function getCookie(name) {
+            const cookiePattern = `${name}=`;
+            const cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                if (cookie.startsWith(cookiePattern)) {
+                    return decodeURIComponent(cookie.substring(cookiePattern.length));
+                }
+            }
+            return null;
+        }
+
+        function deleteCookie(cookieName) {
+            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        }
+
+        var editor1 = CodeMirror.fromTextArea(document.getElementById("CODE1"), {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
+            readOnly: true,
+        });
+        editor1.setSize(null, 170);
+
+        var editor2 = CodeMirror.fromTextArea(document.getElementById("CODE2"), {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
+            readOnly: true,
+        });
+        editor2.setSize(null, 300);
+
+        var editor3 = CodeMirror.fromTextArea(document.getElementById("CODE3"), {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "dracula",
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lineWrapping: true,
+            readOnly: true,
+        });
+        editor3.setSize(null, 410);
+    </script>
+</body>
+</html>

@@ -235,12 +235,12 @@
                     })
                 });
                 const data = await response.json();
-                const isLoggedIn = data.isLoggedIn;
                 const error = data.errorName;
-                if (isLoggedIn === true) {
+                const scc = data.success;
+                if (scc === true) {
                     return true;
                 } else {
-                    return error || "invalidCredentials";
+                    return error;
                 }
             }
 

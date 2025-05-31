@@ -83,10 +83,13 @@
                 .CONTAINERSMALLTEXT {
                     display: none;
                 }
-                #HTMLSPLITCONTAINER, #JSSPLITCONTAINER {
+
+                #HTMLSPLITCONTAINER,
+                #JSSPLITCONTAINER {
                     grid-template-columns: 100% 0%;
                 }
-                #CSSSPLITCONTAINER{
+
+                #CSSSPLITCONTAINER {
                     grid-template-columns: 0% 100%;
                 }
             }
@@ -95,6 +98,7 @@
                 .CONTAINERTEXT {
                     font-size: 2rem;
                 }
+
                 .CONTAINER {
                     height: auto;
                 }
@@ -188,7 +192,6 @@
             </div>
 
             <%- include('components/footer') %>
-
         </div>
 
         <script>
@@ -220,7 +223,7 @@
                         window.location.href = "/" + lang_code + "/" + "search/" + event.target.value;
                     }
                 }
-            })
+            });
 
         </script>
 </body>

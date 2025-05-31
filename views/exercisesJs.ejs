@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html dir="<%= t('direction') %>" lang="<%= lang %>">
+
+<head>
+    <%- include('components/metadata_info')%>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css">
+
+        <!-- Include CodeMirror JavaScript library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
+
+        <!-- Include the JavaScript mode for syntax highlighting -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/javascript/javascript.min.js"></script>
+        <style>
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                margin: 0%;
+            }
+
+            .BODYCONTENT {
+                width: calc(100% - 60px);
+                /* 100% - 2*padding */
+                height: auto;
+                padding: 30px;
+                font-family: "Arial";
+                color: #1a2028;
+            }
+
+            .BODY {
+                width: 100%;
+                height: calc(100% - 80px);
+                overflow-x: hidden;
+                overflow-y: scroll;
+            }
+
+            .BODYCONTENT h1 {
+                color: #fdc535;
+            }
+
+            .CHAPTER {
+                background-color: #1a2028;
+                width: fit-content;
+                color: white;
+                padding: 5px;
+                font-family: "Arial";
+            }
+
+            .POINTS_ {
+                display: flex;
+                flex-direction: row;
+                gap: 1%;
+            }
+
+            .POINTS {
+                background-color: #16af0e;
+                width: fit-content;
+                color: white;
+                padding: 5px;
+                font-family: "Arial";
+            }
+
+            .LOSTPOINTS {
+                background-color: red;
+                width: fit-content;
+                color: white;
+                padding: 5px;
+                font-family: "Arial";
+            }
+
+            .ANSWERBUTTON {
+                background-color: #fdca87;
+                /* A modern blue for better visual appeal */
+                padding: 12px 20px;
+                /* Slightly more padding for a balanced look */
+                display: flex;
+                align-items: center;
+                color: #1a2028;
+                font-weight: 600;
+                /* Slightly lighter than bold for a cleaner look */
+                margin-bottom: 15px;
+                /* Reduced margin for tighter layout */
+                border: none;
+                /* Removed border for a sleeker appearance */
+                border-radius: 8px;
+                /* Rounded corners for a modern feel */
+                cursor: pointer;
+                /* Indicates interactivity */
+                transition: background-color 0.3s ease, transform 0.1s ease;
+                /* Smooth hover effects */
+            }
+
+            .ANSWERBUTTON:hover {
+                background-color: #fcb14e;
+                /* Darker blue on hover */
+                transform: translateY(-2px);
+                /* Subtle lift effect */
+            }
+
+            .ANSWERBUTTON:active {
+                transform: translateY(0);
+                /* Reset lift on click */
+            }
+
+            .WRONGANSWER {
+                background-color: red;
+            }
+
+            .WRONGANSWER:hover {
+                background-color: red;
+            }
+
+            .TRUEANSWER {
+                background-color: green;
+            }
+
+            .TRUEANSWER:hover {
+                background-color: green;
+            }
+
+            .ALERTBOXLIST {
+                display: none;
+                position: absolute;
+                top: 85px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                pointer-events: none;
+                z-index: 1;
+                gap: 5px;
+            }
+
+            .ALERTBOX {
+                width: fit-content;
+                color: white;
+                background-color: black;
+                padding: 1%;
+                animation: ALERTSHOW 0.6s ease;
+                background-clip: border-box;
+                font-family: "Arial";
+                font-weight: bold;
+            }
+
+            @keyframes ALERTSHOW {
+                0% {transform: translateY(0); opacity: 0; background-color: black; color: white;}
+                50% {transform: translateY(-20px);}
+                100% {transform: translateY(0); opacity: 1; background-color: white; color: black;};
+            }
+
+            .PROGRESSBAR {
+                position: absolute;
+                background-color: #1a2028;
+                padding: 5px;
+                color: white;
+                font-family: "Arial";
+                font-weight: bold;
+                top: 85px;
+                left: 5px;
+                z-index: 1;
+            }
+        </style>
+        <title>
+            HTMLtoHero
+        </title>
+</head>
+
+<body>
+    <%- include('components/header') %>
+
+        <div class="ALERTBOXLIST">
+        </div>
+
+        <div class="PROGRESSBAR">
+            <%= t('jsExercises.progress') %> <%= qnumber %>/24
+        </div>
+
+        <div class="BODY">
+
+            <div class="BODYCONTENT">
+
+                <% partials.forEach(function(partialName) { %>
+                    <%- include(`jsExercises/${partialName}`) %>
+                        <% }) %>
+            </div>
+
+            <%- include('components/footer') %>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>
+            function getCookie(name) {
+                const cookiePattern = `${name}=`;
+                const cookies = document.cookie.split('; ');
+                for (let cookie of cookies) {
+                    if (cookie.startsWith(cookiePattern)) {
+                        return decodeURIComponent(cookie.substring(cookiePattern.length));
+                    }
+                }
+                return null;
+            }
+
+            function deleteCookie(cookieName) {
+                document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            }
+
+            let BODY = document.querySelector(".BODY");
+            BODY.scrollTop = BODY.scrollHeight;
+            
+
+            let ALERTBOXLIST = document.querySelector(".ALERTBOXLIST");
+            function showAlert(text, background, time) {
+                let ALERTBOX = document.createElement("div");
+                ALERTBOX.classList.add("ALERTBOX");
+                ALERTBOX.style.backgroundColor = background;
+                ALERTBOX.innerText = text;
+                ALERTBOXLIST.appendChild(ALERTBOX);
+                setTimeout(() => {
+                    ALERTBOX.remove();
+                }, time)
+            }
+
+            async function checkAnswer(question, answer, button, points) {
+                await fetch("/api/checkJsAnswer", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        question: question,
+                        answer: answer
+                    })
+                }).then(data => data.json()).then(data => {
+                    let err = data.error;
+                    let scc = data.success;
+                    let ptsAdd = data.pointsAdd;
+                    let ptsRemove = data.pointsRemove;
+                    let lvlUp = data.levelUp;
+
+                    if (err === false && scc === false) {
+                        button.classList.add("WRONGANSWER");
+                        showAlert(`<%= t('jsExercises.wrongAnswer') %> : -${ptsRemove} <%= t('jsExercises.points') %>`, "red", 2000)
+                        setTimeout(() => {
+                            button.classList.remove("WRONGANSWER");
+                        }, 500)
+                    }
+                    if (err === false && scc === true) {
+                        button.classList.add("TRUEANSWER");
+                        showAlert(`<%= t('jsExercises.trueAnswer') %> : +${ptsAdd} <%= t('jsExercises.points') %>`, "green", 2000)
+                        if(lvlUp) showAlert(`<%= t('jsExercises.levelUp') %>`, "green", 2000)
+                        setTimeout(() => {
+                            button.classList.remove("TRUEANSWER");
+                            location.reload()
+                        }, 2000)
+                    }
+                    if (err === true && scc === false) {
+                        showAlert("Error", "red", 2000)
+                    }
+                });
+            }
+
+        </script>
+</body>
+
+</html>

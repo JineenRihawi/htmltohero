@@ -8,74 +8,177 @@
             body {
                 height: 100%;
                 width: 100%;
+                margin: 0;
                 overflow-x: hidden;
-                margin: 0%;
+                font-family: "Arial";
+                color: #2d3748;
             }
 
-            .CENTER {
-                width: 100%;
-                height: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .PAGE {
+            .page {
                 height: calc(100% - 80px);
-                /*100% - header*/
+                /* Account for header */
                 width: 100%;
-                overflow-x: hidden;
                 overflow-y: scroll;
+                overflow-x: hidden;
             }
 
-            .PAGECONTAINERS {
+            .PAGECONTENT {
                 width: 100%;
-                height: 100%;
-                display: grid;
-                grid-template-columns: 5% 20% 5% 65% 5%;
-                grid-template-rows: 5% 44% 2% 44% 5%;
-                grid-template-areas:
-                    ". . . . ."
-                    ". data . continue ."
-                    ". data . . ."
-                    ". data . continue2 ."
-                    ". . . . .";
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding-top: 30px;
+                padding-bottom: 30px;
             }
 
-            .PROFILEDATACONTAINER {
-                grid-area: data;
+            .profile-container {
+                width: 90%;
+                max-width: 1100px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+                margin-bottom: 30px;
+            }
+
+            .profile-data {
+                border-radius: 20px;
+                padding: 30px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                transition: transform 0.3s ease;
+                background-color: #ffc2b1;
+                width: 90%;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 20px;
+                border-radius: 50%;
+                background: #fff;
+                padding: 10px;
+            }
+
+            .data-details {
                 width: 100%;
-                height: 100%;
-                background-color: rgb(248, 208, 208);
-                border-radius: 20px;
-                overflow-x: scroll;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                font-size: 1.2rem;
+                line-height: 1.6;
             }
 
-            .CONTINUECONTAINER {
-                grid-area: continue;
-                width: calc(100% - 40px);
-                height: calc(100% - 40px);
-                background-color: rgb(252, 193, 193);
-                border-radius: 20px;
-                padding: 20px;
-                overflow-x: scroll;
+            .data-details-bar {
+                background: rgba(255, 255, 255, 0.8);
+                padding: 8px 15px;
+                border-radius: 10px;
             }
 
-            .CONTINUE2CONTAINER {
-                grid-area: continue2;
-                width: calc(100% - 40px);
-                height: calc(100% - 40px);
-                background-color: rgb(250, 150, 150);
+            .learning-container,
+            .exercise-container {
                 border-radius: 20px;
-                padding: 20px;
-                overflow-x: scroll;
+                padding: 30px;
+                width: 90%;
+                max-width: 1100px;
+                transition: transform 0.3s ease;
+                background-color: #ffbe8a;
+            }
+
+            .container-title {
+                font-size: 2rem;
+                margin-bottom: 20px;
+                text-align: center;
+                font-weight: bold;
+                color: #2d3748;
+            }
+
+            .container-buttons {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: center;
+            }
+
+            .container-button {
+                flex: 1;
+                user-select: none;
+            }
+
+            .container-button-btn {
+                flex: 1;
+                min-width: 150px;
+                padding: 15px;
+                color: white;
+                font-size: 1.3rem;
+                font-weight: bold;
+                text-align: center;
+                border-radius: 12px;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+            }
+
+            .container-button-btn:hover {
+                background-color: #402e32;
+            }
+
+            .PROFILEIMAGE {
+                width: 100px;
+                height: 100px;
+            }
+
+            @media (max-width: 1100px) {
+
+                .profile-data,
+                .learning-container,
+                .exercise-container {
+                    width: calc(100% - 40px);
+                    padding: 20px;
+                }
+
+                .container-title {
+                    font-size: 1.6rem;
+                }
+
+                .container-button {
+                    font-size: 1.1rem;
+                    padding: 12px;
+                }
+
+                .data-details {
+                    font-size: 1rem;
+                }
+            }
+
+            @media (max-width: 500px) {
+
+                .profile-data,
+                .learning-container,
+                .exercise-container {
+                    width: calc(100% - 30px);
+                    padding: 15px;
+                }
+
+                .container-button {
+                    font-size: 100%;
+                }
+
+                .container-title {
+                    font-size: 100%;
+                }
             }
 
             .POINTSRANGE {
-                width: 100%;
+                width: calc(100% - 30px);
                 height: 25px;
-                background-color: white;
                 position: relative;
+                background: rgba(255, 255, 255, 0.8);
+                padding: 8px 15px;
+                border-radius: 10px;
             }
 
             .POINTSRANGEBAR {
@@ -98,288 +201,218 @@
             .POINTSRANGEPERCENTAGE {
                 font-size: 14px;
                 position: absolute;
-                top: 25%;
+                top: 0;
                 right: 5px;
-            }
-
-            .CONTAINERTITLE {
-                width: 100%;
-                height: 50px;
-                font-size: 2rem;
-                user-select: none;
-                color: #445368;
-            }
-
-            .CONTAINERBUTTONS {
-                width: 100%;
-                height: auto;
                 display: flex;
-                justify-content: space-around;
-                align-items: center;
-                gap: 5%;
-            }
-
-            .CONTAINERBUTTON {
-                display: flex;
+                height: 100%;
                 justify-content: center;
                 align-items: center;
-                padding: 25px;
-                color: white;
-                background-color: #445368;
-                font-size: 24px;
-                font-family: "Arial";
-                font-weight: bold;
-                user-select: none;
-                height: 30px;
-                /*80 - 2*padding */
-                flex: 1;
             }
 
-            .CONTAINERBUTTON:hover {
-                background-color: #303b4b;
+            #UPLOADPROFILE {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                padding: 8px 12px;
+                border: 2px solid #ffa07a;
+                border-radius: 8px;
+                background-color: #fff0e6;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: border-color 0.3s ease, background-color 0.3s ease;
             }
 
-            #PROFILEDATACENTER {
-                height: 150px;
-            }
-
-            #CONTINUECENTER {
-                height: calc(100% - 50px);
-            }
-
-            @media (max-width: 1100px) {
-                .PAGECONTAINERS {
-                    width: 100%;
-                    height: 100%;
-                    display: flex;
-                    flex-direction: column;
-                }
-
-                .DATACONTAINERDATA,
-                .PROFILEDATACONTAINER,
-                .CONTINUECONTAINER,
-                .CONTINUE2CONTAINER {
-                    height: auto;
-                    width: auto;
-                    display: flex;
-                    flex-direction: column;
-                    border-radius: 0;
-                    padding-bottom: 5%;
-                }
-
-                .CONTAINERBUTTON {
-                    font-size: 100%;
-                }
-
-                #PROFILEDATACENTER {
-                    height: auto;
-                }
-
-                #CONTINUECENTER {
-                    height: auto;
-                }
-
-                .CONTAINERTITLE {
-                    font-size: 100%;
-                }
+            #UPLOADPROFILE:hover {
+                border-color: #ff7f50;
+                background-color: #ffe5d1;
             }
         </style>
-        <title>
-            HTMLtoHero
-        </title>
+        <title>HTMLtoHero</title>
 </head>
 
 <body>
+    <%- include('components/header') %>
+        <div class="page">
+            <div class="PAGECONTENT">
+                <div class="profile-container">
+                    <div class="profile-data">
+                        <img src="<%= profileUrl %>" class="PROFILEIMAGE" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/JineenRihawi/htmltoheroassets/refs/heads/main/default.png';"></img>
+                        <input type="file" accept="image/png" id="UPLOADPROFILE" placeholder="Upload Profile Image">
+                        <div class="data-details">
+                            <div class="data-details-bar">
+                                <%= t('profile.profileContainer.name') %>: <%= name %>
+                            </div>
+                            <div class="data-details-bar">
+                                <%= t('profile.profileContainer.birthday') %>: <%= birthyear %>.<%= birthmonth %>.<%=
+                                                birthday %>
+                            </div>
+                            <div class="data-details-bar">
+                                <%= t('profile.profileContainer.accountCreationDate') %>: <%= createyear %>.<%=
+                                            createmonth %>.<%= createday %>
+                            </div>
+                            <div class="data-details-bar">
+                                <%= t('profile.profileContainer.level') %>: <%= level %>
+                            </div>
+                            <div class="POINTSRANGE">
+                                <div class="POINTSRANGEBAR">
+                                    <div class="POINTSRANGEPERCENTAGE">
 
-    <%- include("components/header") %>
-
-        <div class="PAGE">
-            <div class="PAGECONTAINERS">
-                <div class="PROFILEDATACONTAINER">
-                    <div class="CENTER" id="PROFILEDATACENTER">
-                        <svg id="PROFILEIMAGESVG" fill="#EF6E72" version="1.1" id="Capa_1"
-                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100px"
-                            height="100px" viewBox="0 0 45.532 45.532" id="PROFILEIMAGE">
-                            <g>
-                                <circle cx="22.766" cy="22.766" r="17" fill="#ffffff" />
-                                <path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765
-        S35.34,0.001,22.766,0.001z M22.766,6.808c4.16,0,7.531,3.372,7.531,7.53c0,4.159-3.371,7.53-7.531,7.53
-        c-4.158,0-7.529-3.371-7.529-7.53C15.237,10.18,18.608,6.808,22.766,6.808z M22.761,39.579c-4.149,0-7.949-1.511-10.88-4.012
-        c-0.714-0.609-1.126-1.502-1.126-2.439c0-4.217,3.413-7.592,7.631-7.592h8.762c4.219,0,7.619,3.375,7.619,7.592
-        c0,0.938-0.41,1.829-1.125,2.438C30.712,38.068,26.911,39.579,22.761,39.579z" />
-                            </g>
-                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="DATACONTAINERDATA"></div>
+                    <div class="learning-container">
+                        <div class="container-title">
+                            <%= t('profile.learningContainer.continueLearning')%>
+                        </div>
+                        <div class="container-buttons">
+                            <div class="container-button">
+                                <div class="container-button-btn" id="HTML1">
+                                    <%= t('profile.learningContainer.html') %>
+                                </div>
+                                <span>
+                                    <%= t('htmlExercises.progress') %> : <%= qnumberHtml %>/55
+                                </span>
+                            </div>
+                            <div class="container-button">
+                                <div class="container-button-btn" id="CSS1">
+                                    <%= t('profile.learningContainer.css') %>
+                                </div>
+                                <span>
+                                    <%= t('cssExercises.progress') %> : <%= qnumberCss %>/44
+                                </span>
+                            </div>
+                            <div class="container-button">
+                                <div class="container-button-btn" id="JS1">
+                                    <%= t('profile.learningContainer.js') %>
+                                </div>
+                                <span>
+                                    <%= t('jsExercises.progress') %> : <%= qnumberJs %>/48
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="exercise-container">
+                        <div class="container-title">
+                            <%= t('profile.exercisingContainer.continueExercising')%>
+                        </div>
+                        <div class="container-buttons">
+                            <div class="container-button">
+                                <div class="container-button-btn" id="HTML2">
+                                    <%= t('profile.learningContainer.html') %>
+                                </div>
+                                <span>
+                                    <%= t('htmlExercises.progress') %> : <%= lastCompletedHtmlExerciseNumber %>/20
+                                </span>
+                            </div>
+                            <div class="container-button">
+                                <div class="container-button-btn" id="CSS2">
+                                    <%= t('profile.learningContainer.css') %>
+                                </div>
+                                <span>
+                                    <%= t('cssExercises.progress') %> : <%= lastCompletedCssExerciseNumber %>/20
+                                </span>
+                            </div>
+                            <div class="container-button">
+                                <div class="container-button-btn" id="JS2">
+                                    <%= t('profile.learningContainer.js') %>
+                                </div>
+                                <span>
+                                    <%= t('jsExercises.progress') %> : <%= lastCompletedJsExerciseNumber %>/24
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="CONTINUECONTAINER">
-                    <div class="CONTAINERTITLE" id="CONTINUECONTAINERTITLE">
-                        <%= t('profile.learningContainer.continueLearning')%>
-                    </div>
-                    <div class="CENTER" id="CONTINUECENTER">
-                        <div class="CONTAINERBUTTONS" id="CONTINUECONTAINERBUTTONS"></div>
-                    </div>
-                </div>
-                <div class="CONTINUE2CONTAINER">
-                    <div class="CONTAINERTITLE" id="CONTINUE2CONTAINERTITLE">
-                        <%= t('profile.exercisingContainer.continueExercising')%>
-                    </div>
-                    <div class="CENTER" id="CONTINUECENTER">
-                        <div class="CONTAINERBUTTONS" id="CONTINUE2CONTAINERBUTTONS"></div>
-                    </div>
-                </div>
+                <%- include('components/footer') %>
             </div>
-
-            <%- include('components/footer') %>
-        </div>
-
-        <script>
-
-            function getCookie(name) {
-                // Construct the cookie name as a search pattern
-                const cookiePattern = `${name}=`;
-                const cookies = document.cookie.split('; '); // Split cookies into individual parts
-
-                for (let cookie of cookies) {
-                    if (cookie.startsWith(cookiePattern)) {
-                        // Extract the cookie value
-                        return decodeURIComponent(cookie.substring(cookiePattern.length));
+            <script>
+                function getCookie(name) {
+                    const cookiePattern = `${name}=`;
+                    const cookies = document.cookie.split('; ');
+                    for (let cookie of cookies) {
+                        if (cookie.startsWith(cookiePattern)) {
+                            return decodeURIComponent(cookie.substring(cookiePattern.length));
+                        }
                     }
+                    return null;
                 }
 
-                // Return null if cookie is not found
-                return null;
-            }
+                function deleteCookie(cookieName) {
+                    document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+                }
 
-            function deleteCookie(cookieName) {
-                document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-            }
+                let UPLOADPROFILE = document.querySelector("#UPLOADPROFILE");
+                UPLOADPROFILE.addEventListener("change", (event) => {
+                    let file = event.target.files[0];
+                    let FORMDATA = new FormData();
+                    FORMDATA.append('image', file);
 
-            let DATACONTAINERDATA = document.querySelector(".DATACONTAINERDATA");
-            let CONTINUECONTAINERBUTTONS = document.querySelector("#CONTINUECONTAINERBUTTONS");
-            let CONTINUE2CONTAINERBUTTONS = document.querySelector("#CONTINUE2CONTAINERBUTTONS");
-            fetch("/api/getAccount", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: getCookie("currentEmail"),
-                    password: getCookie("currentPassword")
-                })
-            }).then(response => response.json()).then(data => {
-                let name = document.createElement("div");
-                name.innerText = "<%= t('profile.profileContainer.name') %> : " + data.name;
-                let birth = document.createElement("div");
-                birth.innerText = "<%= t('profile.profileContainer.birthday') %> : " + data.birthyear + "-" + data.birthmonth + "-" + data.birthday;
-                let create = document.createElement("div");
-                create.innerText = "<%= t('profile.profileContainer.accountCreationDate') %> : " + data.createyear + "-" + data.createmonth + "-" + data.createday;
-                let level = document.createElement("div");
-                level.innerText = "<%= t('profile.profileContainer.level') %> : " + data.level;
-                let pointsRange = document.createElement("div");
-                pointsRange.classList.add("POINTSRANGE");
-                let pointsRangeBar = document.createElement("div");
-                pointsRangeBar.classList.add("POINTSRANGEBAR");
-                let pointsPercentage = (data.points / data.level);
+                    fetch("/upload", {
+                        method: "POST",
+                        body: FORMDATA
+                    }).then(data => data.json()).then(data => {
+                        console.log(data.imageUrl);
+                    })
+
+                });
+
+                let pointsRange = document.querySelector(".POINTSRANGE");
+                let pointsRangeBar = document.querySelector(".POINTSRANGEBAR");
+                let pointsRangePercentage = document.querySelector(".POINTSRANGEPERCENTAGE");
+
+                let pointsSTR = "<%= points %>";
+                let pointsINT = parseInt(pointsSTR);
+                let pointsPercentage = (pointsINT / 5);
                 pointsRangeBar.style.width = pointsPercentage + "%";
-                pointsRange.appendChild(pointsRangeBar);
-                let pointsRangePercentage = document.createElement("div");
-                pointsRangePercentage.classList.add("POINTSRANGEPERCENTAGE");
-                pointsRangePercentage.innerText = data.points + "/" + data.level * 100;
-                pointsRange.appendChild(pointsRangePercentage);
+                pointsRangePercentage.innerText = pointsINT + "/500 (%" + pointsPercentage + ")";
 
-                DATACONTAINERDATA.appendChild(name);
-                DATACONTAINERDATA.appendChild(birth);
-                DATACONTAINERDATA.appendChild(create);
-                DATACONTAINERDATA.appendChild(level);
-                DATACONTAINERDATA.appendChild(pointsRange);
+                let HTML1 = document.querySelector("#HTML1");
+                let CSS1 = document.querySelector("#CSS1");
+                let JS1 = document.querySelector("#JS1");
+                let HTML2 = document.querySelector("#HTML2");
+                let CSS2 = document.querySelector("#CSS2");
+                let JS2 = document.querySelector("#JS2");
 
-                let html = document.createElement("div");
-                html.classList.add("CONTAINERBUTTON");
-                html.innerText = "<%= t('profile.learningContainer.html') %>";
-                if (data.lastCheckedHtmlPageLink === "null" || data.lastCheckedHtmlPageLink === "tutorialsHtml") {
-                    html.onclick = () => {
+                HTML1.addEventListener("click", () => {
+                    let link = "<%= lastCheckedHtmlPageLink %>";
+                    if (link === "null" || link === "tutorialsHtml") {
                         window.location.href = "/" + lang_code + "/tutorials/HTML";
+                    } else {
+                        window.location.href = "/" + lang_code + "/tutorials/HTML/" + link;
                     }
-                } else {
-                    html.onclick = () => {
-                        window.location.href = "/" + lang_code + "/tutorials/HTML/" + data.lastCheckedHtmlPageLink;
-                    }
-                }
-                CONTINUECONTAINERBUTTONS.appendChild(html);
+                });
 
-                let css = document.createElement("div");
-                css.classList.add("CONTAINERBUTTON");
-                css.innerText = "<%= t('profile.learningContainer.css') %>";
-                if (data.lastCheckedCssPageLink === "null" || data.lastCheckedCssPageLink === "tutorialsCss") {
-                    css.onclick = () => {
+                CSS1.addEventListener("click", () => {
+                    let link = "<%= lastCheckedCssPageLink %>";
+                    if (link === "null" || link === "tutorialsCss") {
                         window.location.href = "/" + lang_code + "/tutorials/CSS";
+                    } else {
+                        window.location.href = "/" + lang_code + "/tutorials/CSS/" + link;
                     }
-                } else {
-                    css.onclick = () => {
-                        window.location.href = "/" + lang_code + "/tutorials/CSS/" + data.lastCheckedCssPageLink;
-                    }
-                }
-                CONTINUECONTAINERBUTTONS.appendChild(css);
+                });
 
-                let js = document.createElement("div");
-                js.classList.add("CONTAINERBUTTON");
-                js.innerText = "<%= t('profile.learningContainer.js') %>";
-                if (data.lastCheckedJsPageLink === "null" || data.lastCheckedJsPageLink === "tutorialsJs") {
-                    js.onclick = () => {
+                JS1.addEventListener("click", () => {
+                    let link = "<%= lastCheckedJsPageLink %>";
+                    if (link === "null" || link === "tutorialsJs") {
                         window.location.href = "/" + lang_code + "/tutorials/JS";
+                    } else {
+                        window.location.href = "/" + lang_code + "/tutorials/JS/" + link;
                     }
-                } else {
-                    js.onclick = () => {
-                        window.location.href = "/" + lang_code + "/tutorials/JS/" + data.lastCheckedJsPageLink;
-                    }
-                }
-                CONTINUECONTAINERBUTTONS.appendChild(js);
+                });
 
-                let html2 = document.createElement("div");
-                html2.classList.add("CONTAINERBUTTON");
-                html2.innerText = "<%= t('profile.exercisingContainer.html') %>";
-                if (data.lastCheckedHtmlExerciseLink === "null" || data.lastCheckedHtmlExerciseLink === "exercisesHtml") {
-                    html2.onclick = () => {
-                        window.location.href = "/" + lang_code + "/exercises/HTML";
-                    }
-                } else {
-                    html2.onclick = () => {
-                        window.location.href = "/" + lang_code + "/exercises/HTML/" + data.lastCheckedHtmlExerciseLink;
-                    }
-                }
-                CONTINUE2CONTAINERBUTTONS.appendChild(html2);
+                HTML2.addEventListener("click", () => {
+                    window.location.href = "/" + lang_code + "/exercises/HTML";
+                });
 
-                let css2 = document.createElement("div");
-                css2.classList.add("CONTAINERBUTTON");
-                css2.innerText = "<%= t('profile.exercisingContainer.css') %>";
-                if (data.lastCheckedCssExerciseLink === "null" || data.lastCheckedCssExerciseLink === "exercisesCss") {
-                    css2.onclick = () => {
-                        window.location.href = "/" + lang_code + "/exercises/CSS";
-                    }
-                } else {
-                    css2.onclick = () => {
-                        window.location.href = "/" + lang_code + "/exercises/CSS/" + data.lastCheckedCssExerciseLink;
-                    }
-                }
-                CONTINUE2CONTAINERBUTTONS.appendChild(css2);
+                CSS2.addEventListener("click", () => {
+                    window.location.href = "/" + lang_code + "/exercises/CSS";
+                });
 
-                let js2 = document.createElement("div");
-                js2.classList.add("CONTAINERBUTTON");
-                js2.innerText = "<%= t('profile.exercisingContainer.js') %>";
-                if (data.lastCheckedJsExerciseLink === "null" || data.lastCheckedJsExerciseLink === "exercisesJs") {
-                    js2.onclick = () => {
-                        window.location.href = "/" + lang_code + "/exercises/JS";
-                    }
-                } else {
-                    js2.onclick = () => {
-                        window.location.href = "/" + lang_code + "/exercises/JS/" + data.lastCheckedJsExerciseLink;
-                    }
-                }
-                CONTINUE2CONTAINERBUTTONS.appendChild(js2);
-            });
-
-        </script>
+                JS2.addEventListener("click", () => {
+                    window.location.href = "/" + lang_code + "/exercises/JS";
+                });
+            </script>
 </body>
 
 </html>

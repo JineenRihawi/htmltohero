@@ -32,7 +32,7 @@
 
             .BODY {
                 width: 100%;
-                height: 100%;
+                height: calc(100% - 80px);
                 overflow-x: hidden;
                 overflow-y: scroll;
             }
@@ -49,8 +49,22 @@
                 font-family: "Arial";
             }
 
+            .POINTS_ {
+                display: flex;
+                flex-direction: row;
+                gap: 1%;
+            }
+
             .POINTS {
                 background-color: #16af0e;
+                width: fit-content;
+                color: white;
+                padding: 5px;
+                font-family: "Arial";
+            }
+
+            .LOSTPOINTS {
+                background-color: red;
                 width: fit-content;
                 color: white;
                 padding: 5px;
@@ -90,6 +104,64 @@
                 transform: translateY(0);
                 /* Reset lift on click */
             }
+
+            .WRONGANSWER {
+                background-color: red;
+            }
+
+            .WRONGANSWER:hover {
+                background-color: red;
+            }
+
+            .TRUEANSWER {
+                background-color: green;
+            }
+
+            .TRUEANSWER:hover {
+                background-color: green;
+            }
+
+            .ALERTBOXLIST {
+                display: none;
+                position: absolute;
+                top: 85px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                pointer-events: none;
+                z-index: 1;
+                gap: 5px;
+            }
+
+            .ALERTBOX {
+                width: fit-content;
+                color: white;
+                background-color: black;
+                padding: 1%;
+                animation: ALERTSHOW 0.6s ease;
+                background-clip: border-box;
+                font-family: "Arial";
+                font-weight: bold;
+            }
+
+            @keyframes ALERTSHOW {
+                0% {transform: translateY(0); opacity: 0; background-color: black; color: white;}
+                50% {transform: translateY(-20px);}
+                100% {transform: translateY(0); opacity: 1; background-color: white; color: black;};
+            }
+
+            .PROGRESSBAR {
+                position: absolute;
+                background-color: #1a2028;
+                padding: 5px;
+                color: white;
+                font-family: "Arial";
+                font-weight: bold;
+                top: 85px;
+                left: 5px;
+                z-index: 1;
+            }
         </style>
         <title>
             HTMLtoHero
@@ -99,56 +171,21 @@
 <body>
     <%- include('components/header') %>
 
+        <div class="ALERTBOXLIST">
+        </div>
+
+        <div class="PROGRESSBAR">
+            <%= t('htmlExercises.progress') %> <%= qnumber %>/20
+        </div>
+
         <div class="BODY">
 
             <div class="BODYCONTENT">
 
-                <div class="CHAPTER">Chapter 1: Introduction to HTML</div>
-                <h1 class="QUESTIONTITLE">
-                    Question 1 : What does HTML stand for?
-                </h1>
-                <div class="ANSWERBUTTON">
-                    Hyper Transfer Markup Language
-                </div>
-                <div class="ANSWERBUTTON">
-                    Hyper Text Markup Language
-                </div>
-                <div class="ANSWERBUTTON">
-                    High Text Modeling Language
-                </div>
-                <div class="ANSWERBUTTON">
-                    Hyperlink Text Management Language
-                </div>
-                <div class="ANSWERBUTTON">
-                    Home Text Markup Language
-                </div>
-                <div class="POINTS">10 Points
-                </div>
-
-                <hr>
-
-                <div class="CHAPTER">Chapter 3: Working with Text in HTML</div>
-                <h1 class="QUESTIONTITLE">
-                    Question 2 : Which tag creates a paragraph in HTML?
-                </h1>
-                <div class="ANSWERBUTTON">
-                    `&lt;p&gt;`
-                </div>
-                <div class="ANSWERBUTTON">
-                    `&lt;para&gt;`
-                </div>
-                <div class="ANSWERBUTTON">
-                    `&lt;text&gt;`
-                </div>
-                <div class="ANSWERBUTTON">
-                    `&lt;div&gt;`
-                </div>
-                <div class="ANSWERBUTTON">
-                    `&lt;span&gt;`
-                </div>
-                <div class="POINTS">10 Points
-                </div>
-            </div>45
+                <% partials.forEach(function(partialName) { %>
+                    <%- include(`htmlExercises/${partialName}`) %>
+                        <% }) %>
+            </div>
 
             <%- include('components/footer') %>
         </div>
@@ -168,6 +205,61 @@
 
             function deleteCookie(cookieName) {
                 document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            }
+
+            let BODY = document.querySelector(".BODY");
+            BODY.scrollTop = BODY.scrollHeight;
+            
+
+            let ALERTBOXLIST = document.querySelector(".ALERTBOXLIST");
+            function showAlert(text, background, time) {
+                let ALERTBOX = document.createElement("div");
+                ALERTBOX.classList.add("ALERTBOX");
+                ALERTBOX.style.backgroundColor = background;
+                ALERTBOX.innerText = text;
+                ALERTBOXLIST.appendChild(ALERTBOX);
+                setTimeout(() => {
+                    ALERTBOX.remove();
+                }, time)
+            }
+
+            async function checkAnswer(question, answer, button, points) {
+                await fetch("/api/checkHtmlAnswer", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        question: question,
+                        answer: answer
+                    })
+                }).then(data => data.json()).then(data => {
+                    let err = data.error;
+                    let scc = data.success;
+                    let ptsAdd = data.pointsAdd;
+                    let ptsRemove = data.pointsRemove;
+                    let lvlUp = data.levelUp;
+
+                    if (err === false && scc === false) {
+                        button.classList.add("WRONGANSWER");
+                        showAlert(`<%= t('htmlExercises.wrongAnswer') %> : -${ptsRemove} <%= t('htmlExercises.points') %>`, "red", 2000)
+                        setTimeout(() => {
+                            button.classList.remove("WRONGANSWER");
+                        }, 500)
+                    }
+                    if (err === false && scc === true) {
+                        button.classList.add("TRUEANSWER");
+                        showAlert(`<%= t('htmlExercises.trueAnswer') %> : +${ptsAdd} <%= t('htmlExercises.points') %>`, "green", 2000)
+                        if(lvlUp) showAlert(`<%= t('htmlExercises.levelUp') %>`, "green", 2000)
+                        setTimeout(() => {
+                            button.classList.remove("TRUEANSWER");
+                            location.reload()
+                        }, 2000)
+                    }
+                    if (err === true && scc === false) {
+                        showAlert("Error", "red", 2000)
+                    }
+                });
             }
 
         </script>
