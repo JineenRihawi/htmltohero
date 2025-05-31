@@ -11,8 +11,16 @@ const FormData = require('form-data');
 const DATABASE_URL = "mongodb+srv://RHRS_USER:Txtkai18@mycluster.xya3g.mongodb.net/HTMLtoHERO?retryWrites=true&w=majority&appName=MyCluster";
 const client = new MongoClient(DATABASE_URL);
 
-const upload = multer({ dest: 'uploads/' });
-//const IMGUR_CLIENT_ID = '80ad94d3d67f0af';
+try {
+    const uploadDir = path.join(__dirname, 'uploads');
+    if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+        const upload = multer({ dest: uploadDir });
+        //const IMGUR_CLIENT_ID = '80ad94d3d67f0af';
+    }
+} catch (error) {
+    console.log(error);
+}
 
 let db, accountsCollection;
 
@@ -61,22 +69,26 @@ app.set('trust proxy', true);
 app.set('view engine', 'ejs')
 
 app.post("/upload", upload.single("image"), async (req, res) => {
-    const imagePath = path.join(__dirname, req.file.path);
-    const form = new FormData();
-    form.append('image', fs.createReadStream(imagePath));
-    const response = await axios.post('https://api.imgur.com/3/image', form, {
-        headers: {
-            Authorization: `Client-ID 80ad94d3d67f0af`,
-            ...form.getHeaders(),
-        },
-    });
-    fs.unlinkSync(imagePath);
+    try {
+        const imagePath = path.join(__dirname, req.file.path);
+        const form = new FormData();
+        form.append('image', fs.createReadStream(imagePath));
+        const response = await axios.post('https://api.imgur.com/3/image', form, {
+            headers: {
+                Authorization: `Client-ID 80ad94d3d67f0af`,
+                ...form.getHeaders(),
+            },
+        });
+        fs.unlinkSync(imagePath);
 
-    let LINK = response.data.data.link;
-    let OBJECTID = ObjectId.createFromHexString(req.cookies.TOKEN);
-    await updateOneInDatabase("_id", OBJECTID, { $set: { profileUrl: LINK } });
+        let LINK = response.data.data.link;
+        let OBJECTID = ObjectId.createFromHexString(req.cookies.TOKEN);
+        await updateOneInDatabase("_id", OBJECTID, { $set: { profileUrl: LINK } });
 
-    res.json({ imageUrl: response.data.data.link });
+        res.json({ imageUrl: response.data.data.link });
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 async function getAccount(TOKEN) {
@@ -195,9 +207,9 @@ app.post("/api/register", async (req, res) => {
             createday: day,
             createmonth: month,
             createyear: year,
-            lastCheckedCssPageLink: null,
-            lastCheckedHtmlPageLink: null,
-            lastCheckedJsPageLink: null,
+            lastCheckedCssPageLink: "null",
+            lastCheckedHtmlPageLink: "null",
+            lastCheckedJsPageLink: "null",
             checkedCssPages: [],
             checkedHtmlPages: [],
             checkedJsPages: [],
