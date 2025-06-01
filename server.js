@@ -1,17 +1,25 @@
 const { MongoClient, ObjectId } = require("mongodb");
 const express = require('express');  //import express lib
+const session = require('express-session');
 const cookieParser = require("cookie-parser");
 const path = require("path");
 const fs = require("fs")
 const i18n = require("./i18n");
-const multer = require('multer');
-const axios = require('axios');
-const FormData = require('form-data');
+const nodemailer = require("nodemailer");
+const { from } = require("form-data");
+const { inflate } = require("zlib");
+const { error } = require("console");
 
 const DATABASE_URL = "mongodb+srv://RHRS_USER:Txtkai18@mycluster.xya3g.mongodb.net/HTMLtoHERO?retryWrites=true&w=majority&appName=MyCluster";
 const client = new MongoClient(DATABASE_URL);
 
-const upload = multer({ storage: multer.memoryStorage() });
+let EMAILTRANSPORTER = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: "html2hero@gmail.com",
+        pass: "rgmv ydlb bcov vzej"
+    }
+})
 
 let db, accountsCollection;
 
@@ -23,7 +31,6 @@ async function runDataBase() {
         accountsCollection = db.collection("accounts");
 
     } catch (error) {
-        console.log(error);
     }
 }
 
@@ -31,7 +38,6 @@ async function insertOneToDatabase(object) {
     try {
         return await accountsCollection.insertOne(object);
     } catch (error) {
-        console.log(error);
     }
 }
 
@@ -39,7 +45,6 @@ async function findOneInDatabase(field, value) {
     try {
         return await accountsCollection.findOne({ [field]: value });
     } catch (error) {
-        console.log(error);
     }
 }
 
@@ -47,7 +52,6 @@ async function updateOneInDatabase(field, value, update) {
     try {
         return await accountsCollection.updateOne({ [field]: value }, update);
     } catch (error) {
-        console.log(error);
     }
 }
 
@@ -58,30 +62,13 @@ app.use(express.json()); // To handle JSON data
 app.use(cookieParser());
 app.set('trust proxy', true);
 app.set('view engine', 'ejs')
+app.use(session({
+    secret: 'ABsbnacjjskhjlejlrhJWEukxvnjnskdlfLWJEUkflskdvnleiI',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 }   // Session expiration in ms (e.g., 1 minute)
+}));
 
-app.post("/upload", upload.single("image"), async (req, res) => {
-    try {
-    const form = new FormData();
-    form.append('image', req.file.buffer, {
-        filename: req.file.originalname,
-        contentType: req.file.mimetype
-    });
-    const response = await axios.post('https://api.imgur.com/3/image', form, {
-        headers: {
-            Authorization: `Client-ID 80ad94d3d67f0af`,
-            ...form.getHeaders(),
-        },
-    });
-
-    let LINK = response.data.data.link;
-    let OBJECTID = ObjectId.createFromHexString(req.cookies.TOKEN);
-    await updateOneInDatabase("_id", OBJECTID, { $set: { profileUrl: LINK } });
-
-    res.json({ imageUrl: response.data.data.link });
-} catch(error) {
-    console.log(error);
-}
-});
 
 async function getAccount(TOKEN) {
     const OBJECTID = ObjectId.createFromHexString(TOKEN);
@@ -99,11 +86,26 @@ async function isLoggedIn(TOKEN) {
     return true;
 }
 
+async function sendEmail(subject, text, email) {
+    try {
+
+        let EMAIL = {
+            from: "html2hero@gmail.com",
+            to: email,
+            subject: subject,
+            text: text
+        }
+
+        EMAILTRANSPORTER.sendMail(EMAIL, (error, info) => { });
+
+    } catch (error) {
+    }
+}
+
 app.post("/api/consoleLog", (req, res) => { // Server tarafinda log cikartma
     try {
         console.log(req.body.message);
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -169,55 +171,83 @@ app.post("/api/login", async (req, res) => {
     }
 });
 
-app.post("/api/register", async (req, res) => {
+app.post("/api/registerFirstStep", async (req, res) => {
     try {
-        const { email, password, name, birthyear, birthmonth, birthday } = req.body;
 
-        const birthyearNum = parseInt(birthyear);
-        const birthmonthNum = parseInt(birthmonth);
-        const birthdayNum = parseInt(birthday);
-
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = today.getMonth() + 1;
-        const day = today.getDate();
+        const { email, emailsubject, emailmessage } = req.body;
 
         const user = await findOneInDatabase("email", email);
         if (user) {
             return res.json({ errorName: "emailExsists" });
         }
 
-        const USER = {
-            email: email,
-            password: password,
-            name: name,
-            birthyear: birthyearNum,
-            birthmonth: birthmonthNum,
-            birthday: birthdayNum,
-            level: 1,
-            points: 0,
-            createday: day,
-            createmonth: month,
-            createyear: year,
-            lastCheckedCssPageLink: "null",
-            lastCheckedHtmlPageLink: "null",
-            lastCheckedJsPageLink: "null",
-            checkedCssPages: [],
-            checkedHtmlPages: [],
-            checkedJsPages: [],
-            lastCompletedCssExerciseNumber: 0,
-            lastCompletedJsExerciseNumber: 0,
-            lastCompletedHtmlExerciseNumber: 0,
-            profileUrl: "",
-        };
+        const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let CODE = '';
+        for (let i = 0; i < 6; i++) {
+            CODE += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        req.session.CODE = CODE;
 
-        await insertOneToDatabase(USER);
-
+        await sendEmail(emailsubject, `${emailmessage} : ${CODE}`, email);
         return res.json({ errorName: "noerror" });
 
     } catch (error) {
-        console.error("Registration error:", error);
         return res.json({ errorName: "serverError" });
+    }
+});
+
+app.post("/api/registerSecondStep", async (req, res) => {
+    try {
+
+        const CODE = req.session.CODE;
+        if(!CODE) return res.json({errorName: "codeExpired"});
+        if (CODE.length !== 6) return res.json({errorName: "incorrectCode"});
+
+        const { email, password, name, birthyear, birthmonth, birthday, codeinput } = req.body;
+
+        if (codeinput === CODE) {
+
+            const birthyearNum = parseInt(birthyear);
+            const birthmonthNum = parseInt(birthmonth);
+            const birthdayNum = parseInt(birthday);
+
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = today.getMonth() + 1;
+            const day = today.getDate();
+
+            const USER = {
+                email: email,
+                password: password,
+                name: name,
+                birthyear: birthyearNum,
+                birthmonth: birthmonthNum,
+                birthday: birthdayNum,
+                level: 1,
+                points: 0,
+                createday: day,
+                createmonth: month,
+                createyear: year,
+                lastCheckedCssPageLink: "null",
+                lastCheckedHtmlPageLink: "null",
+                lastCheckedJsPageLink: "null",
+                checkedCssPages: [],
+                checkedHtmlPages: [],
+                checkedJsPages: [],
+                lastCompletedCssExerciseNumber: 0,
+                lastCompletedJsExerciseNumber: 0,
+                lastCompletedHtmlExerciseNumber: 0,
+            };
+
+            await insertOneToDatabase(USER);
+            return res.json({errorName: "noerror"});
+
+        } else {
+            return res.json({errorName: "incorrectCode"});
+        }
+
+    } catch (error) {
+        return res.json({errorName: "servererror"});
     }
 });
 
@@ -235,7 +265,6 @@ app.post("/api/checkHtmlPage", async (req, res) => {
             return res.json({ redirectToLoginPage: true });
         }
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -253,7 +282,6 @@ app.post("/api/checkCssPage", async (req, res) => {
             return res.json({ redirectToLoginPage: true });
         }
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -271,7 +299,6 @@ app.post("/api/checkJsPage", async (req, res) => {
             return res.json({ redirectToLoginPage: true });
         }
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -293,7 +320,6 @@ app.post("/api/checkCheckedHtmlPage", async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
         res.json({ PAGECHECKED: false })
     }
 });
@@ -316,7 +342,6 @@ app.post("/api/checkCheckedCssPage", async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
         res.json({ PAGECHECKED: false })
     }
 });
@@ -339,7 +364,6 @@ app.post("/api/checkCheckedJsPage", async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
         res.json({ PAGECHECKED: false })
     }
 });
@@ -348,7 +372,6 @@ app.get("/", async (req, res) => {    //get route
     try {
         res.sendFile(path.join(__dirname, '/views/redirector.html'));
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -369,7 +392,6 @@ app.get("/en", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -386,7 +408,6 @@ app.get("/tr", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -403,7 +424,6 @@ app.get("/es", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -420,7 +440,6 @@ app.get("/fr", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -437,7 +456,6 @@ app.get("/de", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -454,7 +472,6 @@ app.get("/pt", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -471,7 +488,6 @@ app.get("/ar", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -488,7 +504,6 @@ app.get("/ru", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -509,7 +524,6 @@ app.get("/:lang/404", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -581,7 +595,6 @@ app.get("/:lang/profile", async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -604,7 +617,6 @@ app.get("/:lang/search", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -625,7 +637,6 @@ app.get("/:lang/register", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -648,7 +659,6 @@ app.get("/:lang/search/:content", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -669,7 +679,6 @@ app.get("/:lang/tutorials/html", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -696,7 +705,6 @@ app.get("/:lang/tutorials/html/:page", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -743,7 +751,6 @@ app.get("/:lang/exercises/html", async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -786,7 +793,6 @@ app.post("/api/checkHtmlAnswer", async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -807,7 +813,6 @@ app.get("/:lang/tutorials/css", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -834,7 +839,6 @@ app.get("/:lang/tutorials/css/:page", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -881,7 +885,6 @@ app.get("/:lang/exercises/css", async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -924,7 +927,6 @@ app.post("/api/checkCssAnswer", async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -945,7 +947,6 @@ app.get("/:lang/codeeditor", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -966,7 +967,6 @@ app.get("/:lang/tutorials/js", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -993,7 +993,6 @@ app.get("/:lang/tutorials/js/:page", (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -1040,7 +1039,6 @@ app.get("/:lang/exercises/js", async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -1083,7 +1081,6 @@ app.post("/api/checkJsAnswer", async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -1115,7 +1112,6 @@ app.get("/:lang/login", async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -1123,7 +1119,6 @@ app.get("/404", (req, res) => {
     try {
         res.sendFile(path.join(__dirname, '/views/redirector404.html'));
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -1131,7 +1126,6 @@ app.use(async (req, res, next) => {
     try {
         res.sendFile(path.join(__dirname, '/views/redirector404.html'));
     } catch (error) {
-        console.log(error);
     }
 });
 
@@ -1140,4 +1134,3 @@ runDataBase().then(() => {
         console.log("Server listening on port 3000");
     });
 });
-

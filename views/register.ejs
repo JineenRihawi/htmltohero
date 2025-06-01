@@ -298,6 +298,76 @@
                     left: 0;
                 }
             }
+
+            .CODEPAGE {
+                position: fixed;
+                inset: 0;
+                /* shorthand for top, right, bottom, left = 0 */
+                /*display: flex;*/
+                display: none;
+                justify-content: center;
+                align-items: center;
+                background: rgba(249, 249, 249, 0.5);
+                z-index: 1000;
+                font-family: "Arial";
+            }
+
+            .CODECONTAINER {
+                border: 1px solid #ccc;
+                background-color: #fff;
+                display: flex;
+                flex-direction: column;
+                padding: 20px 30px;
+                width: 90%;
+                max-width: 400px;
+                border-radius: 12px;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            }
+
+            .CODETEXT {
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            .CODEINPUT:focus {
+                border-color: #007BFF;
+            }
+
+            .CODECLOSE {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                font-size: 25px;
+                font-weight: bold;
+                cursor: pointer;
+                user-select: none;
+            }
+
+            .CODECLOSE:hover {
+                color: #445368;
+            }
+
+            .CODEBUTTON {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0;
+                margin: 10px;
+                color: #445368;
+                border-radius: 10px;
+                background-color: #FAD473;
+                font-size: 1rem;
+                font-family: "Arial";
+                font-weight: bold;
+                user-select: none;
+                height: 30px;
+            }
+
+            .CODEBUTTON:hover {
+                background-color: #ef9d6e;
+                cursor: pointer;
+            }
         </style>
         <title>
             HTMLtoHero
@@ -306,6 +376,20 @@
 
 <body>
     <%- include('components/header') %>
+
+        <div class="CODEPAGE">
+            <div class="CODECLOSE">X</div>
+            <div class="CODECONTAINER">
+                <div class="REGISTERINPUTBIGDIV" id="CODEINPUTDIV">
+                    <span class="REGISTERINPUTERROR" id="codeInputError"></span>
+                    <div class="REGISTERINPUTDIV">
+                        <input class="REGISTERINPUT" id="CODEINPUT" type="text"
+                            placeholder="<%= t('registerPage.code') %>">
+                    </div>
+                </div>
+                <div class="CODEBUTTON"><%= t('registerPage.registerButton') %></div>
+            </div>
+        </div>
 
         <div class="PAGE">
             <div class="CENTER">
@@ -390,67 +474,57 @@
             const PASSWORDINPUTERROR2 = document.querySelector("#password2InputError");
             const BIRTHDAYINPUTDIV = document.querySelector("#BIRTHDAYINPUT");
             const BIRTHDAYINPUTERROR = document.querySelector("#birthdayInputError");
+            const CODEINPUTERROR = document.querySelector("#codeInputError");
+            const CODEINPUTDIV = document.querySelector("#CODEINPUTDIV");
 
+            CODEINPUTDIV.addEventListener("click", (event) => {
+                CODEINPUTDIV.classList.remove("REGISTERINPUT_ERROR");
+                CODEINPUTERROR.innerText = "";
+            });
             EMAILINPUTDIV.addEventListener("click", (event) => {
                 EMAILINPUTDIV.classList.remove("REGISTERINPUT_ERROR");
-                EMAILINPUTERROR.innerHTML = "";
+                EMAILINPUTERROR.innerText = "";
             });
             USERNAMEINPUTDIV.addEventListener("click", (event) => {
                 USERNAMEINPUTDIV.classList.remove("REGISTERINPUT_ERROR");
-                USERNAMEINPUTERROR.innerHTML = "";
+                USERNAMEINPUTERROR.innerText = "";
             });
             PASSWORDINPUTDIV1.addEventListener("click", (event) => {
                 PASSWORDINPUTDIV1.classList.remove("REGISTERINPUT_ERROR");
-                PASSWORDINPUTERROR1.innerHTML = "";
+                PASSWORDINPUTERROR1.innerText = "";
             });
             PASSWORDINPUTDIV2.addEventListener("click", (event) => {
                 PASSWORDINPUTDIV2.classList.remove("REGISTERINPUT_ERROR");
-                PASSWORDINPUTERROR2.innerHTML = "";
+                PASSWORDINPUTERROR2.innerText = "";
             });
             BIRTHDAYINPUTDIV.addEventListener("click", (event) => {
                 BIRTHDAYINPUTDIV.classList.remove("REGISTERINPUT_ERROR");
-                BIRTHDAYINPUTERROR.innerHTML = "";
+                BIRTHDAYINPUTERROR.innerText = "";
             });
 
             function EMAILINPUTERRORFUNC(err) {
                 EMAILINPUTDIV.classList.add("REGISTERINPUT_ERROR");
-                EMAILINPUTERROR.innerHTML = err;
+                EMAILINPUTERROR.innerText = err;
             }
             function USERNAMEINPUTERRORFUNC(err) {
                 USERNAMEINPUTDIV.classList.add("REGISTERINPUT_ERROR");
-                USERNAMEINPUTERROR.innerHTML = err;
+                USERNAMEINPUTERROR.innerText = err;
             }
             function PASSWORDINPUTERRORFUNC1(err) {
                 PASSWORDINPUTDIV1.classList.add("REGISTERINPUT_ERROR");
-                PASSWORDINPUTERROR1.innerHTML = err;
+                PASSWORDINPUTERROR1.innerText = err;
             }
             function PASSWORDINPUTERRORFUNC2(err) {
                 PASSWORDINPUTDIV2.classList.add("REGISTERINPUT_ERROR");
-                PASSWORDINPUTERROR2.innerHTML = err;
+                PASSWORDINPUTERROR2.innerText = err;
             }
             function BIRTHDAYINPUTERRORFUNC(err) {
                 BIRTHDAYINPUTDIV.classList.add("REGISTERINPUT_ERROR");
-                BIRTHDAYINPUTERROR.innerHTML = err;
+                BIRTHDAYINPUTERROR.innerText = err;
             }
-
-            async function register(email, username, password, birthyear, birthmonth, birthday) {
-                const response = await fetch("/api/register", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        name: username,
-                        password: password,
-                        birthyear: birthyear,
-                        birthmonth: birthmonth,
-                        birthday: birthday,
-                    })
-                });
-                const data = await response.json();
-                const error = data.errorName;
-                return error;
+            function CODEINPUTERRORFUNC(err) {
+                CODEINPUTDIV.classList.add("REGISTERINPUT_ERROR");
+                CODEINPUTERROR.innerText = err;
             }
 
             const EMAILINPUT = document.querySelector("#emailInput");
@@ -458,6 +532,53 @@
             const PASSWORDINPUT1 = document.querySelector("#password1Input");
             const PASSWORDINPUT2 = document.querySelector("#password2Input");
             const BIRTHDAYINPUT = document.querySelector("#birthdayInput");
+
+            const CODEPAGE = document.querySelector(".CODEPAGE");
+            const CODEBUTTON = document.querySelector(".CODEBUTTON");
+            const CODEINPUT = document.querySelector("#CODEINPUT");
+
+            document.querySelector(".CODECLOSE").addEventListener("click", (event) => {
+                CODEPAGE.style.display = "none";
+            });
+
+            CODEBUTTON.addEventListener("click", (event) => {
+
+                const [yearStr, monthStr, dayStr] = BIRTHDAYINPUT.value.split("-");
+                const year = parseInt(yearStr);
+                const month = parseInt(monthStr);
+                const day = parseInt(dayStr);
+
+                fetch("/api/registerSecondStep", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email: EMAILINPUT.value,
+                        password: PASSWORDINPUT1.value,
+                        name: USERNAMEINPUT_.value,
+                        birthyear: year,
+                        birthmonth: month,
+                        birthday: day,
+                        codeinput: CODEINPUT.value
+                    })
+                }).then(data => data.json()).then(data => {
+
+                    const error = data.errorName;
+
+                    if (error === "noerror") {
+                        window.location.href = "/" + lang_code + "/" + "login";
+                    } else if (error === "codeExpired") {
+                        CODEINPUTERRORFUNC("<%= t('registerPage.codeExpiredError') %>");
+                    } else if (error === "incorrectCode") {
+                        CODEINPUTERRORFUNC("<%= t('registerPage.incorrectCodeError') %>");
+                    } else {
+                        CODEINPUTERRORFUNC("An unexpected error occurred. Please try again.");
+                    }
+
+                });
+
+            });
 
             let REGISTERBUTTON = document.querySelector(".REGISTERBUTTON");
             REGISTERBUTTON.addEventListener("click", (event) => {
@@ -492,16 +613,27 @@
                     return;
                 }
 
-                register(EMAILINPUT.value, USERNAMEINPUT_.value, PASSWORDINPUT1.value, year, month, day).then(error => {
+                fetch("/api/registerFirstStep", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email: EMAILINPUT.value,
+                        emailsubject: "<%= t('registerPage.emailsubject') %>",
+                        emailmessage: "<%= t('registerPage.emailmessage') %>",
+                    })
+                }).then(data => data.json()).then(data => {
+
+                    const error = data.errorName;
+
                     if (error === "noerror") {
-                        window.location.href = "/" + lang_code + "/login";
+                        CODEPAGE.style.display = "flex";
                     } else if (error === "emailExsists") {
                         EMAILINPUTERRORFUNC("<%= t('registerPage.emailExsistsError') %>");
                     } else {
                         EMAILINPUTERRORFUNC("An unexpected error occurred. Please try again.");
                     }
-                }).catch(err => {
-                    EMAILINPUTERRORFUNC("An unexpected error occurred. Please try again.");
                 });
             });
 

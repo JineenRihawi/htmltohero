@@ -4388,7 +4388,12 @@
         "emptyPasswordError": "Bitte geben Sie Ihr Passwort ein.",
         "invalidDateError": "Bitte geben Sie ein gültiges Geburtsdatum ein.",
         "passwordNotEqualError": "Die Passwörter stimmen nicht überein.",
-        "emailExsistsError": "Diese E-Mail-Adresse ist bereits registriert."
+        "emailExsistsError": "Diese E-Mail-Adresse ist bereits registriert.",
+        "codeExpiredError": "Der Bestätigungscode ist abgelaufen.",
+        "incorrectCodeError": "Der Bestätigungscode ist falsch.",
+        "emailsubject": "Ihr Html2Hero-Bestätigungscode",
+        "emailmessage": "Hier ist Ihr Bestätigungscode. Bitte nicht weitergeben.",
+        "code": "Bestätigungscode"
     },
     "htmlExercises": {
         "question": "Frage",

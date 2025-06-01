@@ -129,6 +129,14 @@
             .PROFILEIMAGE {
                 width: 100px;
                 height: 100px;
+                margin-bottom: 20px;
+                border: 5px solid white;
+                border-radius: 100%;
+                transition: all 0.5s ease;
+            }
+
+            .PROFILEIMAGE:hover {
+                border-width: 10px;
             }
 
             @media (max-width: 1100px) {
@@ -208,23 +216,6 @@
                 justify-content: center;
                 align-items: center;
             }
-
-            #UPLOADPROFILE {
-                margin-top: 10px;
-                margin-bottom: 10px;
-                padding: 8px 12px;
-                border: 2px solid #ffa07a;
-                border-radius: 8px;
-                background-color: #fff0e6;
-                font-size: 1rem;
-                cursor: pointer;
-                transition: border-color 0.3s ease, background-color 0.3s ease;
-            }
-
-            #UPLOADPROFILE:hover {
-                border-color: #ff7f50;
-                background-color: #ffe5d1;
-            }
         </style>
         <title>HTMLtoHero</title>
 </head>
@@ -235,8 +226,20 @@
             <div class="PAGECONTENT">
                 <div class="profile-container">
                     <div class="profile-data">
-                        <img src="<%= profileUrl %>" class="PROFILEIMAGE" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/JineenRihawi/htmltoheroassets/refs/heads/main/default.png';"></img>
-                        <input type="file" accept="image/png" id="UPLOADPROFILE" placeholder="Upload Profile Image">
+
+                        <svg class="PROFILEIMAGE" id="PROFILEIMAGESVG" fill="#EF6E72" version="1.1" id="Capa_1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55px"
+                            height="55px" viewBox="0 0 45.532 45.532" id="profile_image">
+                            <g>
+                                <circle cx="22.766" cy="22.766" r="17" fill="#ffffff" />
+                                <path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765
+    S35.34,0.001,22.766,0.001z M22.766,6.808c4.16,0,7.531,3.372,7.531,7.53c0,4.159-3.371,7.53-7.531,7.53
+    c-4.158,0-7.529-3.371-7.529-7.53C15.237,10.18,18.608,6.808,22.766,6.808z M22.761,39.579c-4.149,0-7.949-1.511-10.88-4.012
+    c-0.714-0.609-1.126-1.502-1.126-2.439c0-4.217,3.413-7.592,7.631-7.592h8.762c4.219,0,7.619,3.375,7.619,7.592
+    c0,0.938-0.41,1.829-1.125,2.438C30.712,38.068,26.911,39.579,22.761,39.579z" />
+                            </g>
+                        </svg>
+
                         <div class="data-details">
                             <div class="data-details-bar">
                                 <%= t('profile.profileContainer.name') %>: <%= name %>
@@ -341,21 +344,6 @@
                 function deleteCookie(cookieName) {
                     document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
                 }
-
-                let UPLOADPROFILE = document.querySelector("#UPLOADPROFILE");
-                UPLOADPROFILE.addEventListener("change", (event) => {
-                    let file = event.target.files[0];
-                    let FORMDATA = new FormData();
-                    FORMDATA.append('image', file);
-
-                    fetch("/upload", {
-                        method: "POST",
-                        body: FORMDATA
-                    }).then(data => data.json()).then(data => {
-                        console.log(data.imageUrl);
-                    })
-
-                });
 
                 let pointsRange = document.querySelector(".POINTSRANGE");
                 let pointsRangeBar = document.querySelector(".POINTSRANGEBAR");

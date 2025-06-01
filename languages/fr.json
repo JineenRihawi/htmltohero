@@ -4388,7 +4388,12 @@
         "emptyPasswordError": "Veuillez entrer votre mot de passe.",
         "invalidDateError": "Veuillez entrer une date de naissance valide.",
         "passwordNotEqualError": "Les mots de passe ne correspondent pas.",
-        "emailExsistsError": "Cette adresse email est déjà enregistrée."
+        "emailExsistsError": "Cette adresse email est déjà enregistrée.",
+        "codeExpiredError": "Le code de vérification a expiré.",
+        "incorrectCodeError": "Le code de vérification est incorrect.",
+        "emailsubject": "Votre code de vérification Html2Hero",
+        "emailmessage": "Voici votre code de vérification. Veuillez ne le partager avec personne.",
+        "code": "Code de Vérification"
     },
     "htmlExercises": {
         "question": "Question",

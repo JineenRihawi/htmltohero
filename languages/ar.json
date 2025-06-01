@@ -4388,7 +4388,12 @@
         "emptyPasswordError": "يرجى إدخال كلمة المرور.",
         "invalidDateError": "يرجى إدخال تاريخ ميلاد صالح.",
         "passwordNotEqualError": "كلمات المرور غير متطابقة.",
-        "emailExsistsError": "عنوان البريد الإلكتروني هذا مسجل بالفعل."
+        "emailExsistsError": "عنوان البريد الإلكتروني هذا مسجل بالفعل.",
+        "codeExpiredError": "انتهت صلاحية رمز التحقق.",
+        "incorrectCodeError": "رمز التحقق غير صحيح.",
+        "emailsubject": "رمز التحقق من Html2Hero",
+        "emailmessage": "هذا هو رمز التحقق الخاص بك. يرجى عدم مشاركته مع أي شخص.",
+        "code": "رمز التحقق"
     },
     "htmlExercises": {
         "question": "سؤال",

@@ -4388,7 +4388,12 @@
         "emptyPasswordError": "Lütfen bir şifre girin.",
         "invalidDateError": "Lütfen geçerli bir doğum tarihi girin.",
         "passwordNotEqualError": "Şifreler eşleşmiyor.",
-        "emailExsistsError": "Bu e-posta adresi zaten kayıtlı."
+        "emailExsistsError": "Bu e-posta adresi zaten kayıtlı.",
+        "codeExpiredError": "Doğrulama kodunun süresi doldu.",
+        "incorrectCodeError": "Doğrulama kodu yanlış.",
+        "emailsubject": "Html2Hero Doğrulama Kodu",
+        "emailmessage": "İşte doğrulama kodunuz. Lütfen kimseyle paylaşmayın.",
+        "code": "Doğrulama Kodu"
     },
     "htmlExercises": {
         "question": "Soru",
