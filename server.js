@@ -368,6 +368,13 @@ app.post("/api/checkCheckedJsPage", async (req, res) => {
     }
 });
 
+app.use((req, res, next) => {
+  if (req.hostname.endsWith('.onrender.com')) {
+    return res.redirect(301, 'https://yourdomain.com');
+  }
+  next();
+});
+
 app.get("/", async (req, res) => {    //get route
     try {
         res.sendFile(path.join(__dirname, '/views/redirector.html'));
