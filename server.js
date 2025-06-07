@@ -370,7 +370,7 @@ app.post("/api/checkCheckedJsPage", async (req, res) => {
 
 app.use((req, res, next) => {
   if (req.hostname.endsWith('.onrender.com')) {
-    return res.redirect(301, 'https://yourdomain.com');
+    return res.redirect('https://html2hero.net');
   }
   next();
 });
